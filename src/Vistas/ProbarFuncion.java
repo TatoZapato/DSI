@@ -190,7 +190,7 @@ public class ProbarFuncion extends javax.swing.JFrame {
 
         String resultado = InventarioForestal.pruedaFuncion(expresion);
         this.setCursor(Cursor.DEFAULT_CURSOR);
-        if (resultado.equalsIgnoreCase("Math.Error")) {
+        if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {
             JOptionPane.showMessageDialog(jPanel1, "Error al momento de evaluar la Función, se debe cambiar la Función de Volumen.", "Error", 1);
             padre.btnAceptarEnabled(false);
         } else {

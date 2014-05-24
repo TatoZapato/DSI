@@ -43,6 +43,9 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -87,6 +90,16 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem6);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu6.setText("Modelos de Altura");
+
+        jMenuItem9.setText("Agregar Modelo");
+        jMenu6.add(jMenuItem9);
+
+        jMenuItem10.setText("Gestionar Modelos");
+        jMenu6.add(jMenuItem10);
+
+        jMenuBar1.add(jMenu6);
 
         jMenu5.setText("Funciones de Volumen");
 
@@ -175,8 +188,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -184,5 +199,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

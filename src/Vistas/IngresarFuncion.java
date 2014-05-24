@@ -20,6 +20,7 @@ public class IngresarFuncion extends javax.swing.JFrame {
         initComponents();
     }
     private int coutnCoef = 0;
+
     public void btnAceptarEnabled(boolean state) {
         btnAceptar.setEnabled(state);
     }
@@ -65,6 +66,7 @@ public class IngresarFuncion extends javax.swing.JFrame {
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
+        jButton27 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar una Nueva Función");
@@ -360,6 +362,13 @@ public class IngresarFuncion extends javax.swing.JFrame {
             }
         });
 
+        jButton27.setText(",");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -372,25 +381,24 @@ public class IngresarFuncion extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton20))
-                                    .addComponent(jButton19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jButton27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtFuncion)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar)))
@@ -416,15 +424,16 @@ public class IngresarFuncion extends javax.swing.JFrame {
                         .addComponent(jButton25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton27)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton21))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -448,68 +457,140 @@ public class IngresarFuncion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ValidateConcat(String exp) {
+        String fun = txtFuncion.getText();
+        if (exp.equals("dap")) {
+            if (fun.length() > 0) {
+                if (isNumber(fun.substring(fun.length() - 1)) || fun.substring(fun.length() - 1).equals("h")) {
+                    txtFuncion.setText(txtFuncion.getText().concat("*dap"));
+                } else {
+                    if (fun.length() >= 3 && fun.substring(fun.length() - 3).equals("dap")) {
+                        txtFuncion.setText(txtFuncion.getText().concat("*dap"));
+                    } else {
+                        txtFuncion.setText(txtFuncion.getText().concat("dap"));
+                    }
+                }
+            } else {
+                txtFuncion.setText(txtFuncion.getText().concat("dap"));
+            }
+        } else if (exp.equals("h")) {
+            if (fun.length() > 0) {
+                if (isNumber(fun.substring(fun.length() - 1))) {
+                    txtFuncion.setText(txtFuncion.getText().concat("*h"));
+                } else {
+                    if (fun.length() >= 3 && fun.substring(fun.length() - 3).equals("dap") || fun.substring(fun.length() - 1).equals("h")) {
+                        txtFuncion.setText(txtFuncion.getText().concat("*h"));
+                    } else {
+                        txtFuncion.setText(txtFuncion.getText().concat("h"));
+                    }
+                }
+            } else {
+                txtFuncion.setText(txtFuncion.getText().concat("h"));
+            }
+        } else if (isNumber(exp)) {
+            if (fun.length() >= 3) {
+
+                if (fun.substring(fun.length() - 3).equals("dap")) {
+                    txtFuncion.setText(txtFuncion.getText().concat("*" + exp));
+                } else if (fun.substring(txtFuncion.getText().length() - 1).equals("h")) {
+                    txtFuncion.setText(txtFuncion.getText().concat("*" + exp));
+                } else {
+                    this.txtFuncion.setText(fun + exp);
+                }
+            } else {
+                this.txtFuncion.setText(fun + exp);
+            }
+        } else {
+            txtFuncion.setText(fun + exp);//setText(txtFuncion.getText().concat(exp));
+        }
+    }
+
+    private boolean isNumber(String x) {
+        try {
+            Integer.parseInt(x);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("0"));
+        //txtFuncion.setText(txtFuncion.getText().concat("0"));
+        ValidateConcat("0");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("1"));
+        //txtFuncion.setText(txtFuncion.getText().concat("1"));
+        ValidateConcat("1");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("2"));
+        //txtFuncion.setText(txtFuncion.getText().concat("2"));
+        ValidateConcat("2");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("3"));
+        //txtFuncion.setText(txtFuncion.getText().concat("3"));
+        ValidateConcat("3");
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("4"));
+        //txtFuncion.setText(txtFuncion.getText().concat("4"));
+        ValidateConcat("4");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("5"));
+        //txtFuncion.setText(txtFuncion.getText().concat("5"));
+        ValidateConcat("5");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("6"));
+        //txtFuncion.setText(txtFuncion.getText().concat("6"));
+        ValidateConcat("6");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("7"));
+        //txtFuncion.setText(txtFuncion.getText().concat("7"));
+        ValidateConcat("7");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("8"));
+        //txtFuncion.setText(txtFuncion.getText().concat("8"));
+        ValidateConcat("8");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("9"));
+        //txtFuncion.setText(txtFuncion.getText().concat("9"));
+        ValidateConcat("9");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("-"));
+        //txtFuncion.setText(txtFuncion.getText().concat("-"));
+        ValidateConcat("-");
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("+"));
+        //txtFuncion.setText(txtFuncion.getText().concat("+"));
+        ValidateConcat("+");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("*"));
+        //txtFuncion.setText(txtFuncion.getText().concat("*"));
+        ValidateConcat("*");
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("/"));
+        //txtFuncion.setText(txtFuncion.getText().concat("/"));
+        ValidateConcat("/");
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("("));
+        //txtFuncion.setText(txtFuncion.getText().concat("("));
+        ValidateConcat("(");
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat(")"));
+        //txtFuncion.setText(txtFuncion.getText().concat(")"));
+        ValidateConcat(")");
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -526,11 +607,13 @@ public class IngresarFuncion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("h"));
+        //txtFuncion.setText(txtFuncion.getText().concat("h"));
+        ValidateConcat("h");
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("dap"));
+        //txtFuncion.setText(txtFuncion.getText().concat("dap"));
+        ValidateConcat("dap");
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -558,7 +641,7 @@ public class IngresarFuncion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("B"+coutnCoef));
+        txtFuncion.setText(txtFuncion.getText().concat("B" + coutnCoef));
         coutnCoef++;
     }//GEN-LAST:event_jButton24ActionPerformed
 
@@ -573,6 +656,10 @@ public class IngresarFuncion extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         txtFuncion.setText(txtFuncion.getText().concat("."));
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        txtFuncion.setText(txtFuncion.getText().concat(","));
+    }//GEN-LAST:event_jButton27ActionPerformed
 
     private LinkedList<String> buscarCoeficientes() {
         String[] coeficientes = {"dap", "h"};
@@ -642,6 +729,7 @@ public class IngresarFuncion extends javax.swing.JFrame {
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
