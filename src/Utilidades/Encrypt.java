@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author Führer Allison
+ * @author Führer
  */
 public class Encrypt {
     
