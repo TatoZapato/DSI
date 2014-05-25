@@ -5,23 +5,23 @@ package Utilidades.Inventario;
  * @author Führer
  */
 public class Funcion {
-    private int codigo;
+    private int idFuncion;
     private String funcion;
     private String fechaCreacion;
     private String fechaModificacion;
-    public Funcion(int codigo, String funcion, String fechaCreacion, String fechaModificacion) {
-        this.codigo = codigo;
+    public Funcion(int id, String funcion, String fechaCreacion, String fechaModificacion) {
+        this.idFuncion = id;
         this.funcion = funcion;
         this.fechaCreacion = fechaCreacion;
         this.fechaModificacion = fechaModificacion;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getIdFuncion() {
+        return idFuncion;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setIdFuncion(int codigo) {
+        this.idFuncion = codigo;
     }
 
     public String getFuncion() {

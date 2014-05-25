@@ -24,6 +24,9 @@ public class IngresarFuncion extends javax.swing.JFrame {
     public void btnAceptarEnabled(boolean state) {
         btnAceptar.setEnabled(state);
     }
+    public void setTextFuncion(String exp){
+        txtFuncion.setText(exp);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
