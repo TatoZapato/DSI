@@ -23,6 +23,7 @@ public class InventarioForestal {
         funcion = funcion.replaceAll("pow", "Math.pow");
         funcion = funcion.replaceAll("sqrt", "Math.sqrt");
         try {
+            System.out.println("funcion: "+funcion);
             operation = engine.eval(funcion);
         } catch (ScriptException ex) {
             operation = "Math.Error";

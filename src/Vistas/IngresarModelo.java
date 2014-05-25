@@ -1,9 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Vistas;
 
-import Utilidades.Persistencia.DAO.FuncionDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.awt.Cursor;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -11,28 +14,16 @@ import javax.swing.JOptionPane;
  *
  * @author Führer
  */
-public class IngresarFuncion extends javax.swing.JFrame {
+public class IngresarModelo extends javax.swing.JFrame {
 
     /**
-     * Creates new form IngresarFuncion
+     * Creates new form IngresarModelo
      */
-    public IngresarFuncion() {
-        initComponents();
-    }
-    private int coutnCoef = 0;
+    private static int coutnCoef = 0;
     private MantenedorFunciones padreMantenedor = null;
 
-    IngresarFuncion(MantenedorFunciones father) {
+    public IngresarModelo() {
         initComponents();
-        padreMantenedor = father;
-    }
-
-    public void btnAceptarEnabled(boolean state) {
-        btnAceptar.setEnabled(state);
-    }
-
-    public void setTextFuncion(String exp) {
-        txtFuncion.setText(exp);
     }
 
     /**
@@ -79,11 +70,9 @@ public class IngresarFuncion extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Agregar una Nueva Función");
-        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("f(dap) =");
+        jLabel1.setText("f(x) =");
 
         txtFuncion.setEditable(false);
         txtFuncion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -452,9 +441,8 @@ public class IngresarFuncion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,6 +454,80 @@ public class IngresarFuncion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("+"));
+        ValidateConcat("+");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        txtFuncion.setText(txtFuncion.getText().concat("."));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("0"));
+        ValidateConcat("0");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("2"));
+        ValidateConcat("2");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("4"));
+        ValidateConcat("4");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("1"));
+        ValidateConcat("1");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("5"));
+        ValidateConcat("5");
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("8"));
+        ValidateConcat("8");
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("9"));
+        ValidateConcat("9");
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("7"));
+        ValidateConcat("7");
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("3"));
+        ValidateConcat("3");
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("6"));
+        ValidateConcat("6");
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("*"));
+        ValidateConcat("*");
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("-"));
+        ValidateConcat("-");
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("/"));
+        ValidateConcat("/");
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     private void ValidateConcat(String exp) {
         String fun = txtFuncion.getText();
@@ -552,114 +614,7 @@ public class IngresarFuncion extends javax.swing.JFrame {
             return false;
         }
     }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("0"));
-        ValidateConcat("0");
-    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("1"));
-        ValidateConcat("1");
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("2"));
-        ValidateConcat("2");
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("3"));
-        ValidateConcat("3");
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("4"));
-        ValidateConcat("4");
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("5"));
-        ValidateConcat("5");
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("6"));
-        ValidateConcat("6");
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("7"));
-        ValidateConcat("7");
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("8"));
-        ValidateConcat("8");
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("9"));
-        ValidateConcat("9");
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("-"));
-        ValidateConcat("-");
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("+"));
-        ValidateConcat("+");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("*"));
-        ValidateConcat("*");
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("/"));
-        ValidateConcat("/");
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("("));
-        ValidateConcat("(");
-    }//GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat(")"));
-        ValidateConcat(")");
-    }//GEN-LAST:event_jButton23ActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        if (!txtFuncion.getText().equals("")) {
-            ProbarFuncion pantalla = new ProbarFuncion(txtFuncion.getText(), buscarCoeficientes(), this);
-            pantalla.setLocationRelativeTo(this);
-            pantalla.setVisible(true);
-            setVisible(false);
-        }
-    }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("h"));
-        ValidateConcat("h");
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("dap"));
-        ValidateConcat("dap");
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        txtFuncion.setText("");
-        coutnCoef = 0;
-        btnAceptar.setEnabled(false);
-    }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         if (!txtFuncion.getText().equals("")) {
@@ -677,24 +632,80 @@ public class IngresarFuncion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("("));
+        ValidateConcat("(");
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat(")"));
+        ValidateConcat(")");
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        txtFuncion.setText("");
+        coutnCoef = 0;
+        btnAceptar.setEnabled(false);
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (!txtFuncion.getText().equals("")) {
             if (padreMantenedor != null) {
                 padreMantenedor.SetNewEditFuncion(txtFuncion.getText());
             } else {
                 this.setCursor(Cursor.WAIT_CURSOR);
-                try {
-                    FuncionDAO.insertarFuncion(txtFuncion.getText());
-                } catch (DAOException ex) {
-                    this.setCursor(Cursor.DEFAULT_CURSOR);
-                    JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
-                } catch (SQLException ex) {
-                    this.setCursor(Cursor.DEFAULT_CURSOR);
-                    JOptionPane.showMessageDialog(this, "No se puede hacer Rollback", "Error", 0);
-                }
+
+//                try {
+                //FuncionDAO.insertarFuncion(txtFuncion.getText());
+//                } catch (DAOException ex) {
+//                    this.setCursor(Cursor.DEFAULT_CURSOR);
+//                    JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
+//                } catch (SQLException ex) {
+//                    this.setCursor(Cursor.DEFAULT_CURSOR);
+//                    JOptionPane.showMessageDialog(this, "No se puede hacer Rollback", "Error", 0);
+//                }
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        if (!txtFuncion.getText().equals("")) {
+            ProbarFuncion pantalla = new ProbarFuncion(txtFuncion.getText(), buscarCoeficientes(), this);
+            pantalla.setLocationRelativeTo(this);
+            pantalla.setVisible(true);
+            setVisible(false);
+        }
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private LinkedList<String> buscarCoeficientes() {
+        String[] coeficientes = {"dap", "h"};
+        LinkedList<String> co = new LinkedList();
+        for (String coeficiente : coeficientes) {
+            if (txtFuncion.getText().contains(coeficiente)) {
+                co.add(coeficiente);
+            }
+        }
+        return co;
+    }
+    
+    void limpiarFuncion() {
+        txtFuncion.setText("");
+        coutnCoef = 0;
+    }
+    
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("dap"));
+        ValidateConcat("dap");
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        //txtFuncion.setText(txtFuncion.getText().concat("h"));
+        ValidateConcat("h");
+    }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         //txtFuncion.setText(txtFuncion.getText().concat("B" + coutnCoef));
@@ -710,24 +721,9 @@ public class IngresarFuncion extends javax.swing.JFrame {
         txtFuncion.setText(txtFuncion.getText().concat("sqrt("));
     }//GEN-LAST:event_jButton26ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("."));
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         txtFuncion.setText(txtFuncion.getText().concat(","));
     }//GEN-LAST:event_jButton27ActionPerformed
-
-    private LinkedList<String> buscarCoeficientes() {
-        String[] coeficientes = {"dap", "h"};
-        LinkedList<String> co = new LinkedList();
-        for (String coeficiente : coeficientes) {
-            if (txtFuncion.getText().contains(coeficiente)) {
-                co.add(coeficiente);
-            }
-        }
-        return co;
-    }
 
     /**
      * @param args the command line arguments
@@ -746,22 +742,30 @@ public class IngresarFuncion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngresarModelo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngresarModelo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngresarModelo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngresarModelo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IngresarFuncion().setVisible(true);
+                new IngresarModelo().setVisible(true);
             }
         });
+    }
+
+    public void btnAceptarEnabled(boolean state) {
+        btnAceptar.setEnabled(state);
+    }
+
+    public void setTextFuncion(String exp) {
+        txtFuncion.setText(exp);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -799,9 +803,4 @@ public class IngresarFuncion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtFuncion;
     // End of variables declaration//GEN-END:variables
-
-    void limpiarFuncion() {
-        txtFuncion.setText("");
-        coutnCoef = 0;
-    }
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Vistas;
 
 import Utilidades.Persistencia.DAO.FuncionDAO;
@@ -20,6 +19,8 @@ public class Principal extends javax.swing.JFrame {
 
     private final IngresarFuncion ingresarFuncion = new IngresarFuncion();
     private final MantenedorFunciones mantenedorFunciones = new MantenedorFunciones();
+    private final IngresarModelo ingresarModelo = new IngresarModelo();
+
     /**
      * Creates new form Principal
      */
@@ -99,9 +100,19 @@ public class Principal extends javax.swing.JFrame {
         jMenu6.setText("Modelos de Altura");
 
         jMenuItem9.setText("Agregar Modelo");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem9);
 
         jMenuItem10.setText("Gestionar Modelos");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem10);
 
         jMenuBar1.add(jMenu6);
@@ -146,7 +157,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(JOptionPane.showOptionDialog(this, "Realmente Desea Salir?", "Advertencia", JOptionPane.YES_NO_OPTION, WIDTH, null, null, rootPane) == JOptionPane.YES_OPTION){
+        if (JOptionPane.showOptionDialog(this, "Realmente Desea Salir?", "Advertencia", JOptionPane.YES_NO_OPTION, WIDTH, null, null, rootPane) == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -162,9 +173,20 @@ public class Principal extends javax.swing.JFrame {
             mantenedorFunciones.SetFunciones(FuncionDAO.obtenerTodosLasFunciones());
             mantenedorFunciones.setLocationRelativeTo(null);
         } catch (DAOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puede ejecutar esta función\n"
+                    + "por que no hay conexion con la Base de Datos.", "Error", 1);
         }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ingresarModelo.limpiarFuncion();
+        ingresarModelo.setLocationRelativeTo(null);
+        ingresarModelo.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments

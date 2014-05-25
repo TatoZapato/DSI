@@ -18,17 +18,19 @@ public class ProbarFuncion extends javax.swing.JFrame {
 
     private String expresion;
     private LinkedList<String> coeficientes;
-    private IngresarFuncion padre;
+    private IngresarFuncion padreFuncion = null;
+    private IngresarModelo padreModelo = null;
 
     /**
      * Creates new form EvaluarFuncion
      *
      * @param exp
      * @param coef
+     * @param father
      */
     public ProbarFuncion(String exp, LinkedList<String> coef, IngresarFuncion father) {
         initComponents();
-        padre = father;
+        padreFuncion = father;
         expresion = exp;
         txtFuncion.setText(exp);
         coeficientes = coef;
@@ -41,6 +43,24 @@ public class ProbarFuncion extends javax.swing.JFrame {
             }
         }
         System.out.println(coef.size());
+    }
+
+    public ProbarFuncion(String exp, LinkedList<String> coef, IngresarModelo father) {
+        initComponents();
+        padreModelo = father;
+        expresion = exp;
+        txtFuncion.setText(exp);
+        coeficientes = coef;
+        if (coef.size() > 0) {
+            if (coef.contains("dap")) {
+                txtDap.setEnabled(true);
+            }
+            if (coef.contains("h")) {
+                txtAltura.setEnabled(true);
+            }
+        }
+        System.out.println(padreFuncion != null);
+        System.out.println(padreModelo != null);
     }
 
     public ProbarFuncion() {
@@ -187,19 +207,34 @@ public class ProbarFuncion extends javax.swing.JFrame {
         if (coeficientes.contains("h")) {
             expresion = expresion.replaceAll("h", txtAltura.getText());;
         }
-        
 
         String resultado = InventarioForestal.pruebaFuncion(expresion);
         this.setCursor(Cursor.DEFAULT_CURSOR);
+
         if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {
             JOptionPane.showMessageDialog(jPanel1, "Error al momento de evaluar la Función, se debe cambiar la Función de Volumen.", "Error", 1);
-            padre.btnAceptarEnabled(false);
+            if (padreFuncion != null) {
+                padreFuncion.btnAceptarEnabled(false);
+            } else if (padreModelo != null) {
+                padreModelo.btnAceptarEnabled(false);
+            }
+
         } else {
             JOptionPane.showMessageDialog(jPanel1, "Resultado:\n" + resultado, "Prueba de Función", 1);
-            padre.btnAceptarEnabled(true);
+            if (padreFuncion != null) {
+                padreFuncion.btnAceptarEnabled(true);
+            } else if (padreModelo != null) {
+                padreModelo.btnAceptarEnabled(true);
+            }
+
+        }
+        if (padreFuncion != null) {
+            padreFuncion.setVisible(true);
+        } else if (padreModelo != null) {
+            padreModelo.setVisible(true);
         }
         dispose();
-        padre.setVisible(true);
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
