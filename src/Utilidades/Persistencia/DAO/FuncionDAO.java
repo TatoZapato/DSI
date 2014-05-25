@@ -22,7 +22,7 @@ import java.util.LinkedList;
 public class FuncionDAO {
 
     public static final String INSERTAR_FUNCION = "INSERT INTO T_INV_FUNCIONVOLUMEN (codigo,fechaCreacion,fechaUltimaModificacion) VALUES (?,?,?)";
-    public static final String OBTENER_TOD0S_LAS_FUNCIONES = "";
+    public static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONVOLUMEN";
 
     public static boolean insertarFuncion(String expresion) throws DAOException, SQLException {
         Connection conn = DAOManager.getConnection();

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Desarrollo
+ * @author Führer
  */
 public class ProbarFuncion extends javax.swing.JFrame {
 
@@ -187,8 +187,9 @@ public class ProbarFuncion extends javax.swing.JFrame {
         if (coeficientes.contains("h")) {
             expresion = expresion.replaceAll("h", txtAltura.getText());;
         }
+        
 
-        String resultado = InventarioForestal.pruedaFuncion(expresion);
+        String resultado = InventarioForestal.pruebaFuncion(expresion);
         this.setCursor(Cursor.DEFAULT_CURSOR);
         if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {
             JOptionPane.showMessageDialog(jPanel1, "Error al momento de evaluar la Función, se debe cambiar la Función de Volumen.", "Error", 1);

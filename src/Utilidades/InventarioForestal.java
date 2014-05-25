@@ -16,10 +16,12 @@ import javax.script.ScriptException;
  */
 public class InventarioForestal {
     
-    public static String pruedaFuncion(String funcion){
+    public static String pruebaFuncion(String funcion){
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
         Object operation;
+        funcion = funcion.replaceAll("pow", "Math.pow");
+        funcion = funcion.replaceAll("sqrt", "Math.sqrt");
         try {
             operation = engine.eval(funcion);
         } catch (ScriptException ex) {

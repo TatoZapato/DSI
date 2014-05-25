@@ -1,11 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
+import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Persistencia.DAOManager.DAOException;
+import java.awt.Cursor;
+import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -637,7 +637,18 @@ public class IngresarFuncion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        if (!txtFuncion.getText().equals("")) {
+            this.setCursor(Cursor.WAIT_CURSOR);
+            try {
+                FuncionDAO.insertarFuncion(txtFuncion.getText());
+            } catch (DAOException ex) {
+                this.setCursor(Cursor.DEFAULT_CURSOR);
+                JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
+            } catch (SQLException ex) {
+                this.setCursor(Cursor.DEFAULT_CURSOR);
+                    JOptionPane.showMessageDialog(this, "No se puede hacer Rollback", "Error", 0);
+            }
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
