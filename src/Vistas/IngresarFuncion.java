@@ -20,11 +20,18 @@ public class IngresarFuncion extends javax.swing.JFrame {
         initComponents();
     }
     private int coutnCoef = 0;
+    private MantenedorFunciones padreMantenedor = null;
+
+    IngresarFuncion(MantenedorFunciones father) {
+        initComponents();
+        padreMantenedor = father;
+    }
 
     public void btnAceptarEnabled(boolean state) {
         btnAceptar.setEnabled(state);
     }
-    public void setTextFuncion(String exp){
+
+    public void setTextFuncion(String exp) {
         txtFuncion.setText(exp);
     }
 
@@ -641,15 +648,19 @@ public class IngresarFuncion extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (!txtFuncion.getText().equals("")) {
-            this.setCursor(Cursor.WAIT_CURSOR);
-            try {
-                FuncionDAO.insertarFuncion(txtFuncion.getText());
-            } catch (DAOException ex) {
-                this.setCursor(Cursor.DEFAULT_CURSOR);
-                JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
-            } catch (SQLException ex) {
-                this.setCursor(Cursor.DEFAULT_CURSOR);
+            if (padreMantenedor != null) {
+                padreMantenedor.SetNewEditFuncion(txtFuncion.getText());
+            } else {
+                this.setCursor(Cursor.WAIT_CURSOR);
+                try {
+                    FuncionDAO.insertarFuncion(txtFuncion.getText());
+                } catch (DAOException ex) {
+                    this.setCursor(Cursor.DEFAULT_CURSOR);
+                    JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
+                } catch (SQLException ex) {
+                    this.setCursor(Cursor.DEFAULT_CURSOR);
                     JOptionPane.showMessageDialog(this, "No se puede hacer Rollback", "Error", 0);
+                }
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed

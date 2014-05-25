@@ -6,7 +6,11 @@
 package Vistas;
 
 import Utilidades.Inventario.Funcion;
+import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Persistencia.DAOManager.DAOException;
+import java.awt.Cursor;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +21,7 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     /**
      * Creates new form MantenedorFunciones
      */
-    private Funcion funcionActual;
+    private Funcion funcionEdit;
     private static LinkedList<Funcion> misFunciones;
 
     public MantenedorFunciones(LinkedList<Funcion> funciones) {
@@ -36,38 +40,40 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         llenarTablaFunciones(misFunciones);
     }
 
-    
     public static void llenarTablaFunciones(LinkedList<Funcion> lista) {
         misFunciones = lista;
         String[][] arr = new String[lista.size()][4];
-        for(int i=0 ; i<lista.size() ; i++) {
-            arr[i][0] = lista.get(i).getIdFuncion()+"";
+        for (int i = 0; i < lista.size(); i++) {
+            arr[i][0] = lista.get(i).getIdFuncion() + "";
             arr[i][1] = lista.get(i).getFuncion();
             arr[i][2] = lista.get(i).getFechaCreacion();
             arr[i][3] = lista.get(i).getFechaModificacion();
         }
-        
+
         TablaFunciones.setModel(new javax.swing.table.DefaultTableModel(
-            arr,
-            new String [] {
-            "Código", "Expresión", "Fecha Creación", "Fecha Modificación"
-            }
+                arr,
+                new String[]{
+                    "Código", "Expresión", "Fecha Creación", "Fecha Modificación"
+                }
         ) {
-            boolean[] canEdit = new boolean [] {
-            false, false, false, false
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false
             };
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         TablaFunciones.getColumn("Código").setMaxWidth(200);
     }
+
     private void llenarDatosFunicion(Funcion func) {
-        this.txtIdFuncion.setText(func.getIdFuncion()+"");
+        this.txtIdFuncion.setText(func.getIdFuncion() + "");
         this.txtFuncion.setText(func.getFuncion());
         this.jButton1.setEnabled(true);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,6 +147,11 @@ public class MantenedorFunciones extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Guardar Cambios");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -208,7 +219,7 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        IngresarFuncion pantalla = new IngresarFuncion();
+        IngresarFuncion pantalla = new IngresarFuncion(this);
         pantalla.setLocationRelativeTo(null);
         pantalla.setTextFuncion(txtFuncion.getText());
         pantalla.setVisible(true);
@@ -216,8 +227,21 @@ public class MantenedorFunciones extends javax.swing.JFrame {
 
     private void TablaFuncionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFuncionesMouseClicked
         // TODO add your handling code here:
-        llenarDatosFunicion(misFunciones.get(TablaFunciones.getSelectedRow()));
+        funcionEdit = misFunciones.get(TablaFunciones.getSelectedRow());
+        llenarDatosFunicion(funcionEdit);
     }//GEN-LAST:event_TablaFuncionesMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        funcionEdit.setFuncion(txtFuncion.getText());
+        setCursor(Cursor.WAIT_CURSOR);
+        try {
+            FuncionDAO.actualizarFuncion(funcionEdit);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(jPanel1, "No se pudo Realizar la Actualización", "Error", 0);
+        }
+        this.setCursor(Cursor.DEFAULT_CURSOR);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,4 +290,8 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     private javax.swing.JTextField txtFuncion;
     private javax.swing.JTextField txtIdFuncion;
     // End of variables declaration//GEN-END:variables
+
+    void SetNewEditFuncion(String text) {
+        txtFuncion.setText(text);
+    }
 }

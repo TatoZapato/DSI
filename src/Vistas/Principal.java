@@ -6,6 +6,10 @@
 
 package Vistas;
 
+import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Persistencia.DAOManager.DAOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
-    private IngresarFuncion ingresarFuncion = new IngresarFuncion();
+    private final IngresarFuncion ingresarFuncion = new IngresarFuncion();
+    private final MantenedorFunciones mantenedorFunciones = new MantenedorFunciones();
     /**
      * Creates new form Principal
      */
@@ -112,6 +117,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem7);
 
         jMenuItem8.setText("Gestionar Funciones");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem8);
 
         jMenuBar1.add(jMenu5);
@@ -146,6 +156,15 @@ public class Principal extends javax.swing.JFrame {
         ingresarFuncion.setLocationRelativeTo(null);
         ingresarFuncion.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        try {
+            mantenedorFunciones.SetFunciones(FuncionDAO.obtenerTodosLasFunciones());
+            mantenedorFunciones.setLocationRelativeTo(null);
+        } catch (DAOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments

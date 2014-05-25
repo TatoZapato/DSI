@@ -21,8 +21,9 @@ import java.util.LinkedList;
  */
 public class FuncionDAO {
 
-    public static final String INSERTAR_FUNCION = "INSERT INTO T_INV_FUNCIONVOLUMEN (codigo,fechaCreacion,fechaUltimaModificacion) VALUES (?,?,?)";
-    public static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONVOLUMEN";
+    private static final String INSERTAR_FUNCION = "INSERT INTO T_INV_FUNCIONVOLUMEN (funcion,fechaCreacion,fechaUltimaModificacion) VALUES (?,?,?)";
+    private static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONVOLUMEN";
+    private static final String ACTUALIZA_FUNCION = "UPDATE T_INV_FUNCIONVOLUMEN SET funcion = ?, fechaUltimaModificacion = ? where idFuncion = ?";
 
     public static boolean insertarFuncion(String expresion) throws DAOException, SQLException {
         Connection conn = DAOManager.getConnection();
@@ -47,6 +48,30 @@ public class FuncionDAO {
 
         return true;
 
+    }
+    
+    public static boolean actualizarFuncion(Funcion funcion) throws DAOException {
+        Connection conn = DAOManager.getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(ACTUALIZA_FUNCION)){
+            ps.setString(1, funcion.getFuncion());
+            Date fecha = new Date(new java.util.Date().getTime());
+            ps.setDate(2, fecha);
+            ps.setInt(3, funcion.getIdFuncion());
+
+            //ps.executeUpdate(ACTUALIZA_FUNCION+"FUNCION = '"+funcion.getFuncion()+"', FC_ULTIMAMOD = SYSDATE WHERE CD_FUNCION = '"+funcion.getCodigo()+"'");
+            ps.close();
+        } catch (Exception e) {
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        
+        return true;
+        
     }
 
     public static LinkedList<Funcion> obtenerTodosLasFunciones() throws DAOException {
