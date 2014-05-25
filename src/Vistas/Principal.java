@@ -6,9 +6,8 @@
 package Vistas;
 
 import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
     private final IngresarFuncion ingresarFuncion = new IngresarFuncion();
     private final MantenedorFunciones mantenedorFunciones = new MantenedorFunciones();
     private final IngresarModelo ingresarModelo = new IngresarModelo();
+    private final MantenedorModelos mantenedorModelos = new MantenedorModelos();
 
     /**
      * Creates new form Principal
@@ -185,7 +185,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        // TODO add your handling code here:
+        try {
+            mantenedorModelos.SetModelos(ModeloDAO.obtenerTodosLosModelos());
+            mantenedorFunciones.setLocationRelativeTo(null);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede ejecutar esta función\n"
+                    + "por que no hay conexion con la Base de Datos.", "Error", 1);
+        }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**

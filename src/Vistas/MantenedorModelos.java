@@ -5,8 +5,8 @@
  */
 package Vistas;
 
-import Utilidades.Inventario.Funcion;
-import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Inventario.Modelo;
+import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.awt.Cursor;
 import java.util.LinkedList;
@@ -16,61 +16,27 @@ import javax.swing.JOptionPane;
  *
  * @author Führer
  */
-public class MantenedorFunciones extends javax.swing.JFrame {
+public class MantenedorModelos extends javax.swing.JFrame {
 
     /**
-     * Creates new form MantenedorFunciones
+     * Creates new form MantenedorModelos
      */
-    private Funcion funcionEdit;
-    private static LinkedList<Funcion> misFunciones;
+    private Modelo modeloEdit;
+    private LinkedList<Modelo> misModelos;
 
-    public MantenedorFunciones(LinkedList<Funcion> funciones) {
+    public MantenedorModelos(LinkedList<Modelo> modelos) {
         initComponents();
-        misFunciones = funciones;
-        llenarTablaFunciones(funciones);
+        misModelos = modelos;
+        llenarTablaModelos(misModelos);
+    }
+    
+    public void SetModelos(LinkedList<Modelo> modelos) {
+        misModelos = modelos;
+        llenarTablaModelos(misModelos);
     }
 
-    public MantenedorFunciones() {
+    public MantenedorModelos() {
         initComponents();
-        misFunciones = new LinkedList();
-    }
-
-    public void SetFunciones(LinkedList<Funcion> funcions) {
-        misFunciones = funcions;
-        llenarTablaFunciones(misFunciones);
-    }
-
-    public static void llenarTablaFunciones(LinkedList<Funcion> lista) {
-        misFunciones = lista;
-        String[][] arr = new String[lista.size()][4];
-        for (int i = 0; i < lista.size(); i++) {
-            arr[i][0] = lista.get(i).getIdFuncion() + "";
-            arr[i][1] = lista.get(i).getFuncion();
-            arr[i][2] = lista.get(i).getFechaCreacion().toString();
-            arr[i][3] = lista.get(i).getFechaModificacion().toString();
-        }
-
-        TablaFunciones.setModel(new javax.swing.table.DefaultTableModel(
-                arr,
-                new String[]{
-                    "Id", "Función", "Fecha Creación", "Fecha Modificación"
-                }
-        ) {
-            boolean[] canEdit = new boolean[]{
-                false, false, false, false
-            };
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        });
-        TablaFunciones.getColumn("Id").setMaxWidth(200);
-    }
-
-    private void llenarDatosFuncion(Funcion func) {
-        this.txtIdFuncion.setText(func.getIdFuncion() + "");
-        this.txtFuncion.setText(func.getFuncion());
     }
 
     /**
@@ -82,23 +48,22 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaFunciones = new javax.swing.JTable();
+        TablaModelos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtIdFuncion = new javax.swing.JTextField();
-        txtFuncion = new javax.swing.JTextField();
+        txtIdModelo = new javax.swing.JTextField();
+        txtModelo = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TablaFunciones.setAutoCreateRowSorter(true);
-        TablaFunciones.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        TablaFunciones.setModel(new javax.swing.table.DefaultTableModel(
+        TablaModelos.setAutoCreateRowSorter(true);
+        TablaModelos.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        TablaModelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -106,36 +71,25 @@ public class MantenedorFunciones extends javax.swing.JFrame {
 
             }
         ));
-        TablaFunciones.setFocusCycleRoot(true);
-        TablaFunciones.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaModelos.setFocusCycleRoot(true);
+        TablaModelos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaFuncionesMouseClicked(evt);
+                TablaModelosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(TablaFunciones);
+        jScrollPane1.setViewportView(TablaModelos);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Función de Volumen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Modelo de Altura", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Id:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Función:");
+        jLabel2.setText("Modelo:");
 
-        txtIdFuncion.setEditable(false);
+        txtIdModelo.setEditable(false);
 
-        txtFuncion.setEditable(false);
+        txtModelo.setEditable(false);
 
         btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
@@ -155,7 +109,7 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         });
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnEliminar.setText("Eliminar Función");
+        btnEliminar.setText("Eliminar Modelo");
         btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,16 +126,16 @@ public class MantenedorFunciones extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(45, 45, 45)
-                                .addComponent(txtIdFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIdModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -197,90 +151,137 @@ public class MantenedorFunciones extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtIdFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEditar))
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnEditar)
+                        .addComponent(txtModelo))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setEnabledGuardar(boolean state){
+        btnGuardar.setEnabled(state);
+    }
+    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        IngresarFuncion pantalla = new IngresarFuncion(this);
+        IngresarModelo pantalla = new IngresarModelo(this);
         pantalla.setLocationRelativeTo(null);
-        pantalla.setTextFuncion(txtFuncion.getText());
+        pantalla.setTextFuncion(txtModelo.getText());
         pantalla.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void TablaFuncionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFuncionesMouseClicked
-        // TODO add your handling code here:
-        funcionEdit = misFunciones.get(TablaFunciones.getSelectedRow());
-        llenarDatosFuncion(funcionEdit);        
-        btnEditar.setEnabled(true);
-        btnEliminar.setEnabled(true);
-    }//GEN-LAST:event_TablaFuncionesMouseClicked
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        funcionEdit.setFuncion(txtFuncion.getText());
+        modeloEdit.setModelo(txtModelo.getText());
         setCursor(Cursor.WAIT_CURSOR);
         try {
-            FuncionDAO.actualizarFuncion(funcionEdit);
+            ModeloDAO.actualizarModelo(modeloEdit);
         } catch (DAOException ex) {
-            JOptionPane.showMessageDialog(jPanel1, "No se pudo Realizar la Actualización", "Error", 0);
+            JOptionPane.showMessageDialog(rootPane, "No se pudo Realizar la Actualización", "Error", 0);
         }
         this.setCursor(Cursor.DEFAULT_CURSOR);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    
-    public void setEnabledGuardar(boolean state){
-        btnGuardar.setEnabled(state);
-    }
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-        if((JOptionPane.showConfirmDialog(rootPane, "¿Seguro desea eliminar:\n"+funcionEdit.getFuncion()+"?", "Confirmación", 1)) == 0) {
+
+        if ((JOptionPane.showConfirmDialog(rootPane, "¿Seguro desea eliminar:\n" + modeloEdit.getModelo() + " ?", "Confirmación", 1)) == 0) {
             try {
-                FuncionDAO.eliminaFuncion(funcionEdit);
-                misFunciones = FuncionDAO.obtenerTodosLasFunciones();
-                llenarTablaFunciones(misFunciones);
-                txtFuncion.setText("");
-                txtIdFuncion.setText("");
+                ModeloDAO.eliminarModelo(modeloEdit);
+                misModelos = ModeloDAO.obtenerTodosLosModelos();
+                llenarTablaModelos(misModelos);
+                txtModelo.setText("");
+                txtIdModelo.setText("");
                 btnEditar.setEnabled(false);
                 btnEliminar.setEnabled(false);
             } catch (DAOException ex) {
-                JOptionPane.showMessageDialog(jPanel1, "No se pudo realizar\nla eliminación", "Error", 0);
+                JOptionPane.showMessageDialog(rootPane, "No se pudo realizar\nla eliminación", "Error", 0);
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void TablaModelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaModelosMouseClicked
+        // TODO add your handling code here:
+        modeloEdit = misModelos.get(TablaModelos.getSelectedRow());
+        llenarDatosModelos(modeloEdit);
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+
+    }//GEN-LAST:event_TablaModelosMouseClicked
+
+    private void llenarTablaModelos(LinkedList<Modelo> lista) {
+        misModelos = lista;
+        String[][] arr = new String[lista.size()][2];
+        for (int i = 0; i < lista.size(); i++) {
+            arr[i][0] = lista.get(i).getIdModelo() + "";
+            arr[i][1] = lista.get(i).getModelo();
+            arr[i][2] = lista.get(i).getFechaCreacion().toString();
+            arr[i][3] = lista.get(i).getFechaModificacion().toString();
+        }
+
+        TablaModelos.setModel(new javax.swing.table.DefaultTableModel(
+                arr,
+                new String[]{
+                    "Código", "Expresión"
+                }
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        TablaModelos.setModel(new javax.swing.table.DefaultTableModel(
+                arr,
+                new String[]{
+                    "Id", "Modelo", "Fecha Creación", "Fecha Modificación"
+                }
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        TablaModelos.getColumn("Id").setMaxWidth(200);
+    }
 
     /**
      * @param args the command line arguments
@@ -298,40 +299,40 @@ public class MantenedorFunciones extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MantenedorModelos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new MantenedorFunciones().setVisible(true);
+                new MantenedorModelos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JTable TablaFunciones;
+    private static javax.swing.JTable TablaModelos;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtFuncion;
-    private javax.swing.JTextField txtIdFuncion;
+    private javax.swing.JTextField txtIdModelo;
+    private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
 
     void SetNewEditFuncion(String text) {
-        txtFuncion.setText(text);
+        txtModelo.setText(text);
+    }
+
+    private void llenarDatosModelos(Modelo modelo) {
+        txtIdModelo.setText(modelo.getIdModelo()+"");
+        txtModelo.setText(modelo.getModelo());
+        btnEditar.setEnabled(true);
     }
 }

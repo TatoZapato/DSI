@@ -1,5 +1,7 @@
 package Utilidades.Inventario;
 
+import java.sql.Date;
+
 /**
  *
  * @author Führer
@@ -7,9 +9,9 @@ package Utilidades.Inventario;
 public class Funcion {
     private int idFuncion;
     private String funcion;
-    private String fechaCreacion;
-    private String fechaModificacion;
-    public Funcion(int id, String funcion, String fechaCreacion, String fechaModificacion) {
+    private Date fechaCreacion;
+    private Date fechaModificacion;
+    public Funcion(int id, String funcion, Date fechaCreacion, Date fechaModificacion) {
         this.idFuncion = id;
         this.funcion = funcion;
         this.fechaCreacion = fechaCreacion;
@@ -32,19 +34,19 @@ public class Funcion {
         this.funcion = funcion;
     }
 
-    public String getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public String getFechaModificacion() {
+    public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(String fechaModificacion) {
+    public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 }

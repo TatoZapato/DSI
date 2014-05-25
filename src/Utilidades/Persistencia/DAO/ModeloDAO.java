@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Utilidades.Persistencia.DAO;
 
-import Utilidades.Inventario.Funcion;
+import Utilidades.Inventario.Modelo;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Persistencia.DAOManager.DAOManager;
 import java.sql.Connection;
@@ -19,17 +14,18 @@ import java.util.LinkedList;
  *
  * @author Führer
  */
-public class FuncionDAO {
+public class ModeloDAO {
 
-    private static final String INSERTAR_FUNCION = "INSERT INTO T_INV_FUNCIONVOLUMEN (funcion,fechaCreacion,fechaModificacion) VALUES (?,?,?)";
-    private static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONVOLUMEN ORDER BY idFuncion ASC";
-    private static final String ACTUALIZAR_FUNCION = "UPDATE T_INV_FUNCIONVOLUMEN SET funcion = ?, fechaModificacion = ? where idFuncion = ?";
-    private static final String ELIMINAR_FUNCION = "DELETE FROM T_INV_FUNCIONVOLUMEN WHERE idFuncion = ?";
+    private static final String OBTENER_TOD0S_LOS_MODELOS = "SELECT * FROM T_INV_MODELOALTURA ORDER BY idModelo ASC";
+    private static final String OBTENER_MODELO = "SELECT * FROM T_INV_MODELOALTURA WHERE CD_MODELO = ?";
+    private static final String INSERTAR_MODELO = "INSERT INTO T_INV_MODELOALTURA (modelo,fechaCreacion,fechaModificacion) VALUES (?,?,?)";
+    private static final String ACTUALIZAR_MODELO = "UPDATE T_INV_MODELOALTURA SET modelo = ?, fechaModificacion = ? where idModelo = ?";
+    private static final String ELIMINAR_MODELO = "DELETE FROM T_INV_MODELOALTURA WHERE idModelo = ?";
 
-    public static boolean eliminaFuncion(Funcion funcion) throws DAOException {
+    public static boolean eliminarModelo(Modelo modelo) throws DAOException {
         Connection conn = DAOManager.getConnection();
-        try (PreparedStatement ps = conn.prepareCall(ELIMINAR_FUNCION)) {
-            ps.setInt(1, funcion.getIdFuncion());
+        try (PreparedStatement ps = conn.prepareStatement(ELIMINAR_MODELO)) {
+            ps.setInt(1, modelo.getIdModelo());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -47,10 +43,34 @@ public class FuncionDAO {
 
     }
 
-    public static boolean insertarFuncion(String expresion) throws DAOException, SQLException {
+    public static boolean actualizarModelo(Modelo modelo) throws DAOException {
         Connection conn = DAOManager.getConnection();
-        try (PreparedStatement ps = conn.prepareStatement(INSERTAR_FUNCION)) {
-            ps.setString(1, expresion);
+        try (PreparedStatement ps = conn.prepareStatement(ACTUALIZAR_MODELO)) {
+            ps.setString(1, modelo.getModelo());
+            Date fecha = new Date(new java.util.Date().getTime());
+            ps.setDate(2, fecha);
+            ps.setInt(3, modelo.getIdModelo());
+            ResultSet rs = ps.executeQuery();
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+
+        return true;
+
+    }
+
+    public static boolean insertarModelo(String modelo) throws DAOException, SQLException {
+        Connection conn = DAOManager.getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(INSERTAR_MODELO)) {
+            ps.setString(1, modelo);
             Date fecha = new Date(new java.util.Date().getTime());
             ps.setDate(2, fecha);
             ps.setDate(3, fecha);
@@ -72,43 +92,16 @@ public class FuncionDAO {
 
     }
 
-    public static boolean actualizarFuncion(Funcion funcion) throws DAOException {
+    public static LinkedList<Modelo> obtenerTodosLosModelos() throws DAOException {
         Connection conn = DAOManager.getConnection();
-        try (PreparedStatement ps = conn.prepareStatement(ACTUALIZAR_FUNCION)) {
-            ps.setString(1, funcion.getFuncion());
-            Date fecha = new Date(new java.util.Date().getTime());
-            ps.setDate(2, fecha);
-            ps.setInt(3, funcion.getIdFuncion());
-            ResultSet rs = ps.executeQuery();
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
-            }
-        }
-
-        return true;
-
-    }
-
-    public static LinkedList<Funcion> obtenerTodosLasFunciones() throws DAOException {
-        Connection conn = DAOManager.getConnection();
-        LinkedList<Funcion> funciones = new LinkedList();
-
-        try {
-            PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LAS_FUNCIONES);
-            ResultSet rs = ps.executeQuery();
+        LinkedList<Modelo> modelos = new LinkedList();
+        try (PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_MODELOS); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                funciones.add(new Funcion(rs.getInt("idFuncion"), rs.getString("funcion"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
+                modelos.add(new Modelo(rs.getInt("IdModelo"), rs.getString("Modelo"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
             }
             rs.close();
             ps.close();
-            return funciones;
+            return modelos;
         } catch (SQLException e) {
             throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
         } finally {
@@ -119,5 +112,4 @@ public class FuncionDAO {
             }
         }
     }
-
 }

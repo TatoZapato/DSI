@@ -681,17 +681,17 @@ public class IngresarFuncion extends javax.swing.JFrame {
         if (!txtFuncion.getText().equals("")) {
             if (padreMantenedor != null) {
                 padreMantenedor.SetNewEditFuncion(txtFuncion.getText());
+                padreMantenedor.setEnabledGuardar(true);
             } else {
                 this.setCursor(Cursor.WAIT_CURSOR);
                 try {
                     FuncionDAO.insertarFuncion(txtFuncion.getText());
                 } catch (DAOException ex) {
-                    this.setCursor(Cursor.DEFAULT_CURSOR);
                     JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
                 } catch (SQLException ex) {
-                    this.setCursor(Cursor.DEFAULT_CURSOR);
                     JOptionPane.showMessageDialog(this, "No se puede hacer Rollback", "Error", 0);
                 }
+                this.setCursor(Cursor.DEFAULT_CURSOR);
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -745,19 +745,14 @@ public class IngresarFuncion extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(IngresarFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new IngresarFuncion().setVisible(true);
             }

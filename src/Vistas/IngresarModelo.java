@@ -5,9 +5,13 @@
  */
 package Vistas;
 
+import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.awt.Cursor;
+import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +24,12 @@ public class IngresarModelo extends javax.swing.JFrame {
      * Creates new form IngresarModelo
      */
     private static int coutnCoef = 0;
-    private MantenedorFunciones padreMantenedor = null;
+    private MantenedorModelos padreMantenedor = null;
+
+    public IngresarModelo(MantenedorModelos father) {
+        initComponents();
+        padreMantenedor = father;
+    }
 
     public IngresarModelo() {
         initComponents();
@@ -656,18 +665,17 @@ public class IngresarModelo extends javax.swing.JFrame {
         if (!txtFuncion.getText().equals("")) {
             if (padreMantenedor != null) {
                 padreMantenedor.SetNewEditFuncion(txtFuncion.getText());
+                padreMantenedor.setEnabledGuardar(true);
             } else {
                 this.setCursor(Cursor.WAIT_CURSOR);
-
-//                try {
-                //FuncionDAO.insertarFuncion(txtFuncion.getText());
-//                } catch (DAOException ex) {
-//                    this.setCursor(Cursor.DEFAULT_CURSOR);
-//                    JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
-//                } catch (SQLException ex) {
-//                    this.setCursor(Cursor.DEFAULT_CURSOR);
-//                    JOptionPane.showMessageDialog(this, "No se puede hacer Rollback", "Error", 0);
-//                }
+                try {
+                    ModeloDAO.insertarModelo(txtFuncion.getText());
+                } catch (DAOException ex) {
+                    JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "No se puede hacer Rollback", "Error", 0);
+                }
+                this.setCursor(Cursor.DEFAULT_CURSOR);
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -691,12 +699,12 @@ public class IngresarModelo extends javax.swing.JFrame {
         }
         return co;
     }
-    
+
     void limpiarFuncion() {
         txtFuncion.setText("");
         coutnCoef = 0;
     }
-    
+
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         //txtFuncion.setText(txtFuncion.getText().concat("dap"));
         ValidateConcat("dap");
