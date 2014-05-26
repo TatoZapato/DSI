@@ -37,6 +37,7 @@ public class MantenedorModelos extends javax.swing.JFrame {
 
     public MantenedorModelos() {
         initComponents();
+        misModelos = new LinkedList<>();
     }
 
     /**
@@ -225,9 +226,10 @@ public class MantenedorModelos extends javax.swing.JFrame {
 
     private void llenarTablaModelos(LinkedList<Modelo> lista) {
         misModelos = lista;
-        String[][] arr = new String[lista.size()][2];
+        System.out.println(lista.size());
+        String[][] arr = new String[lista.size()][4];
         for (int i = 0; i < lista.size(); i++) {
-            arr[i][0] = lista.get(i).getIdModelo() + "";
+            arr[i][0] = lista.get(i).getIdModelo();
             arr[i][1] = lista.get(i).getModelo();
             arr[i][2] = lista.get(i).getFechaCreacion().toString();
             arr[i][3] = lista.get(i).getFechaModificacion().toString();

@@ -22,7 +22,7 @@ import java.util.LinkedList;
 public class FuncionDAO {
 
     private static final String INSERTAR_FUNCION = "INSERT INTO T_INV_FUNCIONVOLUMEN (funcion,fechaCreacion,fechaModificacion) VALUES (?,?,?)";
-    private static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONVOLUMEN ORDER BY idFuncion ASC";
+    private static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONVOLUMEN";
     private static final String ACTUALIZAR_FUNCION = "UPDATE T_INV_FUNCIONVOLUMEN SET funcion = ?, fechaModificacion = ? where idFuncion = ?";
     private static final String ELIMINAR_FUNCION = "DELETE FROM T_INV_FUNCIONVOLUMEN WHERE idFuncion = ?";
 

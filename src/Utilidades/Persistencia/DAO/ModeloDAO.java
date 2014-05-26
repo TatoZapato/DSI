@@ -16,7 +16,7 @@ import java.util.LinkedList;
  */
 public class ModeloDAO {
 
-    private static final String OBTENER_TOD0S_LOS_MODELOS = "SELECT * FROM T_INV_MODELOALTURA ORDER BY idModelo ASC";
+    private static final String OBTENER_TOD0S_LOS_MODELOS = "SELECT * FROM T_INV_MODELOALTURA";
     private static final String OBTENER_MODELO = "SELECT * FROM T_INV_MODELOALTURA WHERE CD_MODELO = ?";
     private static final String INSERTAR_MODELO = "INSERT INTO T_INV_MODELOALTURA (modelo,fechaCreacion,fechaModificacion) VALUES (?,?,?)";
     private static final String ACTUALIZAR_MODELO = "UPDATE T_INV_MODELOALTURA SET modelo = ?, fechaModificacion = ? where idModelo = ?";
@@ -97,6 +97,7 @@ public class ModeloDAO {
         LinkedList<Modelo> modelos = new LinkedList();
         try (PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_MODELOS); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
+                System.out.println(rs.getString("IdModelo"));
                 modelos.add(new Modelo(rs.getString("IdModelo"), rs.getString("Modelo"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
             }
             rs.close();
