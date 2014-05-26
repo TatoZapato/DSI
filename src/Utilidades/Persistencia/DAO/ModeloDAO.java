@@ -25,7 +25,7 @@ public class ModeloDAO {
     public static boolean eliminarModelo(Modelo modelo) throws DAOException {
         Connection conn = DAOManager.getConnection();
         try (PreparedStatement ps = conn.prepareStatement(ELIMINAR_MODELO)) {
-            ps.setInt(1, modelo.getIdModelo());
+            ps.setString(1, modelo.getIdModelo());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -49,7 +49,7 @@ public class ModeloDAO {
             ps.setString(1, modelo.getModelo());
             Date fecha = new Date(new java.util.Date().getTime());
             ps.setDate(2, fecha);
-            ps.setInt(3, modelo.getIdModelo());
+            ps.setString(3, modelo.getIdModelo());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -97,7 +97,7 @@ public class ModeloDAO {
         LinkedList<Modelo> modelos = new LinkedList();
         try (PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_MODELOS); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                modelos.add(new Modelo(rs.getInt("IdModelo"), rs.getString("Modelo"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
+                modelos.add(new Modelo(rs.getString("IdModelo"), rs.getString("Modelo"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
             }
             rs.close();
             ps.close();

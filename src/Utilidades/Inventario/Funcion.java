@@ -1,28 +1,29 @@
 package Utilidades.Inventario;
 
 import java.sql.Date;
+import java.util.UUID;
 
 /**
  *
  * @author Führer
  */
 public class Funcion {
-    private int idFuncion;
+    private String idFuncion;
     private String funcion;
     private Date fechaCreacion;
     private Date fechaModificacion;
-    public Funcion(int id, String funcion, Date fechaCreacion, Date fechaModificacion) {
+    public Funcion(String id, String funcion, Date fechaCreacion, Date fechaModificacion) {
         this.idFuncion = id;
         this.funcion = funcion;
         this.fechaCreacion = fechaCreacion;
         this.fechaModificacion = fechaModificacion;
     }
 
-    public int getIdFuncion() {
+    public String getIdFuncion() {
         return idFuncion;
     }
 
-    public void setIdFuncion(int codigo) {
+    public void setIdFuncion(String codigo) {
         this.idFuncion = codigo;
     }
 

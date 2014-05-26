@@ -78,7 +78,7 @@ public class IngresarFuncion extends javax.swing.JFrame {
         jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar una Nueva Función");
         setResizable(false);
 
@@ -682,10 +682,12 @@ public class IngresarFuncion extends javax.swing.JFrame {
             if (padreMantenedor != null) {
                 padreMantenedor.SetNewEditFuncion(txtFuncion.getText());
                 padreMantenedor.setEnabledGuardar(true);
+                dispose();
             } else {
                 this.setCursor(Cursor.WAIT_CURSOR);
                 try {
                     FuncionDAO.insertarFuncion(txtFuncion.getText());
+                    dispose();
                 } catch (DAOException ex) {
                     JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
                 } catch (SQLException ex) {

@@ -172,6 +172,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             mantenedorFunciones.SetFunciones(FuncionDAO.obtenerTodosLasFunciones());
             mantenedorFunciones.setLocationRelativeTo(null);
+            mantenedorFunciones.setVisible(true);
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(null, "No se puede ejecutar esta función\n"
                     + "por que no hay conexion con la Base de Datos.", "Error", 1);

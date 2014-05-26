@@ -29,7 +29,7 @@ public class FuncionDAO {
     public static boolean eliminaFuncion(Funcion funcion) throws DAOException {
         Connection conn = DAOManager.getConnection();
         try (PreparedStatement ps = conn.prepareCall(ELIMINAR_FUNCION)) {
-            ps.setInt(1, funcion.getIdFuncion());
+            ps.setString(1, funcion.getIdFuncion().toString());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -78,7 +78,7 @@ public class FuncionDAO {
             ps.setString(1, funcion.getFuncion());
             Date fecha = new Date(new java.util.Date().getTime());
             ps.setDate(2, fecha);
-            ps.setInt(3, funcion.getIdFuncion());
+            ps.setString(3, funcion.getIdFuncion().toString());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -100,11 +100,10 @@ public class FuncionDAO {
         Connection conn = DAOManager.getConnection();
         LinkedList<Funcion> funciones = new LinkedList();
 
-        try {
-            PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LAS_FUNCIONES);
+        try (PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LAS_FUNCIONES)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                funciones.add(new Funcion(rs.getInt("idFuncion"), rs.getString("funcion"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
+                funciones.add(new Funcion(rs.getString("idFuncion"), rs.getString("funcion"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
             }
             rs.close();
             ps.close();

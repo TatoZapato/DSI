@@ -13,23 +13,23 @@ import java.sql.Date;
  * @author Führer
  */
 public class Modelo {
-    private int idModelo;
+    private String idModelo;
     private String modelo;    
     private Date fechaCreacion;
     private Date fechaModificacion;
 
-    public Modelo(int id, String expresion, Date fechaCreacion, Date fechaModificacion) {
+    public Modelo(String id, String expresion, Date fechaCreacion, Date fechaModificacion) {
         this.idModelo = id;
         this.modelo = expresion;
         this.fechaCreacion = fechaCreacion;
         this.fechaModificacion = fechaModificacion;
     }
 
-    public int getIdModelo() {
+    public String getIdModelo() {
         return idModelo;
     }
 
-    public void setIdModelo(int ide) {
+    public void setIdModelo(String ide) {
         this.idModelo = ide;
     }
 

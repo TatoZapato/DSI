@@ -666,10 +666,12 @@ public class IngresarModelo extends javax.swing.JFrame {
             if (padreMantenedor != null) {
                 padreMantenedor.SetNewEditFuncion(txtFuncion.getText());
                 padreMantenedor.setEnabledGuardar(true);
+                dispose();
             } else {
                 this.setCursor(Cursor.WAIT_CURSOR);
                 try {
                     ModeloDAO.insertarModelo(txtFuncion.getText());
+                    dispose();
                 } catch (DAOException ex) {
                     JOptionPane.showMessageDialog(this, "No se puede Establecer Conexión con la Base de Datos", "Error", 0);
                 } catch (SQLException ex) {

@@ -69,7 +69,6 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     }
 
     private void llenarDatosFuncion(Funcion func) {
-        this.txtIdFuncion.setText(func.getIdFuncion() + "");
         this.txtFuncion.setText(func.getFuncion());
     }
 
@@ -86,15 +85,13 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaFunciones = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtIdFuncion = new javax.swing.JTextField();
         txtFuncion = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TablaFunciones.setAutoCreateRowSorter(true);
         TablaFunciones.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -127,13 +124,8 @@ public class MantenedorFunciones extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Función de Volumen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Id:");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Función:");
-
-        txtIdFuncion.setEditable(false);
 
         txtFuncion.setEditable(false);
 
@@ -169,45 +161,32 @@ public class MantenedorFunciones extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(45, 45, 45)
-                                .addComponent(txtIdFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIdFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFuncion, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEditar))
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -244,7 +223,7 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     private void TablaFuncionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFuncionesMouseClicked
         // TODO add your handling code here:
         funcionEdit = misFunciones.get(TablaFunciones.getSelectedRow());
-        llenarDatosFuncion(funcionEdit);        
+        llenarDatosFuncion(funcionEdit);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
     }//GEN-LAST:event_TablaFuncionesMouseClicked
@@ -255,27 +234,31 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         setCursor(Cursor.WAIT_CURSOR);
         try {
             FuncionDAO.actualizarFuncion(funcionEdit);
+            refreshTablaFunciones();
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(jPanel1, "No se pudo Realizar la Actualización", "Error", 0);
         }
         this.setCursor(Cursor.DEFAULT_CURSOR);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    
-    public void setEnabledGuardar(boolean state){
+    public void setEnabledGuardar(boolean state) {
         btnGuardar.setEnabled(state);
     }
+
+    private void refreshTablaFunciones() throws DAOException {
+        misFunciones = FuncionDAO.obtenerTodosLasFunciones();
+        llenarTablaFunciones(misFunciones);
+        txtFuncion.setText("");
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }
+
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-        if((JOptionPane.showConfirmDialog(rootPane, "¿Seguro desea eliminar:\n"+funcionEdit.getFuncion()+"?", "Confirmación", 1)) == 0) {
+
+        if ((JOptionPane.showConfirmDialog(rootPane, "¿Seguro desea eliminar:\n" + funcionEdit.getFuncion() + "?", "Confirmación", 1)) == 0) {
             try {
                 FuncionDAO.eliminaFuncion(funcionEdit);
-                misFunciones = FuncionDAO.obtenerTodosLasFunciones();
-                llenarTablaFunciones(misFunciones);
-                txtFuncion.setText("");
-                txtIdFuncion.setText("");
-                btnEditar.setEnabled(false);
-                btnEliminar.setEnabled(false);
+                refreshTablaFunciones();
             } catch (DAOException ex) {
                 JOptionPane.showMessageDialog(jPanel1, "No se pudo realizar\nla eliminación", "Error", 0);
             }
@@ -322,13 +305,11 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtFuncion;
-    private javax.swing.JTextField txtIdFuncion;
     // End of variables declaration//GEN-END:variables
 
     void SetNewEditFuncion(String text) {
