@@ -9,6 +9,7 @@ import Utilidades.Inventario.Inventario;
 import Utilidades.Persistencia.DAO.FuncionDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -97,6 +98,7 @@ public class CargarDatos extends javax.swing.JFrame {
 
             }
         ));
+        TablaDatosInventario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         TablaDatosInventario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaDatosInventarioMouseClicked(evt);
@@ -170,6 +172,11 @@ public class CargarDatos extends javax.swing.JFrame {
         btnCargar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCargar.setText("Cargar");
         btnCargar.setEnabled(false);
+        btnCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarActionPerformed(evt);
+            }
+        });
 
         btnDealle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnDealle.setText("Ver Detalle");
@@ -191,11 +198,11 @@ public class CargarDatos extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDealle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -231,6 +238,14 @@ public class CargarDatos extends javax.swing.JFrame {
         detalle.setLocationRelativeTo(null);
         detalle.setVisible(true);
     }//GEN-LAST:event_btnDealleActionPerformed
+
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
+        if(inventarioActual == null || jComboBox1.getSelectedItem().equals("") || jComboBox2.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar:\n-Modelo de Altura\n-Función de Volumen\n-Inventario", "Advertencia", 1);
+        }else{
+            
+        }
+    }//GEN-LAST:event_btnCargarActionPerformed
 
     /**
      * @param args the command line arguments
