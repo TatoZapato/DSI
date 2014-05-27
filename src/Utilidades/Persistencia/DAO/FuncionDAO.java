@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,9 +43,7 @@ public class FuncionDAO {
                 throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
             }
         }
-
         return true;
-
     }
 
     public static boolean insertarFuncion(String expresion) throws DAOException, SQLException {
@@ -67,9 +66,7 @@ public class FuncionDAO {
                 throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
             }
         }
-
         return true;
-
     }
 
     public static boolean actualizarFuncion(Funcion funcion) throws DAOException {
@@ -116,6 +113,22 @@ public class FuncionDAO {
             } catch (SQLException e) {
                 throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
             }
+        }
+    }
+
+    public static String[] obtenerTodosLasFuncionesArray() {
+        try {
+            LinkedList<Funcion> funciones = obtenerTodosLasFunciones();
+            String[] datos = new String[funciones.size()];
+            int i = 0;
+            for (Funcion dato : funciones) {
+                datos[i] = dato.getFuncion();
+                i++;
+            }
+            return datos;
+        } catch (DAOException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener Modelos...", "Error", 3);
+            return null;
         }
     }
 

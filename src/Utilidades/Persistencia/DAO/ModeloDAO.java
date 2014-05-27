@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -111,6 +112,22 @@ public class ModeloDAO {
             } catch (SQLException e) {
                 throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
             }
+        }
+    }
+
+    public static String[] obtenerTodosLosModelosArray(){
+        try {
+            LinkedList<Modelo> modelos = obtenerTodosLosModelos();
+            String[] datos = new String[modelos.size()];
+            int i = 0;
+            for (Modelo dato : modelos) {
+                datos[i] = dato.getModelo();
+                i++;
+            }
+            return datos;
+        } catch (DAOException dao) {
+            JOptionPane.showMessageDialog(null, "Error al obtener Modelos...", "Error", 3);
+            return null;
         }
     }
 }

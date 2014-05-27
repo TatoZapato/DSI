@@ -5,9 +5,14 @@
  */
 package Vistas;
 
+import Utilidades.Inventario.Inventario;
 import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Persistencia.DAO.InventarioDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
     private final MantenedorFunciones mantenedorFunciones = new MantenedorFunciones();
     private final IngresarModelo ingresarModelo = new IngresarModelo();
     private final MantenedorModelos mantenedorModelos = new MantenedorModelos();
+    private final CargarDatos cargarDatos = new CargarDatos();
 
     /**
      * Creates new form Principal
@@ -265,7 +271,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        JOptionPane.showMessageDialog(null, "Falta Implementar", "Advertencia", 2);
+        try {
+            LinkedList<Inventario> lista = InventarioDAO.obtenerTodosLosInventariosProcesables();
+            System.out.println(lista.size());
+            cargarDatos.llenarTablaInventarios(lista);
+            cargarDatos.setLocationRelativeTo(null);
+            cargarDatos.setVisible(true);            
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(rootPane, "No se Puede Establecer Conexion con la Base de ", "Excepción", 1);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

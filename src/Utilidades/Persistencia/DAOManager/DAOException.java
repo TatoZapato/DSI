@@ -7,7 +7,7 @@ package Utilidades.Persistencia.DAOManager;
 public class DAOException extends Exception {
 
     private static final long serialVersionUID = 1L;
-    public static final int PRIMARY_KEY_WAS_VIOLATED = 0;
+    public static final int PROBLEM_WITH_PRIMARY_KEY = 0;
     public static final int NOT_FOUND_ROW = 1;
     public static final int IMPOSIBLE_CREATE_STATEMENT = 2;
     public static final int IMPOSIBLE_ESTABLISH_CONNECTION = 3;
@@ -19,13 +19,13 @@ public class DAOException extends Exception {
     public static final int IMPOSIBLE_CLOSE_RESULSET = 9;
 
     private static final String[] errors = {
-        "La clave primaria fue violada",
-        "No se encontro la fila",
-        "Imposible crear el estamento",
-        "Imposible establecer coneccion",
-        "Imposible cerrar la coneccion",
-        "Imposible en contrar el Driver",
-        "Imposible hacer la consulta",
+        "Problemas con la Clave Primaria",
+        "No se Encontro la Fila",
+        "Imposible Crear el Estamento",
+        "Imposible Establecer Coneccion",
+        "Imposible Cerrar la Coneccion",
+        "Imposible Encontrar el Driver",
+        "Imposible Realizar la Consulta",
         "Imposible llenar vector de transferencia",
         "Imposible cerrar la consulta",
         "Imposible cerrar resulset"
