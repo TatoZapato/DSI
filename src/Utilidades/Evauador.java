@@ -14,7 +14,7 @@ import javax.script.ScriptException;
  *
  * @author Desarrollo
  */
-public class InventarioForestal {
+public class Evauador {
     
     public static String pruebaFuncion(String funcion){
         ScriptEngineManager manager = new ScriptEngineManager();

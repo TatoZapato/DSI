@@ -5,10 +5,15 @@
  */
 package Vistas;
 
+import Utilidades.Inventario.ArbolRaleo;
 import Utilidades.Inventario.Inventario;
+import Utilidades.Persistencia.DAO.ArbolRaleoDAO;
 import Utilidades.Persistencia.DAO.FuncionDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
+import Utilidades.Persistencia.DAOManager.DAOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -78,8 +83,8 @@ public class CargarDatos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        ComboBoxVolumen = new javax.swing.JComboBox();
+        ComboBoxAltura = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         btnCargar = new javax.swing.JButton();
         btnDealle = new javax.swing.JButton();
@@ -110,7 +115,7 @@ public class CargarDatos extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,11 +132,11 @@ public class CargarDatos extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Modelo Altura:");
 
-        jComboBox1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(ModeloDAO.obtenerTodosLosModelosArray()));
+        ComboBoxVolumen.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        ComboBoxVolumen.setModel(new javax.swing.DefaultComboBoxModel(ModeloDAO.obtenerTodosLosModelosArray()));
 
-        jComboBox2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(FuncionDAO.obtenerTodosLasFuncionesArray()));
+        ComboBoxAltura.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        ComboBoxAltura.setModel(new javax.swing.DefaultComboBoxModel(FuncionDAO.obtenerTodosLasFuncionesArray()));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,21 +149,21 @@ public class CargarDatos extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ComboBoxVolumen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ComboBoxAltura, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                    .addComponent(ComboBoxVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ComboBoxAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -199,7 +204,7 @@ public class CargarDatos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDealle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -214,10 +219,10 @@ public class CargarDatos extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDealle, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                    .addComponent(btnDealle, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,9 +245,24 @@ public class CargarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDealleActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
-        if(inventarioActual == null || jComboBox1.getSelectedItem().equals("") || jComboBox2.getSelectedItem().equals("")) {
+        if(inventarioActual == null || ComboBoxVolumen.getSelectedItem().equals("") || ComboBoxAltura.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar:\n-Modelo de Altura\n-Función de Volumen\n-Inventario", "Advertencia", 1);
         }else{
+            LinkedList<ArbolRaleo> arboles = new LinkedList();
+            try {
+                arboles = ArbolRaleoDAO.obtenerTodosLosArbolRaleoSeleccionados(inventarioActual);
+                if(arboles.isEmpty()){
+                    JOptionPane.showMessageDialog(rootPane, "No hay datos en la Base de Datos sobre Arboles de Raleo", "Advertencia", 1);
+                }
+                
+                //Reportes
+                
+                //Parametro General
+                
+            } catch (DAOException ex) {
+                System.out.println("Error: "+ex.getMessage());
+            }
+                    
             
         }
     }//GEN-LAST:event_btnCargarActionPerformed
@@ -283,12 +303,12 @@ public class CargarDatos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox ComboBoxAltura;
+    private javax.swing.JComboBox ComboBoxVolumen;
     private static javax.swing.JTable TablaDatosInventario;
     private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnDealle;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
