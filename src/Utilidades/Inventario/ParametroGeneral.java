@@ -6,7 +6,7 @@
 
 package Utilidades.Inventario;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedList;
 
 /**
@@ -21,32 +21,32 @@ public class ParametroGeneral {
     private String especiePrincipal;
     private String especieSecundaria;
     private int numEspecies;
-    private int ordeTrabajo;
-    private String fechaMedicion;
-    private String tipoInventario;
+    private int ordenTrabajo;
+    private Date fechaMedicion;
+    private int tipoInventario;
     private int numParcelas;
-    private String superficieParcelas;
+    private float superficieParcelas;
     private String empresaServicios;
     private Date fechaProyeccion;
-    private String densidad;
-    private String densidadP;
-    private String densidadNP;
-    private String dapMedio;
-    private String dapMedioP;
-    private String dapMedioNP;
-    private String areaBasal;
-    private String areaBasalP;
-    private String areaBasalNP;
-    private String alturaTotalMedia;
-    private String alturaTotalMediaP;
-    private String alturaTotalMediaNP;
-    private String volumen;
-    private String volumenP;
-    private String volumenNP;
+    private float densidad;
+    private float densidadP;
+    private float densidadNP;
+    private float dapMedio;
+    private float dapMedioP;
+    private float dapMedioNP;
+    private float areaBasal;
+    private float areaBasalP;
+    private float areaBasalNP;
+    private float alturaTotalMedia;
+    private float alturaTotalMediaP;
+    private float alturaTotalMediaNP;
+    private float volumen;
+    private float volumenP;
+    private float volumenNP;
     private String modeloAltura;
-    private String[] BO;
-    private String ajuste;
-    private String superficieRodal;
+    private float[] BO;
+    private float ajuste;
+    private float superficieRodal;
     private LinkedList<ArbolRaleo> misArboles;
 
     public ParametroGeneral() {
@@ -109,27 +109,27 @@ public class ParametroGeneral {
         this.numEspecies = numEspecies;
     }
 
-    public int getOrdeTrabajo() {
-        return ordeTrabajo;
+    public int getOrdenTrabajo() {
+        return ordenTrabajo;
     }
 
-    public void setOrdeTrabajo(int ordeTrabajo) {
-        this.ordeTrabajo = ordeTrabajo;
+    public void setOrdenTrabajo(int ordenTrabajo) {
+        this.ordenTrabajo = ordenTrabajo;
     }
 
-    public String getFechaMedicion() {
+    public Date getFechaMedicion() {
         return fechaMedicion;
     }
 
-    public void setFechaMedicion(String fechaMedicion) {
+    public void setFechaMedicion(Date fechaMedicion) {
         this.fechaMedicion = fechaMedicion;
     }
 
-    public String getTipoInventario() {
+    public int getTipoInventario() {
         return tipoInventario;
     }
 
-    public void setTipoInventario(String tipoInventario) {
+    public void setTipoInventario(int tipoInventario) {
         this.tipoInventario = tipoInventario;
     }
 
@@ -141,11 +141,11 @@ public class ParametroGeneral {
         this.numParcelas = numParcelas;
     }
 
-    public String getSuperficieParcelas() {
+    public float getSuperficieParcelas() {
         return superficieParcelas;
     }
 
-    public void setSuperficieParcelas(String superficieParcelas) {
+    public void setSuperficieParcelas(float superficieParcelas) {
         this.superficieParcelas = superficieParcelas;
     }
 
@@ -165,123 +165,123 @@ public class ParametroGeneral {
         this.fechaProyeccion = fechaProyeccion;
     }
 
-    public String getDensidad() {
+    public float getDensidad() {
         return densidad;
     }
 
-    public void setDensidad(String densidad) {
+    public void setDensidad(float densidad) {
         this.densidad = densidad;
     }
 
-    public String getDensidadP() {
+    public float getDensidadP() {
         return densidadP;
     }
 
-    public void setDensidadP(String densidadP) {
+    public void setDensidadP(float densidadP) {
         this.densidadP = densidadP;
     }
 
-    public String getDensidadNP() {
+    public float getDensidadNP() {
         return densidadNP;
     }
 
-    public void setDensidadNP(String densidadNP) {
+    public void setDensidadNP(float densidadNP) {
         this.densidadNP = densidadNP;
     }
 
-    public String getDapMedio() {
+    public float getDapMedio() {
         return dapMedio;
     }
 
-    public void setDapMedio(String dapMedio) {
+    public void setDapMedio(float dapMedio) {
         this.dapMedio = dapMedio;
     }
 
-    public String getDapMedioP() {
+    public float getDapMedioP() {
         return dapMedioP;
     }
 
-    public void setDapMedioP(String dapMedioP) {
+    public void setDapMedioP(float dapMedioP) {
         this.dapMedioP = dapMedioP;
     }
 
-    public String getDapMedioNP() {
+    public float getDapMedioNP() {
         return dapMedioNP;
     }
 
-    public void setDapMedioNP(String dapMedioNP) {
+    public void setDapMedioNP(float dapMedioNP) {
         this.dapMedioNP = dapMedioNP;
     }
 
-    public String getAreaBasal() {
+    public float getAreaBasal() {
         return areaBasal;
     }
 
-    public void setAreaBasal(String areaBasal) {
+    public void setAreaBasal(float areaBasal) {
         this.areaBasal = areaBasal;
     }
 
-    public String getAreaBasalP() {
+    public float getAreaBasalP() {
         return areaBasalP;
     }
 
-    public void setAreaBasalP(String areaBasalP) {
+    public void setAreaBasalP(float areaBasalP) {
         this.areaBasalP = areaBasalP;
     }
 
-    public String getAreaBasalNP() {
+    public float getAreaBasalNP() {
         return areaBasalNP;
     }
 
-    public void setAreaBasalNP(String areaBasalNP) {
+    public void setAreaBasalNP(float areaBasalNP) {
         this.areaBasalNP = areaBasalNP;
     }
 
-    public String getAlturaTotalMedia() {
+    public float getAlturaTotalMedia() {
         return alturaTotalMedia;
     }
 
-    public void setAlturaTotalMedia(String alturaTotalMedia) {
+    public void setAlturaTotalMedia(float alturaTotalMedia) {
         this.alturaTotalMedia = alturaTotalMedia;
     }
 
-    public String getAlturaTotalMediaP() {
+    public float getAlturaTotalMediaP() {
         return alturaTotalMediaP;
     }
 
-    public void setAlturaTotalMediaP(String alturaTotalMediaP) {
+    public void setAlturaTotalMediaP(float alturaTotalMediaP) {
         this.alturaTotalMediaP = alturaTotalMediaP;
     }
 
-    public String getAlturaTotalMediaNP() {
+    public float getAlturaTotalMediaNP() {
         return alturaTotalMediaNP;
     }
 
-    public void setAlturaTotalMediaNP(String alturaTotalMediaNP) {
+    public void setAlturaTotalMediaNP(float alturaTotalMediaNP) {
         this.alturaTotalMediaNP = alturaTotalMediaNP;
     }
 
-    public String getVolumen() {
+    public float getVolumen() {
         return volumen;
     }
 
-    public void setVolumen(String volumen) {
+    public void setVolumen(float volumen) {
         this.volumen = volumen;
     }
 
-    public String getVolumenP() {
+    public float getVolumenP() {
         return volumenP;
     }
 
-    public void setVolumenP(String volumenP) {
+    public void setVolumenP(float volumenP) {
         this.volumenP = volumenP;
     }
 
-    public String getVolumenNP() {
+    public float getVolumenNP() {
         return volumenNP;
     }
 
-    public void setVolumenNP(String volumenNP) {
+    public void setVolumenNP(float volumenNP) {
         this.volumenNP = volumenNP;
     }
 
@@ -293,27 +293,27 @@ public class ParametroGeneral {
         this.modeloAltura = modeloAltura;
     }
 
-    public String[] getBO() {
+    public float[] getBO() {
         return BO;
     }
 
-    public void setBO(String[] BO) {
+    public void setBO(float[] BO) {
         this.BO = BO;
     }
 
-    public String getAjuste() {
+    public float getAjuste() {
         return ajuste;
     }
 
-    public void setAjuste(String ajuste) {
+    public void setAjuste(float ajuste) {
         this.ajuste = ajuste;
     }
 
-    public String getSuperficieRodal() {
+    public float getSuperficieRodal() {
         return superficieRodal;
     }
 
-    public void setSuperficieRodal(String superficieRodal) {
+    public void setSuperficieRodal(float superficieRodal) {
         this.superficieRodal = superficieRodal;
     }
 
@@ -324,8 +324,5 @@ public class ParametroGeneral {
     public void setMisArboles(LinkedList<ArbolRaleo> misArboles) {
         this.misArboles = misArboles;
     }
-    
-    
-    
     
 }
