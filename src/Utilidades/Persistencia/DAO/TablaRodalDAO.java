@@ -30,9 +30,8 @@ public class TablaRodalDAO {
         Connection conn = DAOManager.getConnection();
         try (PreparedStatement ps = conn.prepareStatement(INSERTAR_TABLA_RODAL)) {
             conn.setAutoCommit(false);
-            String att = "";
             ps.setInt(1, t.getOrdenTrabajo());
-            ps.setInt(2, t.getTipoInventario());
+            ps.setString(2, t.getTipoInventario());
             ps.setInt(3, t.getFundo());
             ps.setInt(4, t.getRodal());
             ps.setString(5, t.getEspecie());
@@ -40,11 +39,11 @@ public class TablaRodalDAO {
             ps.setDate(7, new Date(new java.util.Date().getTime()));
             ps.setString(8, t.getModAltura());
             int i = 9;
-            for (Float b : t.getBO()) {
+            for (float b : t.getBO()) {
                 ps.setFloat(i, b);
                 i++;
             }
-            ps.setFloat(16, t.getAjuste());
+            ps.setString(16, t.getAjuste());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();

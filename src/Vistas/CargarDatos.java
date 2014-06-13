@@ -12,8 +12,6 @@ import Utilidades.Persistencia.DAO.FuncionDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,7 +37,7 @@ public class CargarDatos extends javax.swing.JFrame {
         llenarTablaInventarios(misInventarios);
     }
 
-    public void llenarTablaInventarios(LinkedList<Inventario> lista) {
+    public static void llenarTablaInventarios(LinkedList<Inventario> lista) {
         misInventarios = lista;
         String[][] arr = new String[lista.size()][6];
         for (int i = 0; i < lista.size(); i++) {
@@ -258,6 +256,9 @@ public class CargarDatos extends javax.swing.JFrame {
                 //Reportes
                 
                 //Parametro General
+                
+                
+                
                 
             } catch (DAOException ex) {
                 System.out.println("Error: "+ex.getMessage());

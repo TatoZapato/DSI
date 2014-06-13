@@ -22,8 +22,7 @@ public class DetalleTablaRodal {
     private float volumeNoPodado;
     private float volumenTotal;
 
-    public DetalleTablaRodal() {
-    }
+    public DetalleTablaRodal() {}
 
     public int getOrdenTrabajo() {
         return ordenTrabajo;
@@ -104,5 +103,6 @@ public class DetalleTablaRodal {
     public void setVolumenTotal(float volumenTotal) {
         this.volumenTotal = volumenTotal;
     }
+
     
 }

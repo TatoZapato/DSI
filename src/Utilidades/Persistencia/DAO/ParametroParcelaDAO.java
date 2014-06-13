@@ -33,7 +33,7 @@ public class ParametroParcelaDAO {
             conn.setAutoCommit(false);
             ps.setInt(1, p.getOrdenTrabajo());
             ps.setDate(2, p.getFechaMedicion());
-            ps.setInt(3, p.getTipoInventario());
+            ps.setString(3, p.getTipoInventario());
             ps.setInt(4, p.getFundo());
             ps.setInt(5, p.getRodal());
             ps.setString(6, p.getEspeciePrincipal());

@@ -16,7 +16,7 @@ public class ParametroParcela {
 
     private int ordenTrabajo;
     private Date fechaMedicion;
-    private int tipoInventario;
+    private String tipoInventario;
     private int fundo;
     private int rodal;
     private String especiePrincipal;
@@ -54,11 +54,11 @@ public class ParametroParcela {
         this.fechaMedicion = fechaMedicion;
     }
 
-    public int getTipoInventario() {
+    public String getTipoInventario() {
         return tipoInventario;
     }
 
-    public void setTipoInventario(int tipoInventario) {
+    public void setTipoInventario(String tipoInventario) {
         this.tipoInventario = tipoInventario;
     }
 

@@ -35,7 +35,7 @@ public class ParametroGeneralDAO {
             ps.setInt(7, p.getNumEspecies());
             ps.setInt(8, p.getOrdenTrabajo());
             ps.setDate(9, p.getFechaMedicion());
-            ps.setInt(10, p.getTipoInventario());
+            ps.setString(10, p.getTipoInventario());
             ps.setInt(11, p.getNumParcelas());
             ps.setFloat(12, p.getSuperficieParcelas());
             ps.setString(13, p.getEmpresaServicios());
@@ -61,7 +61,7 @@ public class ParametroGeneralDAO {
                 ps.setFloat(i, b);
                 i++;
             }
-            ps.setFloat(38, p.getAjuste());
+            ps.setString(38, p.getAjuste());
             ps.setFloat(39, p.getSuperficieRodal());
             ResultSet rs = ps.executeQuery();
             rs.close();
@@ -95,8 +95,6 @@ public class ParametroGeneralDAO {
                 throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
             }
         }
-
         return true;
-
     }
 }

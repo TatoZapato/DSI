@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class TablaRodal {
 
     private int ordenTrabajo;
-    private int tipoInventario;
+    private String tipoInventario;
     private int fundo;
     private int rodal;
     private String especie;
@@ -23,7 +23,7 @@ public class TablaRodal {
     private Date fechaProyeccion;
     private String modAltura;
     private float[] BO;
-    private float ajuste;
+    private String ajuste;
     private LinkedList<DetalleTablaRodal> detalles;
     private ParametroGeneral parametro;
     
@@ -50,11 +50,11 @@ public class TablaRodal {
         this.ordenTrabajo = ordenTrabajo;
     }
 
-    public int getTipoInventario() {
+    public String getTipoInventario() {
         return tipoInventario;
     }
 
-    public void setTipoInventario(int tipoInventario) {
+    public void setTipoInventario(String tipoInventario) {
         this.tipoInventario = tipoInventario;
     }
 
@@ -114,11 +114,11 @@ public class TablaRodal {
         this.BO = BO;
     }
 
-    public float getAjuste() {
+    public String getAjuste() {
         return ajuste;
     }
 
-    public void setAjuste(float ajuste) {
+    public void setAjuste(String ajuste) {
         this.ajuste = ajuste;
     }
 

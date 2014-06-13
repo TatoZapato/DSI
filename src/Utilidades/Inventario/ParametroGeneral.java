@@ -23,7 +23,7 @@ public class ParametroGeneral {
     private int numEspecies;
     private int ordenTrabajo;
     private Date fechaMedicion;
-    private int tipoInventario;
+    private String tipoInventario;
     private int numParcelas;
     private float superficieParcelas;
     private String empresaServicios;
@@ -45,7 +45,7 @@ public class ParametroGeneral {
     private float volumenNP;
     private String modeloAltura;
     private float[] BO;
-    private float ajuste;
+    private String ajuste;
     private float superficieRodal;
     private LinkedList<ArbolRaleo> misArboles;
 
@@ -125,11 +125,11 @@ public class ParametroGeneral {
         this.fechaMedicion = fechaMedicion;
     }
 
-    public int getTipoInventario() {
+    public String getTipoInventario() {
         return tipoInventario;
     }
 
-    public void setTipoInventario(int tipoInventario) {
+    public void setTipoInventario(String tipoInventario) {
         this.tipoInventario = tipoInventario;
     }
 
@@ -301,11 +301,11 @@ public class ParametroGeneral {
         this.BO = BO;
     }
 
-    public float getAjuste() {
+    public String getAjuste() {
         return ajuste;
     }
 
-    public void setAjuste(float ajuste) {
+    public void setAjuste(String ajuste) {
         this.ajuste = ajuste;
     }
 
@@ -324,5 +324,6 @@ public class ParametroGeneral {
     public void setMisArboles(LinkedList<ArbolRaleo> misArboles) {
         this.misArboles = misArboles;
     }
+
     
 }
