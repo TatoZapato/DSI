@@ -44,7 +44,7 @@ public class ParametroGeneral {
     private float volumenP;
     private float volumenNP;
     private String modeloAltura;
-    private float[] BO;
+    private double[] BO;
     private String ajuste;
     private float superficieRodal;
     private LinkedList<ArbolRaleo> misArboles;
@@ -293,11 +293,11 @@ public class ParametroGeneral {
         this.modeloAltura = modeloAltura;
     }
 
-    public float[] getBO() {
+    public double[] getBO() {
         return BO;
     }
 
-    public void setBO(float[] BO) {
+    public void setBO(double[] BO) {
         this.BO = BO;
     }
 

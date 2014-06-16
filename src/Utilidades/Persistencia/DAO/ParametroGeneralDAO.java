@@ -57,8 +57,8 @@ public class ParametroGeneralDAO {
             ps.setFloat(29, p.getVolumenNP());
             ps.setString(30, p.getModeloAltura());
             int i = 31;
-            for (float b : p.getBO()) {
-                ps.setFloat(i, b);
+            for (double b : p.getBO()) {
+                ps.setDouble(i, b);
                 i++;
             }
             ps.setString(38, p.getAjuste());

@@ -22,7 +22,7 @@ public class TablaRodal {
     private Date fechaMedicion;
     private Date fechaProyeccion;
     private String modAltura;
-    private float[] BO;
+    private double[] BO;
     private String ajuste;
     private LinkedList<DetalleTablaRodal> detalles;
     private ParametroGeneral parametro;
@@ -106,11 +106,11 @@ public class TablaRodal {
         this.modAltura = modAltura;
     }
 
-    public float[] getBO() {
+    public double[] getBO() {
         return BO;
     }
 
-    public void setBO(float[] BO) {
+    public void setBO(double[] BO) {
         this.BO = BO;
     }
 

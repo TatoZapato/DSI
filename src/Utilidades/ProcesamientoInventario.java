@@ -6,9 +6,11 @@
 package Utilidades;
 
 import Utilidades.Inventario.ArbolRaleo;
+import Utilidades.Inventario.DetalleParcela;
 import Utilidades.Inventario.DetalleTablaRodal;
 import Utilidades.Inventario.Inventario;
 import Utilidades.Inventario.ParametroGeneral;
+import Utilidades.Inventario.ParametroParcela;
 import Utilidades.Inventario.TablaRodal;
 import Utilidades.Persistencia.DAO.BancoDatosDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
@@ -18,6 +20,9 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.swing.JOptionPane;
+import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
+import org.apache.commons.math3.fitting.CurveFitter;
+import org.apache.commons.math3.optim.nonlinear.vector.jacobian.LevenbergMarquardtOptimizer;
 
 /**
  *
@@ -154,10 +159,11 @@ public class ProcesamientoInventario {
         String modelo = new String();
         if (array != null) {
             //CALCULAR REGRESION
-            modelo = ""; //calculoRegresion(conAltura, coef);
+            modelo = calculoRegresion(conAltura, coef);
             for (int i = 0; i < arboles.size(); i++) {
                 if (arboles.get(i).gethTotal() == 0) {
                     try {
+                        //Calculo de altura en Base a la Regresión
                         float nvaAltura = calcularAlturaModelo(modelo, arboles.get(i).getDap());
                         arboles.get(i).sethTotal(nvaAltura);
                     } catch (Exception e) {
@@ -203,9 +209,11 @@ public class ProcesamientoInventario {
         parametro.setVolumenP((sumaVolP / numArbolesPodados));
         parametro.setVolumenNP((sumaVolNP / numArbolesNoPodados));
         parametro.setModeloAltura(modelo);
-        float[] b = new float[7];
-        //REALIZAR CALCULO DE COEFICIENTE, PERO TENEMOS SOLO 2 COEFICIENTES, LOS DEMAS SON 0 SIEMPRE?
-        //b = calculoCoeficientesRegresion();
+        double[] b = new double[7];
+        double[] cof = calculoCoeficientesRegresion(arboles, coef);
+        for (int i = 0; i < b.length; i++) {
+            b[i] = (i < cof.length) ? cof[i] : 0;
+        }
         parametro.setBO(b);
         parametro.setAjuste("Minimo Cuadrado");
 
@@ -214,7 +222,6 @@ public class ProcesamientoInventario {
 
         System.out.println(parametro.toString());
         return parametro;
-        //return null;
     }
 
     public static TablaRodal obtenerTablaRodal(ParametroGeneral parametro, Inventario inv, String model, String function) throws DAOException {
@@ -222,12 +229,12 @@ public class ProcesamientoInventario {
         LinkedList<ArbolRaleo> arboles = parametro.getMisArboles();
         float maxDap = 0, minDap = Float.MAX_VALUE;
         for (int i = 0; i < arboles.size(); i++) {
-            if(arboles.get(i).getDap() > maxDap) {
+            if (arboles.get(i).getDap() > maxDap) {
                 maxDap = arboles.get(i).getDap();
-            }   
-            if(arboles.get(i).getDap() < minDap) {
+            }
+            if (arboles.get(i).getDap() < minDap) {
                 minDap = arboles.get(i).getDap();
-            } 
+            }
         }
         int numClases = 0;
         float aux = minDap;
@@ -236,11 +243,82 @@ public class ProcesamientoInventario {
             numClases++;
         }
         LinkedList<DetalleTablaRodal> detalles = new LinkedList();
-        for(int i=0 ; i<numClases ; i++) {
-        
-            
+        for (int i = 0; i < numClases; i++) {
+
         }
         return null;
+    }
+
+    public static ParametroParcela obtenerParametroParcela(ParametroGeneral p, Inventario inv, String function) throws DAOException {
+        ParametroParcela parametro = new ParametroParcela(p);
+        LinkedList<ArbolRaleo> arboles = p.getMisArboles();
+        LinkedList<Integer> parcelas = new LinkedList();
+        for (ArbolRaleo arbol : arboles) {
+            if (!parcelas.contains(arbol.getNumParcela())) {
+                parcelas.add(arbol.getNumParcela());
+            }
+        }
+        LinkedList<DetalleParcela> detalles = new LinkedList();
+        for (int i = 0; i < parcelas.size(); i++) {
+
+            LinkedList<ArbolRaleo> misArbolRaleos = new LinkedList();
+            for (int j = 0; j < misArbolRaleos.size(); j++) {
+                if (parcelas.get(i) == arboles.get(j).getNumParcela()) {
+                    misArbolRaleos.add(arboles.get(j));
+                }
+            }
+            DetalleParcela detalle = new DetalleParcela();
+
+            /* private int ordenTrabajo */
+            detalle.setOrdenTrabajo(parametro.getOrdenTrabajo());
+            /* private int numParcela */
+            detalle.setNumParcela(parcelas.get(i));
+            /* private String superficie */
+            detalle.setSuperficie(BancoDatosDAO.obtenerSuperficiePorParcela(detalle.getNumParcela()));
+
+            double factorExpansion = 10000 / detalle.getSuperficie();
+            detalle.setFactorExpansion(factorExpansion);
+            /* private String densidad */
+            detalle.setDensidad(p.getDensidad() * factorExpansion);
+            if (misArbolRaleos.isEmpty()) {
+                detalle.setAreaBasalMedia(p.getAreaBasal());
+                detalle.setDapMedio(p.getDapMedio());
+                detalle.setAlturaDominante(0);
+            } else {
+                float sumaDap = 0;
+                for (int j = 0; j < misArbolRaleos.size(); j++) {
+                    sumaDap += misArbolRaleos.get(j).getDap();
+                }
+                float dapMedio = (sumaDap / misArbolRaleos.size());
+                double areaBasal = Math.PI * Math.pow(dapMedio / 2, 2);
+                detalle.setAreaBasalMedia(areaBasal);
+                detalle.setDapMedio(dapMedio);
+                float hMax = Float.MIN_VALUE;
+                for (int j = 0; j < misArbolRaleos.size(); j++) {
+                    if (misArbolRaleos.get(j).gethTotal() > hMax) {
+                        hMax = misArbolRaleos.get(j).gethTotal();
+                    }
+                }
+                detalle.setAlturaDominante(hMax);
+            }
+            double volumen = 0;
+
+            for (int j = 0; j < misArbolRaleos.size(); j++) {
+                try {
+                    float vol = calcularVolumenFuncion(function, misArbolRaleos.get(j).getDap(), misArbolRaleos.get(j).gethTotal());
+                    volumen += vol;
+                } catch (Exception e) {
+                    System.err.println("LA FUNCIÓN ESTÁ MALA");
+                    volumen += 0;
+                }
+            }
+            detalle.setVolumen(volumen);
+            parametro.setDetalles(detalles);
+            System.out.println(parametro);
+            detalles.add(detalle);
+        }
+
+        return parametro;
     }
 
     public static float calcularVolumenFuncion(String expresion, float dap, float h) throws Exception {
@@ -306,6 +384,42 @@ public class ProcesamientoInventario {
             }
         }
         return n;
+    }
+
+    public static String calculoRegresion(LinkedList<ArbolRaleo> muestra, int coeficientes) {
+        final CurveFitter fitter = new CurveFitter(new LevenbergMarquardtOptimizer());
+        for (int i = 0; i < muestra.size(); i++) {
+            fitter.addObservedPoint(muestra.get(i).getDap(), muestra.get(i).gethTotal());
+        }
+        final double[] init = new double[coeficientes];
+        for (int i = 0; i < init.length; i++) {
+            init[i] = 1;
+        }
+
+        final double[] best = fitter.fit(new PolynomialFunction.Parametric(), init);
+
+        final PolynomialFunction fitted = new PolynomialFunction(best);
+        String exp = fitted.toString();
+        exp = exp.replace("x", "dap ");
+        exp = exp.replace(" ", "");
+        return exp;
+    }
+
+    public static double[] calculoCoeficientesRegresion(LinkedList<ArbolRaleo> muestra, int coeficientes) {
+        final CurveFitter fitter = new CurveFitter(new LevenbergMarquardtOptimizer());
+        for (int i = 0; i < muestra.size(); i++) {
+            fitter.addObservedPoint(muestra.get(i).getDap(), muestra.get(i).gethTotal());
+        }
+
+        final double[] init = new double[coeficientes];
+        for (int i = 0; i < init.length; i++) {
+            init[i] = 1;
+        }
+
+        final double[] best = fitter.fit(new PolynomialFunction.Parametric(), init);
+
+        final PolynomialFunction fitted = new PolynomialFunction(best);
+        return fitted.getCoefficients();
     }
 
 }

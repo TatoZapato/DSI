@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Utilidades.Persistencia.DAO;
 
-import Utilidades.Inventario.Funcion;
+import Utilidades.Inventario.FuncionSitio;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Persistencia.DAOManager.DAOManager;
 import java.sql.Connection;
@@ -18,19 +19,18 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Führer
+ * @author Desarrollo
  */
-public class FuncionDAO {
-
-    private static final String INSERTAR_FUNCION = "INSERT INTO T_INV_FUNCIONVOLUMEN (funcion,fechaCreacion,fechaModificacion) VALUES (?,?,?)";
-    private static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONVOLUMEN";
-    private static final String ACTUALIZAR_FUNCION = "UPDATE T_INV_FUNCIONVOLUMEN SET funcion = ?, fechaModificacion = ? where idFuncion = ?";
-    private static final String ELIMINAR_FUNCION = "DELETE FROM T_INV_FUNCIONVOLUMEN WHERE idFuncion = ?";
-
-    public static boolean eliminaFuncion(Funcion funcion) throws DAOException {
+public class FuncionSitioDAO {
+    private static final String INSERTAR_FUNCION = "INSERT INTO T_INV_FUNCIONSITIO (funcion,fechaCreacion,fechaModificacion) VALUES (?,?,?)";
+    private static final String OBTENER_TOD0S_LAS_FUNCIONES = "SELECT * FROM T_INV_FUNCIONSITIO";
+    private static final String ACTUALIZAR_FUNCION = "UPDATE T_INV_FUNCIONSITIO SET funcion = ?, fechaModificacion = ? where idFuncion = ?";
+    private static final String ELIMINAR_FUNCION = "DELETE FROM T_INV_FUNCIONSITIO WHERE idFuncion = ?";
+    
+    public static boolean eliminaFuncion(FuncionSitio funcion) throws DAOException {
         Connection conn = DAOManager.getConnection();
         try (PreparedStatement ps = conn.prepareCall(ELIMINAR_FUNCION)) {
-            ps.setInt(1, funcion.getIdFuncion());
+            ps.setInt(1, funcion.getId());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -45,7 +45,7 @@ public class FuncionDAO {
         }
         return true;
     }
-
+    
     public static boolean insertarFuncion(String expresion) throws DAOException, SQLException {
         Connection conn = DAOManager.getConnection();
         try (PreparedStatement ps = conn.prepareStatement(INSERTAR_FUNCION)) {
@@ -69,13 +69,13 @@ public class FuncionDAO {
         return true;
     }
 
-    public static boolean actualizarFuncion(Funcion funcion) throws DAOException {
+    public static boolean actualizarFuncion(FuncionSitio funcion) throws DAOException {
         Connection conn = DAOManager.getConnection();
         try (PreparedStatement ps = conn.prepareStatement(ACTUALIZAR_FUNCION)) {
             ps.setString(1, funcion.getFuncion());
             Date fecha = new Date(new java.util.Date().getTime());
             ps.setDate(2, fecha);
-            ps.setInt(3, funcion.getIdFuncion());
+            ps.setInt(3, funcion.getId());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -93,14 +93,14 @@ public class FuncionDAO {
 
     }
 
-    public static LinkedList<Funcion> obtenerTodosLasFunciones() throws DAOException {
+public static LinkedList<FuncionSitio> obtenerTodosLasFunciones() throws DAOException {
         Connection conn = DAOManager.getConnection();
-        LinkedList<Funcion> funciones = new LinkedList();
+        LinkedList<FuncionSitio> funciones = new LinkedList();
 
         try (PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LAS_FUNCIONES)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                funciones.add(new Funcion(rs.getInt("idFuncion"), rs.getString("funcion"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
+                funciones.add(new FuncionSitio(rs.getInt("idFuncion"), rs.getString("funcion"), rs.getDate("fechaCreacion"), rs.getDate("fechaModificacion")));
             }
             rs.close();
             ps.close();
@@ -115,13 +115,13 @@ public class FuncionDAO {
             }
         }
     }
-
+    
     public static String[] obtenerTodosLasFuncionesArray() {
         try {
-            LinkedList<Funcion> funciones = obtenerTodosLasFunciones();
+            LinkedList<FuncionSitio> funciones = obtenerTodosLasFunciones();
             String[] datos = new String[funciones.size()];
             int i = 0;
-            for (Funcion dato : funciones) {
+            for (FuncionSitio dato : funciones) {
                 datos[i] = dato.getFuncion();
                 i++;
             }
@@ -131,5 +131,4 @@ public class FuncionDAO {
             return null;
         }
     }
-
 }

@@ -7,11 +7,21 @@ package Vistas;
 
 import Utilidades.Inventario.ArbolRaleo;
 import Utilidades.Inventario.Inventario;
+import Utilidades.Inventario.ParametroGeneral;
+import Utilidades.Inventario.ParametroParcela;
+import Utilidades.Inventario.TablaRodal;
 import Utilidades.Persistencia.DAO.ArbolRaleoDAO;
 import Utilidades.Persistencia.DAO.FuncionDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
+import Utilidades.Persistencia.DAO.ParametroGeneralDAO;
+import Utilidades.Persistencia.DAO.ParametroParcelaDAO;
+import Utilidades.Persistencia.DAO.TablaRodalDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
+import Utilidades.ProcesamientoInventario;
+import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -243,28 +253,43 @@ public class CargarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDealleActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
-        if(inventarioActual == null || ComboBoxVolumen.getSelectedItem().equals("") || ComboBoxAltura.getSelectedItem().equals("")) {
+        if (inventarioActual == null || ComboBoxVolumen.getSelectedItem().equals("") || ComboBoxAltura.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar:\n-Modelo de Altura\n-Función de Volumen\n-Inventario", "Advertencia", 1);
-        }else{
+        } else {
+            String modeloAltura = ComboBoxAltura.getSelectedItem().toString(), funcionVolumen = ComboBoxVolumen.getSelectedItem().toString();
             LinkedList<ArbolRaleo> arboles = new LinkedList();
             try {
                 arboles = ArbolRaleoDAO.obtenerTodosLosArbolRaleoSeleccionados(inventarioActual);
-                if(arboles.isEmpty()){
+                if (arboles.isEmpty()) {
                     JOptionPane.showMessageDialog(rootPane, "No hay datos en la Base de Datos sobre Arboles de Raleo", "Advertencia", 1);
                 }
-                
-                //Reportes
-                
-                //Parametro General
-                
-                
-                
-                
+                ParametroGeneral parametroG = ProcesamientoInventario.obtenerParametroGeneral(inventarioActual, arboles, modeloAltura, funcionVolumen);
+                System.out.println("OK! parametro =)");
+
+                TablaRodal tablaR = ProcesamientoInventario.obtenerTablaRodal(parametroG, inventarioActual, modeloAltura, funcionVolumen);
+                System.out.println("OK! tabla =)");
+
+                ParametroParcela parametroP = ProcesamientoInventario.obtenerParametroParcela(parametroG, inventarioActual, funcionVolumen);
+                try {
+                    //Reportes
+                    ParametroGeneralDAO.insertarParametroGeneral(parametroG);
+                    TablaRodalDAO.insertarTablaRodal(tablaR);
+                    ParametroParcelaDAO.insertarParametroParcela(parametroP);
+                    //Parametro General
+                } catch (SQLException sql) {
+                    JOptionPane.showMessageDialog(this, "Error al guardar el Parametro General", "Información", 1);
+                }
+                JOptionPane.showMessageDialog(this, "Se ha cargado con éxito", "Información", 1);
+
             } catch (DAOException ex) {
-                System.out.println("Error: "+ex.getMessage());
+                if(ex.getError() == 0) {
+                    JOptionPane.showMessageDialog(this, "No existen Arboles Raleo asociados", "Información", 1);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al recuperar los ArbolesRaleo", "Información", 1);
+                    System.err.println(ex.getLocalizedMessage());
+                }
             }
-                    
-            
+
         }
     }//GEN-LAST:event_btnCargarActionPerformed
 

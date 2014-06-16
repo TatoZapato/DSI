@@ -65,12 +65,12 @@ public class ParametroParcelaDAO {
         try (PreparedStatement ps = conn.prepareCall(INSERTAR_DETALLE_PARAMETRO)) {
             ps.setInt(1, p.getOrdenTrabajo());
             ps.setInt(2, p.getNumParcela());
-            ps.setFloat(3, p.getSuperficie());
-            ps.setFloat(4, p.getDensidad());
-            ps.setFloat(5, p.getAreaBasalMedia());
-            ps.setFloat(6, p.getDapMedio());
-            ps.setFloat(7, p.getAlturaDominante());
-            ps.setFloat(8, p.getVolumen());
+            ps.setDouble(3, p.getSuperficie());
+            ps.setDouble(4, p.getDensidad());
+            ps.setDouble(5, p.getAreaBasalMedia());
+            ps.setDouble(6, p.getDapMedio());
+            ps.setDouble(7, p.getAlturaDominante());
+            ps.setDouble(8, p.getVolumen());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();

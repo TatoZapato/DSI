@@ -13,12 +13,13 @@ public class DetalleParcela {
 
     private int ordenTrabajo;
     private int numParcela;
-    private float superficie;
-    private float densidad;
-    private float areaBasalMedia;
-    private float dapMedio;
-    private float alturaDominante;
-    private float volumen;
+    private double superficie;
+    private double densidad;
+    private double areaBasalMedia;
+    private double dapMedio;
+    private double alturaDominante;
+    private double volumen;
+    private double factorExpansion;
 
     public DetalleParcela() {
     }
@@ -39,39 +40,39 @@ public class DetalleParcela {
         this.numParcela = numParcela;
     }
 
-    public float getSuperficie() {
+    public double getSuperficie() {
         return superficie;
     }
 
-    public void setSuperficie(float superficie) {
+    public void setSuperficie(double superficie) {
         this.superficie = superficie;
     }
 
-    public float getDensidad() {
+    public double getDensidad() {
         return densidad;
     }
 
-    public void setDensidad(float densidad) {
+    public void setDensidad(double densidad) {
         this.densidad = densidad;
     }
 
-    public float getAreaBasalMedia() {
+    public double getAreaBasalMedia() {
         return areaBasalMedia;
     }
 
-    public void setAreaBasalMedia(float areaBasalMedia) {
+    public void setAreaBasalMedia(double areaBasalMedia) {
         this.areaBasalMedia = areaBasalMedia;
     }
 
-    public float getDapMedio() {
+    public double getDapMedio() {
         return dapMedio;
     }
 
-    public void setDapMedio(float dapMedio) {
+    public void setDapMedio(double dapMedio) {
         this.dapMedio = dapMedio;
     }
 
-    public float getAlturaDominante() {
+    public double getAlturaDominante() {
         return alturaDominante;
     }
 
@@ -79,13 +80,19 @@ public class DetalleParcela {
         this.alturaDominante = alturaDominante;
     }
 
-    public float getVolumen() {
+    public double getVolumen() {
         return volumen;
     }
 
-    public void setVolumen(float volumen) {
+    public void setVolumen(double volumen) {
         this.volumen = volumen;
     }
-    
-    
+
+    public void setFactorExpansion(double factorExpansion) {
+        this.factorExpansion = factorExpansion;
+    }
+    public double getFactorExpansion(){
+        return this.factorExpansion;
+    }
+
 }

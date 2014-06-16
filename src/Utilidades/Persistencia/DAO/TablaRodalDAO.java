@@ -39,8 +39,8 @@ public class TablaRodalDAO {
             ps.setDate(7, new Date(new java.util.Date().getTime()));
             ps.setString(8, t.getModAltura());
             int i = 9;
-            for (float b : t.getBO()) {
-                ps.setFloat(i, b);
+            for (double b : t.getBO()) {
+                ps.setDouble(i, b);
                 i++;
             }
             ps.setString(16, t.getAjuste());
