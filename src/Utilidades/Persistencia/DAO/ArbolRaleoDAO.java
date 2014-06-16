@@ -50,7 +50,8 @@ public class ArbolRaleoDAO {
         Connection conn = DAOManagerBancoDatos.getConnection();
         LinkedList<ArbolRaleo> arboles = new LinkedList();
         try {
-            PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS + inv.getOrdenTrabajo());
+            PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS);
+            ps.setInt(1, inv.getOrdenTrabajo());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 arboles.add(new ArbolRaleo(rs.getInt("orden_trabajo"), rs.getInt("numparcela"), rs.getInt("numero"), rs.getInt("especie"), rs.getInt("estrato"), rs.getInt("fito"), rs.getInt("dominancia"), rs.getInt("condpoda"), rs.getFloat("dap"), rs.getFloat("hpoda"), rs.getFloat("htotal"), rs.getInt("rectitud"), rs.getInt("copa"), rs.getInt("bifulcacion"), rs.getInt("sanidad")));
