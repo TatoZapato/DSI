@@ -138,5 +138,10 @@ public class TablaRodal {
         this.parametro = parametro;
     }
     
+    @Override
+    public String toString(){
+        return ordenTrabajo+" - "+ tipoInventario+" - "+ fundo +" - "+rodal;
+    }
+    
     
 }

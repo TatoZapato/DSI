@@ -12,7 +12,7 @@ import Utilidades.Inventario.Inventario;
 import Utilidades.Inventario.ParametroGeneral;
 import Utilidades.Inventario.ParametroParcela;
 import Utilidades.Inventario.TablaRodal;
-import Utilidades.Persistencia.DAO.BancoDatosDAO;
+import Utilidades.Persistencia.DAO.BancoDatos.BancoDatosDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.sql.Date;
 import java.util.LinkedList;
@@ -44,7 +44,7 @@ public class ProcesamientoInventario {
                 especies.add(arboles.get(i).getEspecie());
             }
         }
-        Object[][] array = new Object[especies.size()][2];
+        int[][] array = new int[especies.size()][2];
         if (especies.isEmpty()) {
             array = null;
         }
@@ -62,12 +62,26 @@ public class ProcesamientoInventario {
             parametro.setEspecieSecundaria("Sin Información");
             parametro.setNumEspecies(0);
         } else {
+
             //Especie Principal
+            //System.out.println("ESPECIE PRINCIAPAL: "+parametro.getEspeciePrincipal());
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 0; j < array[0].length; j++) {
+                    System.out.println("arr" + array[i][j]);
+                }
+            }
+//            if(array.length == 1){
+//                
+//            }
             array = BubbleSort(array);
-            parametro.setEspeciePrincipal(BancoDatosDAO.obtenerEspecie((Integer) array[array.length - 1][1]));
+            //System.out.println("aray" + array.length+"\n cod : "+(Integer) array[array.length - 1][1]);
+
+            System.out.println("array[array.length - 1][1]" + array[array.length - 1][0]);
+            System.out.println("array[array.length - 2][1]" + array[array.length - 2][0]);
+            parametro.setEspeciePrincipal(BancoDatosDAO.obtenerEspecie(array[array.length - 1][0]));
             //Especie Secundaria
             if (array.length > 1) {
-                parametro.setEspecieSecundaria(BancoDatosDAO.obtenerEspecie((Integer) array[array.length - 2][1]));
+                parametro.setEspecieSecundaria(BancoDatosDAO.obtenerEspecie(array[array.length - 2][0]));
             } else {
                 parametro.setEspecieSecundaria(parametro.getEspeciePrincipal());
             }
@@ -82,27 +96,28 @@ public class ProcesamientoInventario {
 
         /* private String tipoInventario */
         parametro.setTipoInventario(BancoDatosDAO.obtenerTipoInventario(inv.getTipoInventario()));
+
         /* private int numParcelas */
         parametro.setNumParcelas(BancoDatosDAO.obtenerNumParcelas(inv));
 
         /* private String superficieParcelas */
         float superficie = BancoDatosDAO.obtenerSuperficieParcelas(inv);
-        parametro.setSuperficieParcelas(superficie);
+
+        parametro.setSuperficieParcelas(superficie + "");
 
         /* private String empresaServicios */
         parametro.setEmpresaServicios(BancoDatosDAO.obtenerEmpresaServicio(inv));
-
         /* private Date fechaProyeccion */
         parametro.setFechaProyeccion(new Date(new java.util.Date().getTime()));
         int numArboles = arboles.size();
         float factorExpansion = 10000 / superficie;
         //densidad
         //float densidad = numArboles / superficie;
-        parametro.setDensidad(numArboles * factorExpansion);
+        parametro.setDensidad((numArboles * factorExpansion) + "");
 
         //densidadP;
         int numArbolesPodados = 0, numArbolesNoPodados = 0;
-        parametro.setDensidadP(numArbolesPodados * factorExpansion);// / superficie);
+        parametro.setDensidadP((numArbolesPodados * factorExpansion) + "");// / superficie);
         for (int i = 0; i < arboles.size(); i++) {
             if (arboles.get(i).getConPoda() == CON_PODA) {
                 numArbolesNoPodados++;
@@ -110,7 +125,7 @@ public class ProcesamientoInventario {
                 numArbolesPodados++;
             }
         }
-        parametro.setDensidadNP(numArbolesNoPodados * factorExpansion);// / superficie);
+        parametro.setDensidadNP((numArbolesNoPodados * factorExpansion) + "");// / superficie);
         float sumaDap = 0, sumaDapP = 0, sumaDapNP = 0;
         float dapMedio = 0, dapMedioP = 0, dapMedioNP = 0;
 
@@ -129,13 +144,14 @@ public class ProcesamientoInventario {
             dapMedio = sumaDap / arboles.size();
             dapMedioP = sumaDapP / numArbolesPodados;
             dapMedioNP = sumaDapNP / numArbolesNoPodados;
-            parametro.setDapMedio(dapMedio);
-            parametro.setDapMedioP(dapMedioP);
-            parametro.setDapMedioNP(dapMedioNP);
+            parametro.setDapMedio(dapMedio + "");
+            parametro.setDapMedioP(dapMedioP + "");
+            parametro.setDapMedioNP(dapMedioNP + "");
         } else {
-            parametro.setDapMedio(0);
-            parametro.setDapMedioP(0);
-            parametro.setDapMedioNP(0);
+            String cero = "0";
+            parametro.setDapMedio(cero);
+            parametro.setDapMedioP(cero);
+            parametro.setDapMedioNP(cero);
         }
 
         float areaBasal = 0, areaBasalP = 0, areaBasalNP = 0;
@@ -144,9 +160,9 @@ public class ProcesamientoInventario {
             areaBasalP = (float) (Math.PI * Math.pow(dapMedioP / 2, 2));
             areaBasalNP = (float) (Math.PI * Math.pow(dapMedioNP / 2, 2));
         }
-        parametro.setAreaBasal(areaBasal * factorExpansion);
-        parametro.setAreaBasalP(areaBasalP * factorExpansion);
-        parametro.setAreaBasalNP(areaBasalNP * factorExpansion);
+        parametro.setAreaBasal((areaBasal * factorExpansion) + "");
+        parametro.setAreaBasalP((areaBasalP * factorExpansion) + "");
+        parametro.setAreaBasalNP((areaBasalNP * factorExpansion) + "");
 
         /* CALCULO DE REGRESIÓN */
         LinkedList<ArbolRaleo> conAltura = new LinkedList();
@@ -182,9 +198,9 @@ public class ProcesamientoInventario {
                 sumaAlturasP += arboles.get(i).gethTotal();
             }
         }
-        parametro.setAlturaTotalMedia((sumaAlturas / numArboles));
-        parametro.setAlturaTotalMediaP((sumaAlturasP / numArbolesPodados));
-        parametro.setAlturaTotalMediaNP((sumaAlturasNP / numArbolesNoPodados));
+        parametro.setAlturaTotalMedia((sumaAlturas / numArboles) + "");
+        parametro.setAlturaTotalMediaP((sumaAlturasP / numArbolesPodados) + "");
+        parametro.setAlturaTotalMediaNP((sumaAlturasNP / numArbolesNoPodados) + "");
 
         LinkedList<Float> volumenes = new LinkedList();
         for (int i = 0; i < arboles.size(); i++) {
@@ -205,9 +221,9 @@ public class ProcesamientoInventario {
                 sumaVolP += volumenes.get(i);
             }
         }
-        parametro.setVolumen((sumaVol / numArboles));
-        parametro.setVolumenP((sumaVolP / numArbolesPodados));
-        parametro.setVolumenNP((sumaVolNP / numArbolesNoPodados));
+        parametro.setVolumen((sumaVol / numArboles) + "");
+        parametro.setVolumenP((sumaVolP / numArbolesPodados) + "");
+        parametro.setVolumenNP((sumaVolNP / numArbolesNoPodados) + "");
         parametro.setModeloAltura(modelo);
         double[] b = new double[7];
         double[] cof = calculoCoeficientesRegresion(arboles, coef);
@@ -218,7 +234,7 @@ public class ProcesamientoInventario {
         parametro.setAjuste("Minimo Cuadrado");
 
         /* private String superficieRodal */
-        parametro.setSuperficieRodal(0);
+        parametro.setSuperficieRodal("0");
 
         System.out.println(parametro.toString());
         return parametro;
@@ -236,17 +252,144 @@ public class ProcesamientoInventario {
                 minDap = arboles.get(i).getDap();
             }
         }
+        System.out.println(parametro.toString());
         int numClases = 0;
         float aux = minDap;
         while (aux < maxDap) {
             aux += 2;
             numClases++;
         }
+
+        System.out.println("MIN DAP: " + minDap);
+        System.out.println("MAX DAP: " + maxDap);
+        System.out.println("NUM CLASES: " + numClases);
         LinkedList<DetalleTablaRodal> detalles = new LinkedList();
         for (int i = 0; i < numClases; i++) {
+            LinkedList<ArbolRaleo> misArboles = new LinkedList();
+            for (int j = 0; j < arboles.size(); j++) {
+                if (arboles.get(j).getDap() >= minDap) {// && (minDap + 2) > arboles.get(j).getDap()) {
+                    misArboles.add(arboles.get(j));
+                }
+            }
+            System.out.println("misArboles.size(): " + misArboles.size());
+
+            DetalleTablaRodal detalle = new DetalleTablaRodal();
+            /* private int ordenTrabajo */
+            detalle.setOrdenTrabajo(parametro.getOrdenTrabajo());
+
+            /* private int claseDAP */
+            detalle.setClaseDAP((int) minDap);
+
+            /* private int densidadTotal */
+            float superficie = 1;
+            if (misArboles.isEmpty()) {
+                detalle.setDensidadTotal("0");
+                detalle.setDensidadPodado("0");
+                detalle.setAreaBasal("0");
+                detalle.setAlturaPoda("0");
+                detalle.setVolumenPodado("0");
+                detalle.setVolumeNoPodado("0");
+                detalle.setVolumenTotal("0");
+            } else {
+                int numArboles = misArboles.size();
+                superficie = BancoDatosDAO.obtenerSuperficieParcelas(inv);
+                System.out.println("NUMERO ARBOLES: " + numArboles);
+                System.out.println("SUPERFICIE: " + superficie);
+                detalle.setDensidadTotal("" + (numArboles / superficie));
+                int numArbolesP = 0, numArbolesNP = 0;
+                float sumaDap = 0;
+
+                LinkedList<ArbolRaleo> conAltura = new LinkedList();
+                for (int j = 0; j < misArboles.size(); j++) {
+                    if (misArboles.get(j).getConPoda() != CON_PODA) {
+                        numArbolesP++;
+                    } else {
+                        numArbolesNP++;
+                    }
+                    sumaDap += misArboles.get(j).getDap();
+                    if (misArboles.get(j).gethTotal() != 0f) {
+                        conAltura.add(misArboles.get(j));
+                    }
+                }
+                detalle.setDensidadPodado("" + numArbolesP / superficie);
+                detalle.setDensidadNoPodado("" + numArbolesNP / superficie);
+
+                float dapMedio = (sumaDap / misArboles.size());
+                double areaBasal = Math.PI * Math.pow(dapMedio / 2, 2);
+                detalle.setAreaBasal("" + areaBasal);
+                int coef = buscarCoeficientes(model).size();
+                String modelo = "";
+                if (!conAltura.isEmpty()) {
+                    modelo = calculoRegresion(conAltura, coef);
+                    for (int j = 0; j < misArboles.size(); j++) {
+                        if (misArboles.get(j).gethTotal() == 0) {
+                            try {
+                                float nvaAltura = calcularAlturaModelo(modelo, misArboles.get(j).getDap());
+                                System.out.println("ALTURA RODAL: " + nvaAltura);
+                                misArboles.get(j).sethTotal(nvaAltura);
+                            } catch (Exception e) {
+//                            JOptionPane.showMessageDialog(null, "Error al evaluar la función ajustada", "Información", 1);
+                            }
+                        }
+                    }
+                }
+
+                /* private String alturaMedia */
+                float sumaAlturas = 0, sumaAlturasP = 0;;
+                for (int j = 0; j < misArboles.size(); j++) {
+                    sumaAlturas += misArboles.get(j).gethTotal();
+                    if (misArboles.get(j).getConPoda() != CON_PODA) {
+                        sumaAlturasP += misArboles.get(j).gethTotal();
+                        numArbolesP++;
+                    }
+                }
+                detalle.setAlturaMedia((sumaAlturas / misArboles.size()) + "");
+                detalle.setAlturaPoda((sumaAlturasP / numArbolesP) + "");
+
+                LinkedList<Float> volumenes = new LinkedList();
+                for (int j = 0; j < misArboles.size(); j++) {
+                    try {
+                        float vol = calcularVolumenFuncion(function, misArboles.get(i).getDap(), misArboles.get(i).gethTotal());
+                        System.out.println("RESULTADO VOL: " + vol);
+                        volumenes.add(vol);
+                    } catch (Exception e) {
+//                    System.err.println("LA FUNCIÓN ESTÁ MALA");
+                        volumenes.add(0f);
+                    }
+                }
+
+                float sumaVolP = 0;
+                for (int j = 0; j < misArboles.size(); j++) {
+                    if (misArboles.get(j).getConPoda() == CON_PODA) {
+                        sumaVolP += volumenes.get(j);
+                    }
+                }
+                System.out.println("VOLUMEN PODADA: " + (sumaVolP / numArbolesP));
+                detalle.setVolumenPodado((sumaVolP / numArbolesP) + "");
+
+                float sumaVolNP = 0;
+                for (int j = 0; j < misArboles.size(); j++) {
+                    if (misArboles.get(j).getConPoda() != CON_PODA) {
+                        sumaVolNP += volumenes.get(j);
+                        numArbolesNP++;
+                    }
+                }
+                detalle.setVolumeNoPodado((sumaVolNP / numArbolesNP) + "");
+
+                float sumaVol = 0;
+                for (int j = 0; j < volumenes.size(); j++) {
+                    sumaVol += volumenes.get(j);
+                }
+                detalle.setVolumenTotal((sumaVol / misArboles.size()) + "");
+                System.out.println("-----" + detalle.toString());
+                minDap += 2;
+
+                detalles.add(detalle);
+            }
+            tabla.setDetalles(detalles);
 
         }
-        return null;
+        return tabla;
     }
 
     public static ParametroParcela obtenerParametroParcela(ParametroGeneral p, Inventario inv, String function) throws DAOException {
@@ -274,16 +417,16 @@ public class ProcesamientoInventario {
             /* private int numParcela */
             detalle.setNumParcela(parcelas.get(i));
             /* private String superficie */
-            detalle.setSuperficie(BancoDatosDAO.obtenerSuperficiePorParcela(detalle.getNumParcela()));
+            detalle.setSuperficie(BancoDatosDAO.obtenerSuperficiePorParcela(detalle.getNumParcela()) + "");
 
-            double factorExpansion = 10000 / detalle.getSuperficie();
-            detalle.setFactorExpansion(factorExpansion);
+            double factorExpansion = 10000 / Double.parseDouble(detalle.getSuperficie());
+            detalle.setFactorExpansion(factorExpansion + "");
             /* private String densidad */
-            detalle.setDensidad(p.getDensidad() * factorExpansion);
+            detalle.setDensidad((Double.parseDouble(p.getDensidad()) * factorExpansion) + "");
             if (misArbolRaleos.isEmpty()) {
                 detalle.setAreaBasalMedia(p.getAreaBasal());
                 detalle.setDapMedio(p.getDapMedio());
-                detalle.setAlturaDominante(0);
+                detalle.setAlturaDominante("0");
             } else {
                 float sumaDap = 0;
                 for (int j = 0; j < misArbolRaleos.size(); j++) {
@@ -291,15 +434,15 @@ public class ProcesamientoInventario {
                 }
                 float dapMedio = (sumaDap / misArbolRaleos.size());
                 double areaBasal = Math.PI * Math.pow(dapMedio / 2, 2);
-                detalle.setAreaBasalMedia(areaBasal);
-                detalle.setDapMedio(dapMedio);
+                detalle.setAreaBasalMedia(areaBasal + "");
+                detalle.setDapMedio(dapMedio + "");
                 float hMax = Float.MIN_VALUE;
                 for (int j = 0; j < misArbolRaleos.size(); j++) {
                     if (misArbolRaleos.get(j).gethTotal() > hMax) {
                         hMax = misArbolRaleos.get(j).gethTotal();
                     }
                 }
-                detalle.setAlturaDominante(hMax);
+                detalle.setAlturaDominante(hMax + "");
             }
             double volumen = 0;
 
@@ -312,10 +455,11 @@ public class ProcesamientoInventario {
                     volumen += 0;
                 }
             }
-            detalle.setVolumen(volumen);
-            parametro.setDetalles(detalles);
-            System.out.println(parametro);
+            detalle.setVolumen(volumen + "");
+
             detalles.add(detalle);
+            parametro.setDetalles(detalles);
+            System.out.println(parametro.toString());
         }
 
         return parametro;
@@ -366,20 +510,21 @@ public class ProcesamientoInventario {
         return co;
     }
 
-    private static Object[][] BubbleSort(Object[][] n) {
-        float temp;
-        Object tempString;
+    private static int[][] BubbleSort(int[][] n) {
+        System.out.println("buublesort: " + n.length);
+        int temp;
+        int temp2;
         int t = n.length;
         for (int i = 1; i < t; i++) {
             for (int k = t - 1; k >= i; k--) {
-                if (Float.parseFloat(n[k][1] + "") < Float.parseFloat(n[k - 1][1] + "")) {
-                    temp = Float.parseFloat(n[k][1] + "");
+                if (n[k][1] < n[k - 1][1]) {
+                    temp = n[k][1];
                     n[k][1] = n[k - 1][1];
                     n[k - 1][1] = temp;
 
-                    tempString = (n[k][0]);
+                    temp2 = (n[k][0]);
                     n[k][0] = n[k - 1][0];
-                    n[k - 1][0] = tempString;
+                    n[k - 1][0] = temp2;
                 }
             }
         }
@@ -387,11 +532,12 @@ public class ProcesamientoInventario {
     }
 
     public static String calculoRegresion(LinkedList<ArbolRaleo> muestra, int coeficientes) {
+        System.out.println(coeficientes + " :Coef");
         final CurveFitter fitter = new CurveFitter(new LevenbergMarquardtOptimizer());
         for (int i = 0; i < muestra.size(); i++) {
             fitter.addObservedPoint(muestra.get(i).getDap(), muestra.get(i).gethTotal());
         }
-        final double[] init = new double[coeficientes];
+        final double[] init = new double[2];//coeficientes];
         for (int i = 0; i < init.length; i++) {
             init[i] = 1;
         }
@@ -400,7 +546,7 @@ public class ProcesamientoInventario {
 
         final PolynomialFunction fitted = new PolynomialFunction(best);
         String exp = fitted.toString();
-        exp = exp.replace("x", "dap ");
+        exp = exp.replace("x", " * dap ");
         exp = exp.replace(" ", "");
         return exp;
     }
@@ -411,7 +557,7 @@ public class ProcesamientoInventario {
             fitter.addObservedPoint(muestra.get(i).getDap(), muestra.get(i).gethTotal());
         }
 
-        final double[] init = new double[coeficientes];
+        final double[] init = new double[2];//coeficientes];
         for (int i = 0; i < init.length; i++) {
             init[i] = 1;
         }

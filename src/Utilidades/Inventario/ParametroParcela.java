@@ -117,5 +117,10 @@ public class ParametroParcela {
     public void setParametro(ParametroGeneral parametro) {
         this.parametro = parametro;
     }
-
+    
+    @Override
+    public String toString() {
+        return "ParametroParcela: ["+ordenTrabajo+", "+fechaMedicion+", "+tipoInventario+", "+fundo+", "+rodal+", "+
+                especiePrincipal+", "+especieSecundaria+", "+fechaProyeccion+", "+detalles.size();
+    }
 }

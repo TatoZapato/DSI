@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utilidades.Persistencia.DAO;
+package Utilidades.Persistencia.DAO.BancoDatos;
 
+import Utilidades.Inventario.ArbolRaleo;
 import Utilidades.Inventario.Inventario;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Persistencia.DAOManager.DAOManagerBancoDatos;
@@ -22,19 +23,71 @@ public class BancoDatosDAO {
 
     private static final String OBTENER_TOD0S_LOS_INVENTARIOS = "SELECT ordentrabajo, rute, fecha, rutjcuadrilla, estado, parcela, rodal, fundo, tipoinventario FROM t_bddi_inventario";
     private static final String OBTENER_TOD0S_LOS_INVENTARIOS_PROCESABLES = "SELECT ordentrabajo, rute, fecha, rutjcuadrilla, estado, parcela, rodal, fundo, tipoinventario FROM t_bddi_inventario";// WHERE tipoinventario = 2 OR tipoinventario = 3";
-    private static final String OBTENER_EMPRESA_PROPIETARIA = "1 - FORESTAL MASISA S.A.";
+    private static final String OBTENER_EMPRESA_PROPIETARIA = "FORESTAL MASISA S.A.";
     private static final String OBTENER_ESPECIE = "SELECT codigo, descripcion FROM t_bddi_especie WHERE codigo = ?";
     private static final String OBTENER_TIPO_INVENTARIO = "SELECT id, descripcion FROM t_bddi_tipo_inventario WHERE id = ?";
     private static final String OBTENER_NUM_PARCELAS = "SELECT COUNT(numparcela) as parcelas FROM t_bddi_parcela WHERE ordentrabajo = ?";
     //private static final String OBTENER_PARCELAS = "SELECT numparcela, pendiente, manejo, ordentrabajo, latitud, logitud, m2orden, forma FROM t_bddi_parcela WHERE ordentrabajo = ?";
-    private static final String OBTENER_SUPERFICIE_PARCELAS = "SELECT SUM(m2orden) as superficie FROM t_bddi_parcela WHERE ordentrabajo = ?";
-    private static final String OBTENER_SUPERFICIE_POR_PARCELA = "SELECT m2orden as superficie FROM t_bddi_parcela WHERE numparcela = ?";
+    private static final String OBTENER_SUPERFICIE_PARCELAS = "SELECT SUM(m2) as superficie FROM t_bddi_parcela WHERE ordentrabajo = ?";
+    private static final String OBTENER_SUPERFICIE_POR_PARCELA = "SELECT m2 as superficie FROM t_bddi_parcela WHERE numparcela = ?";
     private static final String OBTENER_EMPRESA_SERVICIO = "SELECT rute, nombre FROM t_bddi_empresa_servicio WHERE rute = ?";
+    private static final String OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS = "SELECT orden_trabajo, numparcela, numero, especie, conpoda, dap, hpoda, htotal FROM t_bddi_arbol_raleo WHERE orden_trabajo = ?";
 
-    public static String obtenerEmpresaPropietaria(Inventario inv){
+    public static String obtenerEmpresaPropietaria(Inventario inv) {
         return OBTENER_EMPRESA_PROPIETARIA;
     }
-    
+
+    public static ArbolRaleo obtenerArbolRaleo(int ordenT) throws DAOException {
+        Connection conn = DAOManagerBancoDatos.getConnection();
+        ArbolRaleo arbol = null;
+        try (PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS)) {
+            ps.setInt(1, ordenT);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                arbol = new ArbolRaleo(rs.getInt("orden_trabajo"), rs.getInt("numparcela"), rs.getInt("numero"), rs.getInt("especie"),rs.getInt("condpoda"), rs.getFloat("dap"), rs.getFloat("hpoda"), rs.getFloat("htotal"));
+            }
+            rs.close();
+            ps.close();
+            return arbol;
+        } catch (SQLException e) {
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+
+    public static LinkedList<ArbolRaleo> obtenerTodosLosArbolRaleoSeleccionados(Inventario inv) throws DAOException {
+        Connection conn = DAOManagerBancoDatos.getConnection();
+        LinkedList<ArbolRaleo> arboles = new LinkedList();
+        try {
+            PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS);
+            ps.setInt(1, inv.getOrdenTrabajo());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.println("asdasdasdaskjdhask");
+                System.out.println(rs.toString());
+                //orden_trabajo, numparcela, numero, especie, conpoda, dap, hpoda, htotal
+                arboles.add(new ArbolRaleo(rs.getInt("orden_trabajo"), rs.getInt("numparcela"), rs.getInt("numero"), rs.getInt("especie"), rs.getInt("conpoda"), rs.getFloat("dap"), rs.getFloat("hpoda"), rs.getFloat("htotal")));
+            }
+            rs.close();
+            ps.close();
+            return arboles;
+        } catch (SQLException e) {
+            System.out.println(e.toString() + "\nERROR");
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+
     public static String obtenerEspecie(int cod) throws DAOException {
         Connection conn = DAOManagerBancoDatos.getConnection();
         String especie = "";
@@ -42,7 +95,7 @@ public class BancoDatosDAO {
             ps.setInt(1, cod);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                especie = rs.getInt("codigo") + " - " + rs.getString("descripcion");
+                especie = rs.getString("descripcion");
                 //especie = rs.getString("descripcion");
             }
             rs.close();
@@ -66,7 +119,7 @@ public class BancoDatosDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                especie = rs.getInt("id") + " - " + rs.getString("descripcion");
+                especie = rs.getString("descripcion");
                 //especie = rs.getString("descripcion");
             }
             rs.close();

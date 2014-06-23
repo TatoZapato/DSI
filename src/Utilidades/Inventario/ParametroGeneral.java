@@ -25,28 +25,28 @@ public class ParametroGeneral {
     private Date fechaMedicion;
     private String tipoInventario;
     private int numParcelas;
-    private float superficieParcelas;
+    private String superficieParcelas;
     private String empresaServicios;
     private Date fechaProyeccion;
-    private float densidad;
-    private float densidadP;
-    private float densidadNP;
-    private float dapMedio;
-    private float dapMedioP;
-    private float dapMedioNP;
-    private float areaBasal;
-    private float areaBasalP;
-    private float areaBasalNP;
-    private float alturaTotalMedia;
-    private float alturaTotalMediaP;
-    private float alturaTotalMediaNP;
-    private float volumen;
-    private float volumenP;
-    private float volumenNP;
+    private String densidad;
+    private String densidadP;
+    private String densidadNP;
+    private String dapMedio;
+    private String dapMedioP;
+    private String dapMedioNP;
+    private String areaBasal;
+    private String areaBasalP;
+    private String areaBasalNP;
+    private String alturaTotalMedia;
+    private String alturaTotalMediaP;
+    private String alturaTotalMediaNP;
+    private String volumen;
+    private String volumenP;
+    private String volumenNP;
     private String modeloAltura;
     private double[] BO;
     private String ajuste;
-    private float superficieRodal;
+    private String superficieRodal;
     private LinkedList<ArbolRaleo> misArboles;
 
     public ParametroGeneral() {
@@ -141,11 +141,11 @@ public class ParametroGeneral {
         this.numParcelas = numParcelas;
     }
 
-    public float getSuperficieParcelas() {
+    public String getSuperficieParcelas() {
         return superficieParcelas;
     }
 
-    public void setSuperficieParcelas(float superficieParcelas) {
+    public void setSuperficieParcelas(String superficieParcelas) {
         this.superficieParcelas = superficieParcelas;
     }
 
@@ -165,123 +165,123 @@ public class ParametroGeneral {
         this.fechaProyeccion = fechaProyeccion;
     }
 
-    public float getDensidad() {
+    public String getDensidad() {
         return densidad;
     }
 
-    public void setDensidad(float densidad) {
+    public void setDensidad(String densidad) {
         this.densidad = densidad;
     }
 
-    public float getDensidadP() {
+    public String getDensidadP() {
         return densidadP;
     }
 
-    public void setDensidadP(float densidadP) {
+    public void setDensidadP(String densidadP) {
         this.densidadP = densidadP;
     }
 
-    public float getDensidadNP() {
+    public String getDensidadNP() {
         return densidadNP;
     }
 
-    public void setDensidadNP(float densidadNP) {
+    public void setDensidadNP(String densidadNP) {
         this.densidadNP = densidadNP;
     }
 
-    public float getDapMedio() {
+    public String getDapMedio() {
         return dapMedio;
     }
 
-    public void setDapMedio(float dapMedio) {
+    public void setDapMedio(String dapMedio) {
         this.dapMedio = dapMedio;
     }
 
-    public float getDapMedioP() {
+    public String getDapMedioP() {
         return dapMedioP;
     }
 
-    public void setDapMedioP(float dapMedioP) {
+    public void setDapMedioP(String dapMedioP) {
         this.dapMedioP = dapMedioP;
     }
 
-    public float getDapMedioNP() {
+    public String getDapMedioNP() {
         return dapMedioNP;
     }
 
-    public void setDapMedioNP(float dapMedioNP) {
+    public void setDapMedioNP(String dapMedioNP) {
         this.dapMedioNP = dapMedioNP;
     }
 
-    public float getAreaBasal() {
+    public String getAreaBasal() {
         return areaBasal;
     }
 
-    public void setAreaBasal(float areaBasal) {
+    public void setAreaBasal(String areaBasal) {
         this.areaBasal = areaBasal;
     }
 
-    public float getAreaBasalP() {
+    public String getAreaBasalP() {
         return areaBasalP;
     }
 
-    public void setAreaBasalP(float areaBasalP) {
+    public void setAreaBasalP(String areaBasalP) {
         this.areaBasalP = areaBasalP;
     }
 
-    public float getAreaBasalNP() {
+    public String getAreaBasalNP() {
         return areaBasalNP;
     }
 
-    public void setAreaBasalNP(float areaBasalNP) {
+    public void setAreaBasalNP(String areaBasalNP) {
         this.areaBasalNP = areaBasalNP;
     }
 
-    public float getAlturaTotalMedia() {
+    public String getAlturaTotalMedia() {
         return alturaTotalMedia;
     }
 
-    public void setAlturaTotalMedia(float alturaTotalMedia) {
+    public void setAlturaTotalMedia(String alturaTotalMedia) {
         this.alturaTotalMedia = alturaTotalMedia;
     }
 
-    public float getAlturaTotalMediaP() {
+    public String getAlturaTotalMediaP() {
         return alturaTotalMediaP;
     }
 
-    public void setAlturaTotalMediaP(float alturaTotalMediaP) {
+    public void setAlturaTotalMediaP(String alturaTotalMediaP) {
         this.alturaTotalMediaP = alturaTotalMediaP;
     }
 
-    public float getAlturaTotalMediaNP() {
+    public String getAlturaTotalMediaNP() {
         return alturaTotalMediaNP;
     }
 
-    public void setAlturaTotalMediaNP(float alturaTotalMediaNP) {
+    public void setAlturaTotalMediaNP(String alturaTotalMediaNP) {
         this.alturaTotalMediaNP = alturaTotalMediaNP;
     }
 
-    public float getVolumen() {
+    public String getVolumen() {
         return volumen;
     }
 
-    public void setVolumen(float volumen) {
+    public void setVolumen(String volumen) {
         this.volumen = volumen;
     }
 
-    public float getVolumenP() {
+    public String getVolumenP() {
         return volumenP;
     }
 
-    public void setVolumenP(float volumenP) {
+    public void setVolumenP(String volumenP) {
         this.volumenP = volumenP;
     }
 
-    public float getVolumenNP() {
+    public String getVolumenNP() {
         return volumenNP;
     }
 
-    public void setVolumenNP(float volumenNP) {
+    public void setVolumenNP(String volumenNP) {
         this.volumenNP = volumenNP;
     }
 
@@ -309,13 +309,14 @@ public class ParametroGeneral {
         this.ajuste = ajuste;
     }
 
-    public float getSuperficieRodal() {
+    public String getSuperficieRodal() {
         return superficieRodal;
     }
 
-    public void setSuperficieRodal(float superficieRodal) {
+    public void setSuperficieRodal(String superficieRodal) {
         this.superficieRodal = superficieRodal;
     }
+    
 
     public LinkedList<ArbolRaleo> getMisArboles() {
         return misArboles;
@@ -323,6 +324,17 @@ public class ParametroGeneral {
 
     public void setMisArboles(LinkedList<ArbolRaleo> misArboles) {
         this.misArboles = misArboles;
+    }
+    
+    public String toString() {
+        String aux = "Parametro General : ["+emPropietaria+", "+
+                fundo+", "+rodal+", "+anoPlantacion+", "+especiePrincipal+", "+
+                especieSecundaria+", "+numEspecies+", "+ordenTrabajo+", "+fechaMedicion+", "+tipoInventario+", "+
+                numParcelas+", "+superficieParcelas+", "+empresaServicios+", "+fechaProyeccion+", "+densidad+", "+
+                densidadP+", "+densidadNP+", "+dapMedio+", "+dapMedioP+", "+dapMedioNP+", "+areaBasal+", "+areaBasalP+","+
+                areaBasalNP+", "+alturaTotalMedia+", "+alturaTotalMediaP+", "+alturaTotalMediaNP+", "+volumen+", "+
+                volumenP+", "+volumenNP+", "+modeloAltura+", "+BO.length+", "+ajuste+", "+superficieRodal;
+        return aux;
     }
 
     

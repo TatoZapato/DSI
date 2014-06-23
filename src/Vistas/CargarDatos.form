@@ -187,7 +187,7 @@
               <Font name="Verdana" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(ModeloDAO.obtenerTodosLosModelosArray())" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(FuncionDAO.obtenerTodosLasFuncionesArray())" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -197,7 +197,7 @@
               <Font name="Verdana" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(FuncionDAO.obtenerTodosLasFuncionesArray())" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(ModeloDAO.obtenerTodosLosModelosArray())" type="code"/>
             </Property>
           </Properties>
         </Component>

@@ -13,15 +13,15 @@ public class DetalleParcela {
 
     private int ordenTrabajo;
     private int numParcela;
-    private double superficie;
-    private double densidad;
-    private double areaBasalMedia;
-    private double dapMedio;
-    private double alturaDominante;
-    private double volumen;
-    private double factorExpansion;
+    private String superficie;
+    private String densidad;
+    private String areaBasalMedia;
+    private String dapMedio;
+    private String alturaDominante;
+    private String volumen;
+    private String factorExpansion;
 
-    public DetalleParcela() {
+    public DetalleParcela(){
     }
 
     public int getOrdenTrabajo() {
@@ -40,59 +40,62 @@ public class DetalleParcela {
         this.numParcela = numParcela;
     }
 
-    public double getSuperficie() {
+    public String getSuperficie() {
         return superficie;
     }
 
-    public void setSuperficie(double superficie) {
+    public void setSuperficie(String superficie) {
         this.superficie = superficie;
     }
 
-    public double getDensidad() {
+    public String getDensidad() {
         return densidad;
     }
 
-    public void setDensidad(double densidad) {
+    public void setDensidad(String densidad) {
         this.densidad = densidad;
     }
 
-    public double getAreaBasalMedia() {
+    public String getAreaBasalMedia() {
         return areaBasalMedia;
     }
 
-    public void setAreaBasalMedia(double areaBasalMedia) {
+    public void setAreaBasalMedia(String areaBasalMedia) {
         this.areaBasalMedia = areaBasalMedia;
     }
 
-    public double getDapMedio() {
+    public String getDapMedio() {
         return dapMedio;
     }
 
-    public void setDapMedio(double dapMedio) {
+    public void setDapMedio(String dapMedio) {
         this.dapMedio = dapMedio;
     }
 
-    public double getAlturaDominante() {
+    public String getAlturaDominante() {
         return alturaDominante;
     }
 
-    public void setAlturaDominante(float alturaDominante) {
+    public void setAlturaDominante(String alturaDominante) {
         this.alturaDominante = alturaDominante;
     }
 
-    public double getVolumen() {
+    public String getVolumen() {
         return volumen;
     }
 
-    public void setVolumen(double volumen) {
+    public void setVolumen(String volumen) {
         this.volumen = volumen;
     }
 
-    public void setFactorExpansion(double factorExpansion) {
+    public String getFactorExpansion() {
+        return factorExpansion;
+    }
+
+    public void setFactorExpansion(String factorExpansion) {
         this.factorExpansion = factorExpansion;
     }
-    public double getFactorExpansion(){
-        return this.factorExpansion;
-    }
+
+    
 
 }

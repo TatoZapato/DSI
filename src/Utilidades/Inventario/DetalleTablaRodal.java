@@ -13,14 +13,19 @@ public class DetalleTablaRodal {
 
     private int ordenTrabajo;
     private int claseDAP;
-    private float densidadTotal;
-    private float densidadPodado;
-    private float areaBasal;
-    private float alturaMedia;
-    private float alturaPoda;
-    private float volumenPodado;
-    private float volumeNoPodado;
-    private float volumenTotal;
+    private String densidadTotal;
+    private String densidadPodado;
+    private String densidadNoPodado;
+    private String areaBasal;
+    private String alturaMedia;
+    private String alturaPoda;
+    private String volumenPodado;
+    private String volumeNoPodado;
+    private String volumenTotal;
+
+    public String getDensidadNoPodado() {
+        return densidadNoPodado;
+    }
 
     public DetalleTablaRodal() {}
 
@@ -40,68 +45,72 @@ public class DetalleTablaRodal {
         this.claseDAP = claseDAP;
     }
 
-    public float getDensidadTotal() {
+    public String getDensidadTotal() {
         return densidadTotal;
     }
 
-    public void setDensidadTotal(float densidadTotal) {
+    public void setDensidadTotal(String densidadTotal) {
         this.densidadTotal = densidadTotal;
     }
 
-    public float getDensidadPodado() {
+    public String getDensidadPodado() {
         return densidadPodado;
     }
 
-    public void setDensidadPodado(float densidadPodado) {
+    public void setDensidadPodado(String densidadPodado) {
         this.densidadPodado = densidadPodado;
     }
 
-    public float getAreaBasal() {
+    public String getAreaBasal() {
         return areaBasal;
     }
 
-    public void setAreaBasal(float areaBasal) {
+    public void setAreaBasal(String areaBasal) {
         this.areaBasal = areaBasal;
     }
 
-    public float getAlturaMedia() {
+    public String getAlturaMedia() {
         return alturaMedia;
     }
 
-    public void setAlturaMedia(float alturaMedia) {
+    public void setAlturaMedia(String alturaMedia) {
         this.alturaMedia = alturaMedia;
     }
 
-    public float getAlturaPoda() {
+    public String getAlturaPoda() {
         return alturaPoda;
     }
 
-    public void setAlturaPoda(float alturaPoda) {
+    public void setAlturaPoda(String alturaPoda) {
         this.alturaPoda = alturaPoda;
     }
 
-    public float getVolumenPodado() {
+    public String getVolumenPodado() {
         return volumenPodado;
     }
 
-    public void setVolumenPodado(float volumenPodado) {
+    public void setVolumenPodado(String volumenPodado) {
         this.volumenPodado = volumenPodado;
     }
 
-    public float getVolumeNoPodado() {
+    public String getVolumeNoPodado() {
         return volumeNoPodado;
     }
 
-    public void setVolumeNoPodado(float volumeNoPodado) {
+    public void setVolumeNoPodado(String volumeNoPodado) {
         this.volumeNoPodado = volumeNoPodado;
     }
 
-    public float getVolumenTotal() {
+    public String getVolumenTotal() {
         return volumenTotal;
     }
 
-    public void setVolumenTotal(float volumenTotal) {
+    public void setVolumenTotal(String volumenTotal) {
         this.volumenTotal = volumenTotal;
+    }
+
+    public void setDensidadNoPodado(String np) {
+        this.densidadNoPodado = np;
     }
 
     
