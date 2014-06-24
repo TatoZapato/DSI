@@ -38,6 +38,8 @@ public class ProcesamientoInventario {
         parametro.setFundo(Integer.parseInt(inv.getFundo()));
         parametro.setRodal(Integer.parseInt(inv.getRodal()));
         parametro.setAnoPlantacion("Sin Información"); //?
+        parametro.setFuncionVolumen(function);
+        parametro.setModeloAltura(model);
         LinkedList<Integer> especies = new LinkedList();
         for (int i = 0; i < arboles.size(); i++) {
             if (!especies.contains(arboles.get(i).getEspecie())) {
@@ -111,13 +113,13 @@ public class ProcesamientoInventario {
         parametro.setFechaProyeccion(new Date(new java.util.Date().getTime()));
         int numArboles = arboles.size();
         float factorExpansion = 10000 / superficie;
+        parametro.setFactorExpansion(factorExpansion+"");
         //densidad
         //float densidad = numArboles / superficie;
         parametro.setDensidad((numArboles * factorExpansion) + "");
 
         //densidadP;
         int numArbolesPodados = 0, numArbolesNoPodados = 0;
-        parametro.setDensidadP((numArbolesPodados * factorExpansion) + "");// / superficie);
         for (int i = 0; i < arboles.size(); i++) {
             if (arboles.get(i).getConPoda() == CON_PODA) {
                 numArbolesNoPodados++;
@@ -125,6 +127,7 @@ public class ProcesamientoInventario {
                 numArbolesPodados++;
             }
         }
+        parametro.setDensidadP((numArbolesPodados * factorExpansion) + "");// / superficie);
         parametro.setDensidadNP((numArbolesNoPodados * factorExpansion) + "");// / superficie);
         float sumaDap = 0, sumaDapP = 0, sumaDapNP = 0;
         float dapMedio = 0, dapMedioP = 0, dapMedioNP = 0;
@@ -234,7 +237,7 @@ public class ProcesamientoInventario {
         parametro.setAjuste("Minimo Cuadrado");
 
         /* private String superficieRodal */
-        parametro.setSuperficieRodal("0");
+        //parametro.setSuperficieRodal("0");
 
         System.out.println(parametro.toString());
         return parametro;
@@ -301,7 +304,7 @@ public class ProcesamientoInventario {
 
                 LinkedList<ArbolRaleo> conAltura = new LinkedList();
                 for (int j = 0; j < misArboles.size(); j++) {
-                    if (misArboles.get(j).getConPoda() != CON_PODA) {
+                    if (misArboles.get(j).getConPoda() == CON_PODA) {
                         numArbolesP++;
                     } else {
                         numArbolesNP++;

@@ -46,7 +46,42 @@ public class ParametroGeneral {
     private String modeloAltura;
     private double[] BO;
     private String ajuste;
-    private String superficieRodal;
+    private String factorExpansion;
+    private String funcionVolumen;
+    private String funcionSitio;
+    private String valorSitio;
+
+    public String getFuncionVolumen() {
+        return funcionVolumen;
+    }
+
+    public void setFuncionVolumen(String funcionVolumen) {
+        this.funcionVolumen = funcionVolumen;
+    }
+
+    public String getFuncionSitio() {
+        return funcionSitio;
+    }
+
+    public void setFuncionSitio(String funcionSitio) {
+        this.funcionSitio = funcionSitio;
+    }
+
+    public String getValorSitio() {
+        return valorSitio;
+    }
+
+    public void setValorSitio(String valorSitio) {
+        this.valorSitio = valorSitio;
+    }
+
+    public String getFactorExpansion() {
+        return factorExpansion;
+    }
+
+    public void setFactorExpansion(String factorExpansion) {
+        this.factorExpansion = factorExpansion;
+    }
     private LinkedList<ArbolRaleo> misArboles;
 
     public ParametroGeneral() {
@@ -309,13 +344,6 @@ public class ParametroGeneral {
         this.ajuste = ajuste;
     }
 
-    public String getSuperficieRodal() {
-        return superficieRodal;
-    }
-
-    public void setSuperficieRodal(String superficieRodal) {
-        this.superficieRodal = superficieRodal;
-    }
     
 
     public LinkedList<ArbolRaleo> getMisArboles() {
@@ -333,7 +361,7 @@ public class ParametroGeneral {
                 numParcelas+", "+superficieParcelas+", "+empresaServicios+", "+fechaProyeccion+", "+densidad+", "+
                 densidadP+", "+densidadNP+", "+dapMedio+", "+dapMedioP+", "+dapMedioNP+", "+areaBasal+", "+areaBasalP+","+
                 areaBasalNP+", "+alturaTotalMedia+", "+alturaTotalMediaP+", "+alturaTotalMediaNP+", "+volumen+", "+
-                volumenP+", "+volumenNP+", "+modeloAltura+", "+BO.length+", "+ajuste+", "+superficieRodal;
+                volumenP+", "+volumenNP+", "+modeloAltura+", "+BO.length+", "+ajuste+", "+factorExpansion;
         return aux;
     }
 
