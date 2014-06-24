@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Vistas;
 
+import Utilidades.Evauador;
 import Utilidades.Persistencia.DAO.FuncionSitioDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.awt.Cursor;
@@ -24,7 +24,7 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
     public IngresarFuncionSitio() {
         initComponents();
     }
-    
+
     private MantenedorFunciones padreMantenedor = null;
 
     /**
@@ -447,8 +447,7 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("+"));
-        ValidateConcat("+");
+        txtFuncion.setText(txtFuncion.getText().concat("+"));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -456,68 +455,56 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("0"));
-        ValidateConcat("0");
+        txtFuncion.setText(txtFuncion.getText().concat("0"));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("2"));
-        ValidateConcat("2");
+        txtFuncion.setText(txtFuncion.getText().concat("2"));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("4"));
-        ValidateConcat("4");
+        txtFuncion.setText(txtFuncion.getText().concat("4"));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("1"));
-        ValidateConcat("1");
+        txtFuncion.setText(txtFuncion.getText().concat("1"));
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("5"));
-        ValidateConcat("5");
+        txtFuncion.setText(txtFuncion.getText().concat("5"));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("8"));
-        ValidateConcat("8");
+        txtFuncion.setText(txtFuncion.getText().concat("8"));
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("9"));
-        ValidateConcat("9");
+        txtFuncion.setText(txtFuncion.getText().concat("9"));
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("7"));
-        ValidateConcat("7");
+        txtFuncion.setText(txtFuncion.getText().concat("7"));
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("3"));
-        ValidateConcat("3");
+        txtFuncion.setText(txtFuncion.getText().concat("3"));
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("6"));
-        ValidateConcat("6");
+        txtFuncion.setText(txtFuncion.getText().concat("6"));
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("*"));
-        ValidateConcat("*");
+        txtFuncion.setText(txtFuncion.getText().concat("*"));
+
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("-"));
-        ValidateConcat("-");
+        txtFuncion.setText(txtFuncion.getText().concat("-"));
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("/"));
-        ValidateConcat("/");
+        txtFuncion.setText(txtFuncion.getText().concat("/"));
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -536,83 +523,6 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
-    private void ValidateConcat(String exp) {
-        String fun = txtFuncion.getText();
-        if (exp.equals("dap")) {
-            System.out.println("1");
-            if (fun.length() > 0) {
-                if (isNumber(fun.substring(fun.length() - 1)) || fun.substring(fun.length() - 1).equals("h")) {
-                    txtFuncion.setText(txtFuncion.getText().concat("*dap"));
-                } else {
-                    if (fun.length() >= 3 && fun.substring(fun.length() - 3).equals("dap")) {
-                        txtFuncion.setText(txtFuncion.getText().concat("*dap"));
-                    } else {
-                        txtFuncion.setText(txtFuncion.getText().concat("dap"));
-                    }
-                }
-            } else {
-                txtFuncion.setText(txtFuncion.getText().concat("dap"));
-            }
-        } else if (exp.equals("h")) {
-            System.out.println("2");
-            if (fun.length() > 0) {
-                if (isNumber(fun.substring(fun.length() - 1))) {
-                    txtFuncion.setText(txtFuncion.getText().concat("*h"));
-                } else {
-                    if (fun.length() >= 3 && fun.substring(fun.length() - 3).equals("dap") || fun.substring(fun.length() - 1).equals("h")) {
-                        txtFuncion.setText(txtFuncion.getText().concat("*h"));
-                    } else {
-                        txtFuncion.setText(txtFuncion.getText().concat("h"));
-                    }
-                }
-            } else {
-                txtFuncion.setText(txtFuncion.getText().concat("h"));
-            }
-        } else if (isNumber(exp)) {//NUMEROS
-            System.out.println("3");
-            if (fun.length() >= 3) {
-                if (fun.substring(fun.length() - 3).equals("dap")) {
-                    txtFuncion.setText(txtFuncion.getText().concat("*" + exp));
-                } else if (fun.substring(fun.length() - 2).contains("B")) {
-                    this.txtFuncion.setText(fun + "*" + exp);
-
-                } else if (fun.substring(txtFuncion.getText().length() - 1).equals("h")
-                        || fun.substring(txtFuncion.getText().length() - 1).equals(")")) {
-                    txtFuncion.setText(txtFuncion.getText().concat("*" + exp));
-                } else {
-                    this.txtFuncion.setText(fun + exp);
-                }
-
-            } else {
-                this.txtFuncion.setText(fun + exp);
-            }
-        } else if (exp.contains("B")) {
-            System.out.println("4");
-            if (fun.length() >= 2) {
-                if (fun.substring(fun.length() - 1).contains("(")) {
-                    this.txtFuncion.setText(fun + exp);
-                } else {
-                    this.txtFuncion.setText(fun + "*" + exp);
-                }
-//                if (fun.substring(fun.length() - 2).contains("B")) {
-//                    this.txtFuncion.setText(fun + "*" + exp);
-//                } else {
-//                    this.txtFuncion.setText(fun + exp);
-//                }
-            } else {
-                this.txtFuncion.setText(fun + exp);
-            }
-        } else {
-            System.out.println("5");
-            if (exp.contains("(") && fun.length() > 1) {
-                this.txtFuncion.setText(fun + "*" + exp);
-            } else {
-                txtFuncion.setText(fun + exp);
-            }
-            //setText(txtFuncion.getText().concat(exp));
-        }
-    }
-
     private boolean isNumber(String x) {
         try {
             Integer.parseInt(x);
@@ -622,13 +532,13 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
         }
     }
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("("));
-        ValidateConcat("(");
+        txtFuncion.setText(txtFuncion.getText().concat("("));
+
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat(")"));
-        ValidateConcat(")");
+        txtFuncion.setText(txtFuncion.getText().concat(")"));
+
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -662,22 +572,29 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        if (!txtFuncion.getText().equals("")) {
-            //ProbarFuncion pantalla = new ProbarFuncion(txtFuncion.getText(), buscarCoeficientes(), this);
-            //pantalla.setLocationRelativeTo(this);
-            //pantalla.setVisible(true);
-            setVisible(false);
+       String resultado = Evauador.pruebaFuncion(txtFuncion.getText());
+        this.setCursor(Cursor.DEFAULT_CURSOR);
+
+        if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {
+            JOptionPane.showMessageDialog(jPanel1, "Error al momento de evaluar la Función, se debe cambiar la Función de Volumen.", "Error", 1);
+            btnAceptarEnabled(false);
+        }else{
+            btnAceptarEnabled(true);
         }
     }//GEN-LAST:event_jButton20ActionPerformed
 
+    private void btnAceptarEnabled(boolean bol){
+        btnAceptar.setEnabled(bol);
+    }
+    
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("h"));
-        ValidateConcat("h");
+        txtFuncion.setText(txtFuncion.getText().concat("h"));
+
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        //txtFuncion.setText(txtFuncion.getText().concat("B" + coutnCoef));
-        ValidateConcat("EA");
+        txtFuncion.setText(txtFuncion.getText().concat("B"));
+
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed

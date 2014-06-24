@@ -22,6 +22,15 @@ public class Evauador {
         Object operation;
         funcion = funcion.replaceAll("pow", "Math.pow");
         funcion = funcion.replaceAll("sqrt", "Math.sqrt");
+        funcion = funcion.replaceAll("dap", "1");
+        funcion = funcion.replaceAll("h", "1");
+        funcion = funcion.replaceAll("B0", "1");
+        funcion = funcion.replaceAll("B1", "1");
+        funcion = funcion.replaceAll("B2", "1");
+        funcion = funcion.replaceAll("B3", "1");
+        funcion = funcion.replaceAll("B4", "1");
+        funcion = funcion.replaceAll("B5", "1");
+        funcion = funcion.replaceAll("B6", "1");
         try {
             System.out.println("funcion: "+funcion);
             operation = engine.eval(funcion);
