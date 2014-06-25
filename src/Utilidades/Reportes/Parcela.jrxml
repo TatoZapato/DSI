@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Parcela" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c32dfc79-448c-4718-b018-b871c0a5ae08">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Column header" forecolor="#000000" isBlankWhenNull="true" fontName="Times New Roman" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Subtitle" hAlign="Center" fontName="Times New Roman" fontSize="22" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Title" hAlign="Center" vAlign="Top" fontName="Times New Roman" fontSize="26" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<subDataset name="Detalles" uuid="6fb9f167-9883-46c1-a70f-d6b97e74e089">
+		<queryString language="SQL">
+			<![CDATA[SELECT *FROM "DSI"."T_INV_DETALLE_PARAMETROPARCELA" T_INV_DETALLE_PARAMETROPARCELA]]>
+		</queryString>
+		<field name="CD_ORDEN_TRABAJO" class="java.lang.String"/>
+		<field name="CD_NM_PARCELA" class="java.lang.String"/>
+		<field name="SUPERFICIE" class="java.lang.String"/>
+		<field name="DENSIDAD" class="java.lang.String"/>
+		<field name="AREA_BASAL_MEDIA" class="java.lang.String"/>
+		<field name="DAP_MEDIO" class="java.lang.String"/>
+		<field name="ALTURA_DOMINANTE" class="java.lang.String"/>
+		<field name="VOLUMEN" class="java.lang.String"/>
+		<field name="FACTOR_EXPANSION" class="java.lang.String"/>
+		<group name="CD_ORDEN_TRABAJO">
+			<groupExpression><![CDATA[$F{CD_ORDEN_TRABAJO}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="dataset1" uuid="770ed626-c0c5-42c5-a6b9-4eeee1a9abc7"/>
+	<parameter name="OrdenTrabajo" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Desarrollo\\Desktop\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     gen."EM_PROPIETARIA" AS gen_EM_PROPIETARIA,
+     par."CD_ORDEN_TRABAJO" AS par_CD_ORDEN_TRABAJO,
+     par."FC_MEDICION" AS par_FC_MEDICION,
+     par."TP_INVENTARIO" AS par_TP_INVENTARIO,
+     par."FUNDO" AS par_FUNDO,
+     par."RODAL" AS par_RODAL,
+     par."ESPECIE_PRINCIPAL" AS par_ESPECIE_PRINCIPAL,
+     par."ESPECIE_SECUNDARIA" AS par_ESPECIE_SECUNDARIA,
+     par."FC_PROYECCION" AS par_FC_PROYECCION,
+     det."CD_NM_PARCELA" AS det_CD_NM_PARCELA,
+     det."SUPERFICIE" AS det_SUPERFICIE,
+     det."DENSIDAD" AS det_DENSIDAD,
+     det."AREA_BASAL_MEDIA" AS det_AREA_BASAL_MEDIA,
+     det."DAP_MEDIO" AS det_DAP_MEDIO,
+     det."ALTURA_DOMINANTE" AS det_ALTURA_DOMINANTE,
+     det."VOLUMEN" AS det_VOLUMEN,
+     det."FACTOR_EXPANSION" AS det_FACTOR_EXPANSION,
+     gen."NM_ESPECIES" AS gen_NM_ESPECIES,
+     gen."EM_DE_SERVICIOS" AS gen_EM_DE_SERVICIOS
+FROM
+     "T_INV_PARAMETROPARCELA" par INNER JOIN "T_INV_DETALLE_PARAMETROPARCELA" det ON par."CD_ORDEN_TRABAJO" = det."CD_ORDEN_TRABAJO"
+     INNER JOIN "T_INV_PARAMETROGENERAL" gen ON det."CD_ORDEN_TRABAJO" = gen."CD_ORDEN_TRABAJO"
+WHERE
+     gen."CD_ORDEN_TRABAJO" = $P{OrdenTrabajo}]]>
+	</queryString>
+	<field name="GEN_EM_PROPIETARIA" class="java.lang.String"/>
+	<field name="PAR_CD_ORDEN_TRABAJO" class="java.lang.String"/>
+	<field name="PAR_FC_MEDICION" class="java.lang.String"/>
+	<field name="PAR_TP_INVENTARIO" class="java.lang.String"/>
+	<field name="PAR_FUNDO" class="java.lang.String"/>
+	<field name="PAR_RODAL" class="java.lang.String"/>
+	<field name="PAR_ESPECIE_PRINCIPAL" class="java.lang.String"/>
+	<field name="PAR_ESPECIE_SECUNDARIA" class="java.lang.String"/>
+	<field name="PAR_FC_PROYECCION" class="java.sql.Timestamp"/>
+	<field name="DET_CD_NM_PARCELA" class="java.lang.String"/>
+	<field name="DET_SUPERFICIE" class="java.lang.String"/>
+	<field name="DET_DENSIDAD" class="java.lang.String"/>
+	<field name="DET_AREA_BASAL_MEDIA" class="java.lang.String"/>
+	<field name="DET_DAP_MEDIO" class="java.lang.String"/>
+	<field name="DET_ALTURA_DOMINANTE" class="java.lang.String"/>
+	<field name="DET_VOLUMEN" class="java.lang.String"/>
+	<field name="DET_FACTOR_EXPANSION" class="java.lang.String"/>
+	<field name="GEN_NM_ESPECIES" class="java.lang.String"/>
+	<field name="GEN_EM_DE_SERVICIOS" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="0" width="802" height="45" uuid="fbf47c01-a0c6-43ae-9374-ff78849649f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="26" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Subsistema de Procesamiento de Inventarios]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="c307a9e2-c401-4298-ae99-2089486fde76"/>
+			</line>
+			<staticText>
+				<reportElement style="Subtitle" x="0" y="1" width="802" height="33" uuid="fee6697d-136c-40eb-8815-09da2bf38380"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="22" isBold="false" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Parámetro por Parcela]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="181" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="562" y="60" width="119" height="20" uuid="34bfca65-3ef3-4750-9ab9-268dad1710cb"/>
+				<text><![CDATA[Especie Secundaria  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="562" y="40" width="119" height="20" uuid="a28c44f6-6032-4c8b-9e91-3c53f40cd356"/>
+				<text><![CDATA[Especie Principal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="290" y="60" width="100" height="20" uuid="a6838a07-a2f8-42b8-ba04-561ebc49c926"/>
+				<text><![CDATA[Fundo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="290" y="20" width="100" height="20" uuid="a28a157b-b822-454b-b9bc-e1c621954135"/>
+				<text><![CDATA[Fecha Medición:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="290" y="80" width="100" height="20" uuid="b3fbb76c-e95d-49fa-8e32-315be840c759"/>
+				<text><![CDATA[Rodal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="562" y="20" width="119" height="20" uuid="2fa0034e-aec3-4b2b-8180-78d0115d4fe1"/>
+				<text><![CDATA[Número de Especies:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="290" y="40" width="100" height="20" uuid="ecc97972-e752-487e-a6bf-1d9730d35a35"/>
+				<text><![CDATA[Fecha Proyección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="16" y="80" width="100" height="20" uuid="a65525e4-3de0-4c88-a2ef-f340ba40be55"/>
+				<text><![CDATA[Tipo Inventario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="16" y="40" width="100" height="20" uuid="146095cb-eb1c-473e-a0b2-9eea9fcdbbfb"/>
+				<text><![CDATA[Emp. Propietaria:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="16" y="60" width="100" height="20" uuid="055db7c3-e145-4e5a-8eca-97f1972f9717"/>
+				<text><![CDATA[Emp. Servicio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="16" y="20" width="100" height="20" uuid="2a527798-1f28-4304-9647-6b158c1eb4bf"/>
+				<text><![CDATA[Orden de Trabajo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="20" width="133" height="20" uuid="83272e28-04f1-49ca-b10a-7468e64066b0"/>
+				<textFieldExpression><![CDATA[$F{PAR_CD_ORDEN_TRABAJO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="60" width="133" height="20" uuid="6448e680-c4e8-4e4f-aa4e-815366229891"/>
+				<textFieldExpression><![CDATA[$F{GEN_EM_DE_SERVICIOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="40" width="133" height="20" uuid="9a2e725e-202a-4dde-859f-e19a22486ccc"/>
+				<textFieldExpression><![CDATA[$F{GEN_EM_PROPIETARIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="80" width="133" height="20" uuid="b493d57d-2602-49fd-ad69-db141e0b1eaa"/>
+				<textFieldExpression><![CDATA[$F{PAR_TP_INVENTARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="20" width="116" height="20" uuid="d889753e-4a28-4fb6-875c-9424885a6891"/>
+				<textFieldExpression><![CDATA[$F{PAR_FC_MEDICION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="40" width="116" height="20" uuid="60e84051-c54c-4178-aabc-f81616c3d983"/>
+				<textFieldExpression><![CDATA[$F{PAR_FC_PROYECCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="60" width="116" height="20" uuid="0d3357a3-ef9b-4e9d-bbb5-b0632218ca63"/>
+				<textFieldExpression><![CDATA[$F{PAR_FUNDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="80" width="116" height="20" uuid="86f85389-e5d1-482a-a80f-bbdba0d57eec"/>
+				<textFieldExpression><![CDATA[$F{PAR_RODAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="681" y="20" width="100" height="20" uuid="0363756f-fb5c-426b-9a89-bc9f0ac13841"/>
+				<textFieldExpression><![CDATA[$F{GEN_NM_ESPECIES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="681" y="40" width="100" height="20" uuid="04c6dee0-d62c-4d24-817c-07e4d605ee49"/>
+				<textFieldExpression><![CDATA[$F{PAR_ESPECIE_PRINCIPAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="681" y="60" width="100" height="20" uuid="86dfeac4-225a-42f5-bdf5-7e7ee335607d"/>
+				<textFieldExpression><![CDATA[$F{PAR_ESPECIE_SECUNDARIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Subtitle" x="0" y="101" width="802" height="33" uuid="0d1559b4-bb97-4874-983e-b31531b31ef5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="22" isBold="false" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cálculo de Datos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="16" y="161" width="63" height="20" uuid="469b1d7c-0071-4837-b279-d151093a44fd"/>
+				<text><![CDATA[Parcela]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="79" y="161" width="100" height="20" uuid="b6d5ac58-225e-4ecc-8d58-8dc47a355d36"/>
+				<text><![CDATA[Superficie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="179" y="161" width="100" height="20" uuid="9c0dc549-06f6-4bda-a39d-63d744e03560"/>
+				<text><![CDATA[Densidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="279" y="161" width="100" height="20" uuid="0fe097d9-bc7c-4ecb-a654-4360a367e1d8"/>
+				<text><![CDATA[Área Basal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="379" y="161" width="100" height="20" uuid="1cbef5a6-e6cb-4f7f-b9e2-2a02f13df146"/>
+				<text><![CDATA[DAP Medio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="479" y="161" width="100" height="20" uuid="873e8c9d-aead-4491-be75-9828eeec6586"/>
+				<text><![CDATA[Altura Dominante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="579" y="161" width="100" height="20" uuid="8ec1becb-102a-499e-94e5-699fcaa03604"/>
+				<text><![CDATA[Volumen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="679" y="161" width="100" height="20" uuid="9547c9d7-95d1-4b5c-b410-216fc5f5ae2b"/>
+				<text><![CDATA[Factor Expansión]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="802" height="2" uuid="2358c467-1e18-4e11-a3ca-e200d056b946"/>
+			</line>
+			<line>
+				<reportElement x="0" y="100" width="802" height="1" uuid="03d9858c-0aa2-4118-adfc-107c9880e200"/>
+			</line>
+			<line>
+				<reportElement x="0" y="134" width="802" height="1" uuid="fb433780-2f70-4d41-bb55-e26ccdcbf405"/>
+			</line>
+			<line>
+				<reportElement x="0" y="180" width="802" height="1" uuid="b469fcd5-f661-4507-9dd5-1ed0936757b0"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="16" y="3" width="63" height="20" uuid="fdeeec46-3624-4536-9518-3931ac78173f"/>
+				<textFieldExpression><![CDATA[$F{DET_CD_NM_PARCELA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="3" width="100" height="20" uuid="186c966d-f08d-4627-94dc-e776df5ecf00"/>
+				<textFieldExpression><![CDATA[$F{DET_SUPERFICIE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="3" width="100" height="20" uuid="26caf3bc-ae9e-48df-b1da-9f63e1888e36"/>
+				<textFieldExpression><![CDATA[$F{DET_DENSIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="3" width="100" height="20" uuid="677a87af-4100-4013-891c-dc18679d203f"/>
+				<textFieldExpression><![CDATA[$F{DET_AREA_BASAL_MEDIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="3" width="100" height="20" uuid="43fe9330-d489-403e-89c6-d7872190a93c"/>
+				<textFieldExpression><![CDATA[$F{DET_DAP_MEDIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="0" width="100" height="20" uuid="ffd9ed24-153e-4e4b-a6d8-07736b649b45"/>
+				<textFieldExpression><![CDATA[$F{DET_ALTURA_DOMINANTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="579" y="0" width="100" height="20" uuid="47166fd1-e9a6-4080-9afe-54d6871abb22"/>
+				<textFieldExpression><![CDATA[$F{DET_VOLUMEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="679" y="0" width="100" height="20" uuid="525f37b1-8273-4f64-b0bb-b3f7a0f1ac64"/>
+				<textFieldExpression><![CDATA[$F{DET_FACTOR_EXPANSION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="21" y="34" width="75" height="20" uuid="8dcc4fc9-a743-49a4-a51b-95292753e31c"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Reporte:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="96" y="34" width="197" height="20" uuid="b5a48c9b-2976-4fee-98f8-2e0f560c90d6"/>
+				<textElement>
+					<font size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -16,10 +16,10 @@ public class TablaRodal {
 
     private int ordenTrabajo;
     private String tipoInventario;
-    private int fundo;
-    private int rodal;
+    private String fundo;
+    private String rodal;
     private String especie;
-    private Date fechaMedicion;
+    private String fechaMedicion;
     private Date fechaProyeccion;
     private String modAltura;
     private double[] BO;
@@ -58,19 +58,19 @@ public class TablaRodal {
         this.tipoInventario = tipoInventario;
     }
 
-    public int getFundo() {
+    public String getFundo() {
         return fundo;
     }
 
-    public void setFundo(int fundo) {
+    public void setFundo(String fundo) {
         this.fundo = fundo;
     }
 
-    public int getRodal() {
+    public String getRodal() {
         return rodal;
     }
 
-    public void setRodal(int rodal) {
+    public void setRodal(String rodal) {
         this.rodal = rodal;
     }
 
@@ -82,11 +82,11 @@ public class TablaRodal {
         this.especie = especie;
     }
 
-    public Date getFechaMedicion() {
+    public String getFechaMedicion() {
         return fechaMedicion;
     }
 
-    public void setFechaMedicion(Date fechaMedicion) {
+    public void setFechaMedicion(String fechaMedicion) {
         this.fechaMedicion = fechaMedicion;
     }
 

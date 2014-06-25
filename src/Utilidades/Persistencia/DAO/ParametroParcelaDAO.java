@@ -6,6 +6,7 @@
 package Utilidades.Persistencia.DAO;
 
 import Utilidades.Inventario.DetalleParcela;
+import Utilidades.Inventario.ParametroGeneral;
 import Utilidades.Inventario.ParametroParcela;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Persistencia.DAOManager.DAOManager;
@@ -15,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 /**
  *
@@ -24,8 +26,8 @@ public class ParametroParcelaDAO {
 
     private static final String INSERTAR_PARAMETRO = "INSERT INTO T_INV_PARAMETROPARCELA (CD_ORDEN_TRABAJO, FC_MEDICION, TP_INVENTARIO, FUNDO, RODAL, ESPECIE_PRINCIPAL, ESPECIE_SECUNDARIA, FC_PROYECCION) values (?,?,?,?,?,?,?,?)";
     private static final String INSERTAR_PARAMETRO_V2 = "INSERT INTO T_INV_PARAMETROPARCELA (CD_ORDEN_TRABAJO, FC_MEDICION, TP_INVENTARIO, FUNDO, RODAL, ESPECIE_PRINCIPAL, ESPECIE_SECUNDARIA, FC_PROYECCION) values (";
-    
-    private static final String INSERTAR_DETALLE_PARAMETRO = "INSERT INTO T_INV_DETALLE_PARAMETROPARCELA (CD_ORDEN_TRABAJO, CD_NM_PARCELA, SUPERFICIE, DENSIDAD, AREA_BASAL_MEDIA, DAP_MEDIO, ALTURA_DOMINANTE, VOLUMEN) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String OBTENER_PARAMETROS_PARCELA = "SELECT G.CD_ORDEN_TRABAJO as cd,g.em_propietaria as prop, g.em_de_servicios as serv, G.FUNDO as fundo, G.RODAL as rodal, p.especie_principal as principal,g.es_secundaria as secundaria,g.tp_inventario as inv, g.fc_proyeccion as pro FROM t_inv_parametroparcela P, T_INV_PARAMETROGENERAL G WHERE P.CD_ORDEN_TRABAJO = G.CD_ORDEN_TRABAJO";
+    private static final String INSERTAR_DETALLE_PARAMETRO = "INSERT INTO T_INV_DETALLE_PARAMETROPARCELA (CD_ORDEN_TRABAJO, CD_NM_PARCELA, SUPERFICIE, DENSIDAD, AREA_BASAL_MEDIA, DAP_MEDIO, ALTURA_DOMINANTE, VOLUMEN, FACTOR_EXPANSION) VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String ELIMINA_PARAMETRO = "DELETE FROM T_INV_PARAMETROPARCELA WHERE CD_ORDEN_TRABAJO = ?";
     private static final String ELIMINA_DETALLE_PARAMETRO = "DELETE FROM T_INV_DETALLE_PARAMETROPARCELA WHERE CD_ORDEN_TRABAJO = ?";
 
@@ -87,7 +89,7 @@ public class ParametroParcelaDAO {
             }
             
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException | DAOException e) {
             conn.rollback();
             throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
         } finally {
@@ -101,7 +103,7 @@ public class ParametroParcelaDAO {
         return true;
         
     }
-    //Detalle Parcela
+    
     public static boolean insertarDetalleTablaRodal(DetalleParcela p) throws DAOException, SQLException {
         Connection conn = DAOManager.getConnection();
         try (PreparedStatement ps = conn.prepareCall(INSERTAR_DETALLE_PARAMETRO)) {
@@ -113,6 +115,7 @@ public class ParametroParcelaDAO {
             ps.setString(6, p.getDapMedio());
             ps.setString(7, p.getAlturaDominante());
             ps.setString(8, p.getVolumen());
+            ps.setString(9, p.getFactorExpansion());
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();
@@ -173,4 +176,39 @@ public class ParametroParcelaDAO {
         return true;
     }
 
+    public static LinkedList<ParametroParcela> getAllParametroParcelas() throws DAOException{
+        Connection conn = DAOManager.getConnection();
+        LinkedList<ParametroParcela> parametro = new LinkedList();
+
+        try (PreparedStatement ps = conn.prepareStatement(OBTENER_PARAMETROS_PARCELA)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ParametroGeneral y =  new ParametroGeneral();
+                ParametroParcela x = new ParametroParcela();
+                y.setEmPropietaria(rs.getString("prop"));
+                y.setEmpresaServicios(rs.getString("serv"));
+                x.setOrdenTrabajo(rs.getInt("cd"));
+                x.setParametro(y);
+                x.setTipoInventario(rs.getString("inv"));
+                x.setEspeciePrincipal(rs.getString("principal"));
+                x.setEspecieSecundaria(rs.getString("secundaria"));
+                x.setFechaProyeccion(rs.getDate("pro"));
+                x.setFundo(rs.getString("fundo"));
+                x.setRodal(rs.getString("rodal"));
+                parametro.add(x);
+            }
+            rs.close();
+            ps.close();
+            return parametro;
+        } catch (SQLException e) {
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+    
 }

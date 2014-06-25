@@ -35,8 +35,8 @@ public class ProcesamientoInventario {
     public static ParametroGeneral obtenerParametroGeneral(Inventario inv, LinkedList<ArbolRaleo> arboles, String model, String function) throws DAOException {
         ParametroGeneral parametro = new ParametroGeneral();
         parametro.setEmPropietaria(BancoDatosDAO.obtenerEmpresaPropietaria(inv));
-        parametro.setFundo(Integer.parseInt(inv.getFundo()));
-        parametro.setRodal(Integer.parseInt(inv.getRodal()));
+        parametro.setFundo(inv.getFundo());
+        parametro.setRodal(inv.getRodal());
         parametro.setAnoPlantacion("Sin Información"); //?
         parametro.setFuncionVolumen(function);
         parametro.setModeloAltura(model);
@@ -94,7 +94,7 @@ public class ProcesamientoInventario {
         parametro.setOrdenTrabajo(inv.getOrdenTrabajo());
 
         /* private String fechaMedicion */
-        parametro.setFechaMedicion(inv.getFecha());
+        parametro.setFechaMedicion(inv.getFecha()+"");
 
         /* private String tipoInventario */
         parametro.setTipoInventario(BancoDatosDAO.obtenerTipoInventario(inv.getTipoInventario()));
@@ -414,17 +414,12 @@ public class ProcesamientoInventario {
                 }
             }
             DetalleParcela detalle = new DetalleParcela();
-
-            /* private int ordenTrabajo */
             detalle.setOrdenTrabajo(parametro.getOrdenTrabajo());
-            /* private int numParcela */
             detalle.setNumParcela(parcelas.get(i));
-            /* private String superficie */
             detalle.setSuperficie(BancoDatosDAO.obtenerSuperficiePorParcela(detalle.getNumParcela()) + "");
 
             double factorExpansion = 10000 / Double.parseDouble(detalle.getSuperficie());
             detalle.setFactorExpansion(factorExpansion + "");
-            /* private String densidad */
             detalle.setDensidad((Double.parseDouble(p.getDensidad()) * factorExpansion) + "");
             if (misArbolRaleos.isEmpty()) {
                 detalle.setAreaBasalMedia(p.getAreaBasal());

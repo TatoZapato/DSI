@@ -20,8 +20,6 @@ import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.ProcesamientoInventario;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
