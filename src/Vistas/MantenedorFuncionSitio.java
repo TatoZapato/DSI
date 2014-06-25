@@ -5,9 +5,11 @@
  */
 package Vistas;
 
-import Utilidades.Inventario.Funcion;
+import Utilidades.Inventario.FuncionSitio;
 import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Persistencia.DAO.FuncionSitioDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
+import static Vistas.MantenedorFunciones.llenarTablaFunciones;
 import java.awt.Cursor;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
@@ -16,35 +18,52 @@ import javax.swing.JOptionPane;
  *
  * @author Führer
  */
-public class MantenedorFunciones extends javax.swing.JFrame {
+public class MantenedorFuncionSitio extends javax.swing.JFrame {
 
     /**
-     * Creates new form MantenedorFunciones
+     * Creates new form MantenedorFuncionSitio
      */
-    private Funcion funcionEdit;
-    private static LinkedList<Funcion> misFunciones;
+    private FuncionSitio funcionEdit;
+    private static LinkedList<FuncionSitio> misFunciones;
 
-    public MantenedorFunciones(LinkedList<Funcion> funciones) {
+    public MantenedorFuncionSitio(LinkedList<FuncionSitio> funciones) {
         initComponents();
+        setLocationRelativeTo(null);
         misFunciones = funciones;
         llenarTablaFunciones(funciones);
     }
 
-    public MantenedorFunciones() {
+    public MantenedorFuncionSitio() {
         initComponents();
-        misFunciones = new LinkedList();
+        setLocationRelativeTo(null);
+        misFunciones = new LinkedList<>();
     }
-
-    public void SetFunciones(LinkedList<Funcion> funcions) {
+    
+    public void SetFunciones(LinkedList<FuncionSitio> funcions) {
         misFunciones = funcions;
         llenarTablaFunciones(misFunciones);
     }
+    private void llenarDatosFuncion(FuncionSitio func) {
+        this.txtFuncion.setText(func.getFuncion());
+    }
+    
+    public void setEnabledGuardar(boolean state) {
+        btnGuardar.setEnabled(state);
+    }
 
-    public static void llenarTablaFunciones(LinkedList<Funcion> lista) {
+    private void refreshTablaFunciones() throws DAOException {
+        misFunciones = FuncionSitioDAO.obtenerTodosLasFunciones();
+        llenarTablaFunciones(misFunciones);
+        txtFuncion.setText("");
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }
+
+    public static void llenarTablaFunciones(LinkedList<FuncionSitio> lista) {
         misFunciones = lista;
         String[][] arr = new String[lista.size()][4];
         for (int i = 0; i < lista.size(); i++) {
-            arr[i][0] = lista.get(i).getIdFuncion() + "";
+            arr[i][0] = lista.get(i).getId() + "";
             arr[i][1] = lista.get(i).getFuncion();
             arr[i][2] = lista.get(i).getFechaCreacion().toString();
             arr[i][3] = lista.get(i).getFechaModificacion().toString();
@@ -68,10 +87,6 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         TablaFunciones.getColumn("Id").setMaxWidth(200);
     }
 
-    private void llenarDatosFuncion(Funcion func) {
-        this.txtFuncion.setText(func.getFuncion());
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,17 +96,16 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaFunciones = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         txtFuncion = new javax.swing.JTextField();
-        btnEditar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TablaFunciones.setAutoCreateRowSorter(true);
         TablaFunciones.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -106,36 +120,17 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         TablaFunciones.setFocusCycleRoot(true);
         TablaFunciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaFuncionesMouseClicked(evt);
+                TablaFuncionesSitioMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(TablaFunciones);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Función de Volumen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Función:");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Función de Sitio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 20))); // NOI18N
 
         txtFuncion.setEditable(false);
 
-        btnEditar.setText("Editar");
-        btnEditar.setEnabled(false);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Función:");
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnGuardar.setText("Guardar Cambios");
@@ -155,86 +150,79 @@ public class MantenedorFunciones extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFuncion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtFuncion, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(4, 4, 4))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        IngresarFuncion pantalla = new IngresarFuncion(this);
-        pantalla.setLocationRelativeTo(null);
-        pantalla.setTextFuncion(txtFuncion.getText());
-        pantalla.setVisible(true);
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void TablaFuncionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFuncionesMouseClicked
-        // TODO add your handling code here:
-        funcionEdit = misFunciones.get(TablaFunciones.getSelectedRow());
-        llenarDatosFuncion(funcionEdit);
-        btnEditar.setEnabled(true);
-        btnEliminar.setEnabled(true);
-    }//GEN-LAST:event_TablaFuncionesMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         funcionEdit.setFuncion(txtFuncion.getText());
         setCursor(Cursor.WAIT_CURSOR);
         try {
-            FuncionDAO.actualizarFuncion(funcionEdit);
+            FuncionSitioDAO.actualizarFuncion(funcionEdit);
             refreshTablaFunciones();
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(jPanel1, "No se pudo Realizar la Actualización", "Error", 0);
@@ -242,29 +230,33 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         this.setCursor(Cursor.DEFAULT_CURSOR);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    public void setEnabledGuardar(boolean state) {
-        btnGuardar.setEnabled(state);
-    }
-
-    private void refreshTablaFunciones() throws DAOException {
-        misFunciones = FuncionDAO.obtenerTodosLasFunciones();
-        llenarTablaFunciones(misFunciones);
-        txtFuncion.setText("");
-        btnEditar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-    }
-
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
         if ((JOptionPane.showConfirmDialog(rootPane, "¿Seguro desea eliminar:\n" + funcionEdit.getFuncion() + "?", "Confirmación", 1)) == 0) {
             try {
-                FuncionDAO.eliminaFuncion(funcionEdit);
+                FuncionSitioDAO.eliminaFuncion(funcionEdit);
                 refreshTablaFunciones();
             } catch (DAOException ex) {
                 JOptionPane.showMessageDialog(jPanel1, "No se pudo realizar\nla eliminación", "Error", 0);
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        IngresarFuncionSitio pantalla = new IngresarFuncionSitio(this);
+        pantalla.setLocationRelativeTo(null);
+        pantalla.setTextFuncion(txtFuncion.getText());
+        pantalla.setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void TablaFuncionesSitioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFuncionesSitioMouseClicked
+
+        funcionEdit = misFunciones.get(TablaFunciones.getSelectedRow());
+        llenarDatosFuncion(funcionEdit);
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        
+    }//GEN-LAST:event_TablaFuncionesSitioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -283,20 +275,20 @@ public class MantenedorFunciones extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MantenedorFuncionSitio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MantenedorFuncionSitio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MantenedorFuncionSitio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MantenedorFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MantenedorFuncionSitio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MantenedorFunciones().setVisible(true);
+                new MantenedorFuncionSitio().setVisible(true);
             }
         });
     }
@@ -308,12 +300,7 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtFuncion;
     // End of variables declaration//GEN-END:variables
-
-    void SetNewEditFuncion(String text) {
-        txtFuncion.setText(text);
-    }
 }

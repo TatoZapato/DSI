@@ -7,6 +7,7 @@ package Vistas;
 
 import Utilidades.Inventario.Inventario;
 import Utilidades.Persistencia.DAO.FuncionDAO;
+import Utilidades.Persistencia.DAO.FuncionSitioDAO;
 import Utilidades.Persistencia.DAO.InventarioDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
@@ -290,7 +291,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        // TODO add your handling code here:
+        try {
+            MantenedorFuncionSitio pantalla = new MantenedorFuncionSitio();
+            pantalla.SetFunciones(FuncionSitioDAO.obtenerTodosLasFunciones());
+            pantalla.setLocationRelativeTo(null);
+            pantalla.setVisible(true);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede ejecutar esta función\n"
+                    + "por que no hay conexion con la Base de Datos.", "Error", 1);
+        }
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
