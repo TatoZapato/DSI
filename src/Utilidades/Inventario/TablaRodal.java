@@ -26,6 +26,9 @@ public class TablaRodal {
     private String ajuste;
     private LinkedList<DetalleTablaRodal> detalles;
     private ParametroGeneral parametro;
+
+    public TablaRodal() {
+    }
     
     public TablaRodal(ParametroGeneral par) {
         this.parametro = par;

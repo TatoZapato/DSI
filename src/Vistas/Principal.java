@@ -11,8 +11,6 @@ import Utilidades.Persistencia.DAO.InventarioDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -276,7 +274,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        JOptionPane.showMessageDialog(null, "Falta Implementar", "Advertencia", 2);
+        new ReporteTablaRodal().show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

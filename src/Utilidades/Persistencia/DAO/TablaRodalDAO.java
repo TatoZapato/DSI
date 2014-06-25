@@ -6,6 +6,7 @@
 package Utilidades.Persistencia.DAO;
 
 import Utilidades.Inventario.DetalleTablaRodal;
+import Utilidades.Inventario.ParametroGeneral;
 import Utilidades.Inventario.TablaRodal;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Persistencia.DAOManager.DAOManager;
@@ -15,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 /**
  *
@@ -26,6 +28,7 @@ public class TablaRodalDAO {
     private static final String INSERTAR_TABLA_RODAL_V2 = "INSERT INTO T_INV_TABLARODAL (CD_ORDEN_TRABAJO,TP_INVENTARIO,FUNDO,RODAL,ESPECIE,FC_MEDICION,FC_PROYECCION,MOD_ALTURA,B0,B1,B2,B3,B4,B5,B6,AJUSTE) values (";
     private static final String INSERTAR_DETALLE = "INSERT INTO T_INV_DETALLE_TABLARODAL (CD_ORDEN_TRABAJO, CD_CLASE_DAP, DENSIDAD_TOTAL, DENSIDAD_PODADO, AREA_BASAL, ALTURA_MEDIA, ALTURA_PODA, VOLUMEN_PODADO, VOLUMEN_NO_PODADO, VOLUMEN_TOTAL) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String INSERTAR_DETALLE_V2 = "INSERT INTO T_INV_DETALLE_TABLARODAL (CD_ORDEN_TRABAJO, CD_CLASE_DAP, DENSIDAD_TOTAL, DENSIDAD_PODADO, AREA_BASAL, ALTURA_MEDIA, ALTURA_PODA, VOLUMEN_PODADO, VOLUMEN_NO_PODADO, VOLUMEN_TOTAL, DENSIDAD_NO_PODADO) VALUES (";
+    private static final String OBTENER_TABLAS_RODALES = "SELECT gen.CD_ORDEN_TRABAJO as cd, rodal.TP_INVENTARIO as inv, rodal.FUNDO as fundo, rodal.RODAL as rodal, rodal.ESPECIE as especie, rodal.FC_MEDICION as fc_medicio,rodal.FC_PROYECCION as fc_proyeccion,gen.em_propietaria as prop, gen.em_de_servicios as serv  FROM T_INV_TABLARODAL rodal, t_inv_parametrogeneral gen where gen.cd_orden_trabajo = rodal.cd_orden_trabajo";
     private static final String ELIMINA_TABLA_RODAL = "DELETE FROM T_INV_TABLARODAL WHERE CD_ORDEN_TRABAJO = ?";
     private static final String ELIMINA_DETALLE = "DELETE FROM T_INV_DETALLE_TABLARODAL WHERE CD_ORDEN_TRABAJO = ?";
 
@@ -188,5 +191,43 @@ public class TablaRodalDAO {
             }
         }
         return true;
+    }
+    
+    public static LinkedList<TablaRodal> getAllTablasRodales() throws DAOException{
+        Connection conn = DAOManager.getConnection();
+        LinkedList<TablaRodal> rodales = new LinkedList();
+
+        try (PreparedStatement ps = conn.prepareStatement(OBTENER_TABLAS_RODALES)) {
+            ResultSet rs = ps.executeQuery();
+            //gen.CD_ORDEN_TRABAJO as cd, rodal.TP_INVENTARIO as inv, rodal.FUNDO as fundo
+            //rodal.RODAL as rodal, rodal.ESPECIE as especie, rodal.FC_MEDICION as fc_medicio,
+            //rodal.FC_PROYECCION as fc_proyeccion,gen.em_propietaria as prop, gen.em_de_servicios as serv
+            while (rs.next()) {
+                TablaRodal x = new TablaRodal();
+                ParametroGeneral y = new ParametroGeneral();
+                y.setEmPropietaria(rs.getString("prop"));
+                y.setEmpresaServicios(rs.getString("serv"));
+                x.setParametro(y);
+                x.setOrdenTrabajo(rs.getInt("cd"));
+                x.setTipoInventario(rs.getString("inv"));
+                x.setEspecie(rs.getString("especie"));
+                x.setFechaMedicion(rs.getString("fc_medicio"));
+                x.setFechaProyeccion(rs.getDate("fc_proyeccion"));
+                x.setFundo(rs.getString("fundo"));
+                x.setRodal(rs.getString("rodal"));
+                rodales.add(x);
+            }
+            rs.close();
+            ps.close();
+            return rodales;
+        } catch (SQLException e) {
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
     }
 }

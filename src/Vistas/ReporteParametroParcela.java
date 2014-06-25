@@ -10,13 +10,11 @@ import Utilidades.Persistencia.DAO.ParametroParcelaDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Reportes.Reportes;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Desarrollo
+ * @author Führer
  */
 public class ReporteParametroParcela extends javax.swing.JFrame {
 
@@ -30,13 +28,13 @@ public class ReporteParametroParcela extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         try {
-            llenarTablaInventarios(ParametroParcelaDAO.getAllParametroParcelas());
+            llenarTablaParcelas(ParametroParcelaDAO.getAllParametroParcelas());
         } catch (DAOException ex) {
-            Logger.getLogger(ReporteParametroParcela.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error al momento de Cargar los Datos", "Error", 2);
         }
     }
 
-    public static void llenarTablaInventarios(LinkedList<ParametroParcela> lista) {
+    public static void llenarTablaParcelas(LinkedList<ParametroParcela> lista) {
         parametrosParcelas = lista;
         String[][] arr = new String[lista.size()][9];
         for (int i = 0; i < lista.size(); i++) {

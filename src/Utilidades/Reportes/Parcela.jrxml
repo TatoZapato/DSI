@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Parcela" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c32dfc79-448c-4718-b018-b871c0a5ae08">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="109"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Column header" forecolor="#000000" isBlankWhenNull="true" fontName="Times New Roman" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Subtitle" hAlign="Center" fontName="Times New Roman" fontSize="22" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
@@ -105,91 +105,91 @@ WHERE
 	<columnHeader>
 		<band height="181" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="562" y="60" width="119" height="20" uuid="34bfca65-3ef3-4750-9ab9-268dad1710cb"/>
+				<reportElement style="Column header" x="546" y="60" width="119" height="20" uuid="34bfca65-3ef3-4750-9ab9-268dad1710cb"/>
 				<text><![CDATA[Especie Secundaria  :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="562" y="40" width="119" height="20" uuid="a28c44f6-6032-4c8b-9e91-3c53f40cd356"/>
+				<reportElement style="Column header" x="546" y="40" width="119" height="20" uuid="a28c44f6-6032-4c8b-9e91-3c53f40cd356"/>
 				<text><![CDATA[Especie Principal:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="290" y="60" width="100" height="20" uuid="a6838a07-a2f8-42b8-ba04-561ebc49c926"/>
+				<reportElement style="Column header" x="274" y="60" width="100" height="20" uuid="a6838a07-a2f8-42b8-ba04-561ebc49c926"/>
 				<text><![CDATA[Fundo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="290" y="20" width="100" height="20" uuid="a28a157b-b822-454b-b9bc-e1c621954135"/>
+				<reportElement style="Column header" x="274" y="20" width="100" height="20" uuid="a28a157b-b822-454b-b9bc-e1c621954135"/>
 				<text><![CDATA[Fecha Medición:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="290" y="80" width="100" height="20" uuid="b3fbb76c-e95d-49fa-8e32-315be840c759"/>
+				<reportElement style="Column header" x="274" y="80" width="100" height="20" uuid="b3fbb76c-e95d-49fa-8e32-315be840c759"/>
 				<text><![CDATA[Rodal:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="562" y="20" width="119" height="20" uuid="2fa0034e-aec3-4b2b-8180-78d0115d4fe1"/>
+				<reportElement style="Column header" x="546" y="20" width="119" height="20" uuid="2fa0034e-aec3-4b2b-8180-78d0115d4fe1"/>
 				<text><![CDATA[Número de Especies:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="290" y="40" width="100" height="20" uuid="ecc97972-e752-487e-a6bf-1d9730d35a35"/>
+				<reportElement style="Column header" x="274" y="40" width="100" height="20" uuid="ecc97972-e752-487e-a6bf-1d9730d35a35"/>
 				<text><![CDATA[Fecha Proyección:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="16" y="80" width="100" height="20" uuid="a65525e4-3de0-4c88-a2ef-f340ba40be55"/>
+				<reportElement style="Column header" x="0" y="80" width="100" height="20" uuid="a65525e4-3de0-4c88-a2ef-f340ba40be55"/>
 				<text><![CDATA[Tipo Inventario:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="16" y="40" width="100" height="20" uuid="146095cb-eb1c-473e-a0b2-9eea9fcdbbfb"/>
+				<reportElement style="Column header" x="0" y="40" width="100" height="20" uuid="146095cb-eb1c-473e-a0b2-9eea9fcdbbfb"/>
 				<text><![CDATA[Emp. Propietaria:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="16" y="60" width="100" height="20" uuid="055db7c3-e145-4e5a-8eca-97f1972f9717"/>
+				<reportElement style="Column header" x="0" y="60" width="100" height="20" uuid="055db7c3-e145-4e5a-8eca-97f1972f9717"/>
 				<text><![CDATA[Emp. Servicio:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="16" y="20" width="100" height="20" uuid="2a527798-1f28-4304-9647-6b158c1eb4bf"/>
+				<reportElement style="Column header" x="0" y="20" width="100" height="20" uuid="2a527798-1f28-4304-9647-6b158c1eb4bf"/>
 				<text><![CDATA[Orden de Trabajo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="116" y="20" width="133" height="20" uuid="83272e28-04f1-49ca-b10a-7468e64066b0"/>
+				<reportElement style="Column header" x="100" y="20" width="133" height="20" uuid="83272e28-04f1-49ca-b10a-7468e64066b0"/>
 				<textFieldExpression><![CDATA[$F{PAR_CD_ORDEN_TRABAJO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="116" y="60" width="133" height="20" uuid="6448e680-c4e8-4e4f-aa4e-815366229891"/>
+				<reportElement style="Column header" x="100" y="60" width="133" height="20" uuid="6448e680-c4e8-4e4f-aa4e-815366229891"/>
 				<textFieldExpression><![CDATA[$F{GEN_EM_DE_SERVICIOS}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="116" y="40" width="133" height="20" uuid="9a2e725e-202a-4dde-859f-e19a22486ccc"/>
+				<reportElement style="Column header" x="100" y="40" width="133" height="20" uuid="9a2e725e-202a-4dde-859f-e19a22486ccc"/>
 				<textFieldExpression><![CDATA[$F{GEN_EM_PROPIETARIA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="116" y="80" width="133" height="20" uuid="b493d57d-2602-49fd-ad69-db141e0b1eaa"/>
+				<reportElement style="Column header" x="100" y="80" width="133" height="20" uuid="b493d57d-2602-49fd-ad69-db141e0b1eaa"/>
 				<textFieldExpression><![CDATA[$F{PAR_TP_INVENTARIO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="20" width="116" height="20" uuid="d889753e-4a28-4fb6-875c-9424885a6891"/>
+				<reportElement style="Column header" x="374" y="20" width="116" height="20" uuid="d889753e-4a28-4fb6-875c-9424885a6891"/>
 				<textFieldExpression><![CDATA[$F{PAR_FC_MEDICION}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="40" width="116" height="20" uuid="60e84051-c54c-4178-aabc-f81616c3d983"/>
+				<reportElement style="Column header" x="374" y="40" width="116" height="20" uuid="60e84051-c54c-4178-aabc-f81616c3d983"/>
 				<textFieldExpression><![CDATA[$F{PAR_FC_PROYECCION}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="60" width="116" height="20" uuid="0d3357a3-ef9b-4e9d-bbb5-b0632218ca63"/>
+				<reportElement style="Column header" x="374" y="60" width="116" height="20" uuid="0d3357a3-ef9b-4e9d-bbb5-b0632218ca63"/>
 				<textFieldExpression><![CDATA[$F{PAR_FUNDO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="80" width="116" height="20" uuid="86f85389-e5d1-482a-a80f-bbdba0d57eec"/>
+				<reportElement style="Column header" x="374" y="80" width="116" height="20" uuid="86f85389-e5d1-482a-a80f-bbdba0d57eec"/>
 				<textFieldExpression><![CDATA[$F{PAR_RODAL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="681" y="20" width="100" height="20" uuid="0363756f-fb5c-426b-9a89-bc9f0ac13841"/>
+				<reportElement style="Column header" x="665" y="20" width="100" height="20" uuid="0363756f-fb5c-426b-9a89-bc9f0ac13841"/>
 				<textFieldExpression><![CDATA[$F{GEN_NM_ESPECIES}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="681" y="40" width="100" height="20" uuid="04c6dee0-d62c-4d24-817c-07e4d605ee49"/>
+				<reportElement style="Column header" x="665" y="40" width="100" height="20" uuid="04c6dee0-d62c-4d24-817c-07e4d605ee49"/>
 				<textFieldExpression><![CDATA[$F{PAR_ESPECIE_PRINCIPAL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="681" y="60" width="100" height="20" uuid="86dfeac4-225a-42f5-bdf5-7e7ee335607d"/>
+				<reportElement style="Column header" x="665" y="60" width="100" height="20" uuid="86dfeac4-225a-42f5-bdf5-7e7ee335607d"/>
 				<textFieldExpression><![CDATA[$F{PAR_ESPECIE_SECUNDARIA}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -248,35 +248,35 @@ WHERE
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="16" y="3" width="63" height="20" uuid="fdeeec46-3624-4536-9518-3931ac78173f"/>
+				<reportElement style="Column header" x="16" y="3" width="63" height="20" uuid="fdeeec46-3624-4536-9518-3931ac78173f"/>
 				<textFieldExpression><![CDATA[$F{DET_CD_NM_PARCELA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="79" y="3" width="100" height="20" uuid="186c966d-f08d-4627-94dc-e776df5ecf00"/>
+				<reportElement style="Column header" x="79" y="3" width="100" height="20" uuid="186c966d-f08d-4627-94dc-e776df5ecf00"/>
 				<textFieldExpression><![CDATA[$F{DET_SUPERFICIE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="3" width="100" height="20" uuid="26caf3bc-ae9e-48df-b1da-9f63e1888e36"/>
+				<reportElement style="Column header" x="179" y="3" width="100" height="20" uuid="26caf3bc-ae9e-48df-b1da-9f63e1888e36"/>
 				<textFieldExpression><![CDATA[$F{DET_DENSIDAD}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="279" y="3" width="100" height="20" uuid="677a87af-4100-4013-891c-dc18679d203f"/>
+				<reportElement style="Column header" x="279" y="3" width="100" height="20" uuid="677a87af-4100-4013-891c-dc18679d203f"/>
 				<textFieldExpression><![CDATA[$F{DET_AREA_BASAL_MEDIA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="379" y="3" width="100" height="20" uuid="43fe9330-d489-403e-89c6-d7872190a93c"/>
+				<reportElement style="Column header" x="379" y="3" width="100" height="20" uuid="43fe9330-d489-403e-89c6-d7872190a93c"/>
 				<textFieldExpression><![CDATA[$F{DET_DAP_MEDIO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="479" y="0" width="100" height="20" uuid="ffd9ed24-153e-4e4b-a6d8-07736b649b45"/>
+				<reportElement style="Column header" x="479" y="0" width="100" height="20" uuid="ffd9ed24-153e-4e4b-a6d8-07736b649b45"/>
 				<textFieldExpression><![CDATA[$F{DET_ALTURA_DOMINANTE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="579" y="0" width="100" height="20" uuid="47166fd1-e9a6-4080-9afe-54d6871abb22"/>
+				<reportElement style="Column header" x="579" y="0" width="100" height="20" uuid="47166fd1-e9a6-4080-9afe-54d6871abb22"/>
 				<textFieldExpression><![CDATA[$F{DET_VOLUMEN}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="679" y="0" width="100" height="20" uuid="525f37b1-8273-4f64-b0bb-b3f7a0f1ac64"/>
+				<reportElement style="Column header" x="679" y="0" width="100" height="20" uuid="525f37b1-8273-4f64-b0bb-b3f7a0f1ac64"/>
 				<textFieldExpression><![CDATA[$F{DET_FACTOR_EXPANSION}]]></textFieldExpression>
 			</textField>
 		</band>

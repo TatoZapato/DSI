@@ -49,4 +49,20 @@ public class Reportes {
             System.out.println("error " + e.toString());
         }
     }
+    
+    public void reporteDetallesTablaRodalUnico(int valor) {
+        try {
+            Connection conn = DAOManager.getConnection();
+            String url = "Rodal.jasper";
+            Map parametros = new HashMap();
+            parametros.put("OrdenTrabajo", valor);
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource(url));
+            JasperPrint print = JasperFillManager.fillReport(report, parametros, conn);
+            JasperViewer viewer = new JasperViewer(print,false);
+            viewer.setTitle("Reporte Detalles Tabla Rodal");
+            viewer.setVisible(true);
+        } catch (DAOException | JRException e) {
+            System.out.println("error " + e.toString());
+        }
+    }
 }
