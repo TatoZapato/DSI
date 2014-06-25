@@ -10,6 +10,7 @@ import Utilidades.Inventario.Inventario;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Persistencia.DAOManager.DAOManagerBancoDatos;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,16 +32,40 @@ public class BancoDatosDAO {
     private static final String OBTENER_SUPERFICIE_PARCELAS = "SELECT SUM(m2) as superficie FROM t_bddi_parcela WHERE ordentrabajo = ?";
     private static final String OBTENER_SUPERFICIE_POR_PARCELA = "SELECT m2 as superficie FROM t_bddi_parcela WHERE numparcela = ?";
     private static final String OBTENER_EMPRESA_SERVICIO = "SELECT rute, nombre FROM t_bddi_empresa_servicio WHERE rute = ?";
-    private static final String OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS = "SELECT orden_trabajo, numparcela, numero, especie, conpoda, dap, hpoda, htotal FROM t_bddi_arbol_raleo WHERE orden_trabajo = ?";
-
+    private static final String OBTENER_TODOS_LOS_ARBOLES_RALEO_POR_ID = "SELECT orden_trabajo, numparcela, numero, especie, conpoda, dap, hpoda, htotal FROM t_bddi_arbol_raleo WHERE orden_trabajo = ?";
+    private static final String OBTENER_PROMEDIO_ANO_PLANTACION_POR_ID = "select round(AVG(extract(day from anoplantacion)))as dia,round(AVG(extract(month from anoplantacion)))as mes, round(AVG(extract(year from anoplantacion))) as ano from t_bddi_arbol_raleo where orden_trabajo = ?";
     public static String obtenerEmpresaPropietaria(Inventario inv) {
         return OBTENER_EMPRESA_PROPIETARIA;
     }
 
+    public static String obtenerPromedioAnoPlantacion(int ordenT) throws DAOException {
+        Connection conn = DAOManagerBancoDatos.getConnection();
+        String fecha = "Sin Fecha";
+        try (PreparedStatement ps = conn.prepareStatement(OBTENER_PROMEDIO_ANO_PLANTACION_POR_ID)) {
+            ps.setInt(1, ordenT);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                fecha = rs.getString("ano")+"-"+rs.getString("mes")+"-"+rs.getString("dia") ;
+            }
+            rs.close();
+            ps.close();
+            return fecha;
+        } catch (SQLException e) {
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+
+    
     public static ArbolRaleo obtenerArbolRaleo(int ordenT) throws DAOException {
         Connection conn = DAOManagerBancoDatos.getConnection();
         ArbolRaleo arbol = null;
-        try (PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS)) {
+        try (PreparedStatement ps = conn.prepareStatement(OBTENER_TODOS_LOS_ARBOLES_RALEO_POR_ID)) {
             ps.setInt(1, ordenT);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -64,7 +89,7 @@ public class BancoDatosDAO {
         Connection conn = DAOManagerBancoDatos.getConnection();
         LinkedList<ArbolRaleo> arboles = new LinkedList();
         try {
-            PreparedStatement ps = conn.prepareStatement(OBTENER_TOD0S_LOS_ARBOLES_RALEO_SELECCIONADOS);
+            PreparedStatement ps = conn.prepareStatement(OBTENER_TODOS_LOS_ARBOLES_RALEO_POR_ID);
             ps.setInt(1, inv.getOrdenTrabajo());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

@@ -6,8 +6,6 @@
 
 package Utilidades.Inventario;
 
-import java.sql.Date;
-
 /**
  *
  * @author Führer
@@ -17,18 +15,10 @@ public class ArbolRaleo {
     private int numParcela;
     private int numero;
     private int especie;
-//    private int estrato;
-//    private int fito;
-   // private int dominancia;
     private int conPoda;
     private float dap;
     private float hPoda;
     private float hTotal;
-
-//    private int rectitud;
-//    private int copa;
-//    private int bifulcacion;
-//    private int sanidad;
     public ArbolRaleo(int ordenTrabajo, int numParcela, int numero, int especie, int conPoda, float dap, float hPoda, float hTotal) {
         this.ordenTrabajo = ordenTrabajo;
         this.numParcela = numParcela;

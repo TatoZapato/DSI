@@ -588,12 +588,12 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
     }
     
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("h"));
+        txtFuncion.setText(txtFuncion.getText().concat("H"));
 
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        txtFuncion.setText(txtFuncion.getText().concat("B"));
+        txtFuncion.setText(txtFuncion.getText().concat("EA"));
 
     }//GEN-LAST:event_jButton24ActionPerformed
 

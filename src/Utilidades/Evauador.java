@@ -31,6 +31,9 @@ public class Evauador {
         funcion = funcion.replaceAll("B4", "1");
         funcion = funcion.replaceAll("B5", "1");
         funcion = funcion.replaceAll("B6", "1");
+        funcion = funcion.replaceAll("EA", "1");
+        funcion = funcion.replaceAll("H", "1");
+        
         try {
             System.out.println("funcion: "+funcion);
             operation = engine.eval(funcion);

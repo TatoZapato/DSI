@@ -10,7 +10,7 @@ import java.sql.Date;
 
 /**
  *
- * @author Desarrollo
+ * @author Führer
  */
 public class FuncionSitio {
     private int id;

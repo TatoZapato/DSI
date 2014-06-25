@@ -16,6 +16,8 @@ import Utilidades.Persistencia.DAO.BancoDatos.BancoDatosDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.sql.Date;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -31,15 +33,24 @@ import org.apache.commons.math3.optim.nonlinear.vector.jacobian.LevenbergMarquar
 public class ProcesamientoInventario {
 
     private final static int CON_PODA = 1;
+    private static final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
 
-    public static ParametroGeneral obtenerParametroGeneral(Inventario inv, LinkedList<ArbolRaleo> arboles, String model, String function) throws DAOException {
+    public static ParametroGeneral obtenerParametroGeneral(Inventario inv, LinkedList<ArbolRaleo> arboles, String model, String function, String sitio) throws DAOException {
         ParametroGeneral parametro = new ParametroGeneral();
         parametro.setEmPropietaria(BancoDatosDAO.obtenerEmpresaPropietaria(inv));
         parametro.setFundo(inv.getFundo());
         parametro.setRodal(inv.getRodal());
-        parametro.setAnoPlantacion("Sin Información"); //?
+        String anoPlantacion = BancoDatosDAO.obtenerPromedioAnoPlantacion(inv.getOrdenTrabajo());
+        parametro.setAnoPlantacion(anoPlantacion);
+        String anoP = anoPlantacion.substring(0, 4);
+        String anoM = inv.getFecha().toString().substring(0, 4);
+        System.out.println("AÑO PLANTACION " + anoP);
+        System.out.println("AÑO MEDICION " + anoM);
+        int edadActual = Math.abs(Integer.parseInt(anoM) - Integer.parseInt(anoP));
+        System.out.println("EDAD ACTUAL " + edadActual);
         parametro.setFuncionVolumen(function);
         parametro.setModeloAltura(model);
+        parametro.setFuncionSitio(sitio);
         LinkedList<Integer> especies = new LinkedList();
         for (int i = 0; i < arboles.size(); i++) {
             if (!especies.contains(arboles.get(i).getEspecie())) {
@@ -94,7 +105,7 @@ public class ProcesamientoInventario {
         parametro.setOrdenTrabajo(inv.getOrdenTrabajo());
 
         /* private String fechaMedicion */
-        parametro.setFechaMedicion(inv.getFecha()+"");
+        parametro.setFechaMedicion(inv.getFecha() + "");
 
         /* private String tipoInventario */
         parametro.setTipoInventario(BancoDatosDAO.obtenerTipoInventario(inv.getTipoInventario()));
@@ -113,7 +124,7 @@ public class ProcesamientoInventario {
         parametro.setFechaProyeccion(new Date(new java.util.Date().getTime()));
         int numArboles = arboles.size();
         float factorExpansion = 10000 / superficie;
-        parametro.setFactorExpansion(factorExpansion+"");
+        parametro.setFactorExpansion(factorExpansion + "");
         //densidad
         //float densidad = numArboles / superficie;
         parametro.setDensidad((numArboles * factorExpansion) + "");
@@ -235,10 +246,16 @@ public class ProcesamientoInventario {
         }
         parametro.setBO(b);
         parametro.setAjuste("Minimo Cuadrado");
-
+        System.out.println("\n\n\n\nPRUEBA FUNCION SITIO");
+        try {
+            calcularSitio(sitio, 15, 20);
+            parametro.setValorSitio(calcularSitio(sitio, edadActual, Float.parseFloat(parametro.getAlturaTotalMedia()))+"");
+        } catch (Exception ex) {
+            Logger.getLogger(ProcesamientoInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("\n\n\n\n");
         /* private String superficieRodal */
         //parametro.setSuperficieRodal("0");
-
         System.out.println(parametro.toString());
         return parametro;
     }
@@ -480,6 +497,24 @@ public class ProcesamientoInventario {
         return Float.parseFloat(operation.toString());
     }
 
+    public static float calcularSitio(String expresion, float ea, float h) throws Exception {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("js");
+        String exp = expresion.replace("H", h + "");
+        exp = exp.replace("pow", "Math.pow");
+        exp = exp.replace("sqrt", "Math.sqrt");
+        exp = exp.replace("EA", ea + "");
+        Object operation = "Math.Error";
+        try {
+            System.out.println("expresion = " +exp);
+            operation = engine.eval(exp);
+            System.out.println(exp +" = "+operation);
+        } catch (ScriptException ex) {
+            throw new Exception("Math.Error...");
+        }
+        return Float.parseFloat(operation.toString());
+    }
+
     public static float calcularAlturaModelo(String expresion, float dap) throws Exception {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
@@ -509,7 +544,6 @@ public class ProcesamientoInventario {
     }
 
     private static int[][] BubbleSort(int[][] n) {
-        System.out.println("buublesort: " + n.length);
         int temp;
         int temp2;
         int t = n.length;

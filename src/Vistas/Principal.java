@@ -283,7 +283,7 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(lista.size());
             cargarDatos.llenarTablaInventarios(lista);
             cargarDatos.setLocationRelativeTo(null);
-            cargarDatos.setVisible(true);            
+            cargarDatos.setVisible(true);
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(rootPane, "No se Puede Establecer Conexion con la Base de ", "Excepción", 1);
         }
@@ -294,7 +294,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
+        new IngresarFuncionSitio().show();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     /**
