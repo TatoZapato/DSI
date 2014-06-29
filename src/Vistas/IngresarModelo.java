@@ -5,14 +5,12 @@
  */
 package Vistas;
 
-import Utilidades.Evauador;
+import Utilidades.Evaluador;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.awt.Cursor;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -609,7 +607,7 @@ public class IngresarModelo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        String resultado = Evauador.pruebaFuncion(txtFuncion.getText());
+        String resultado =Evaluador.pruebaFuncion(txtFuncion.getText());
         this.setCursor(Cursor.DEFAULT_CURSOR);
 
         if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {

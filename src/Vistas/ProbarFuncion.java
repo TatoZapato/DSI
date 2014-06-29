@@ -5,7 +5,7 @@
  */
 package Vistas;
 
-import Utilidades.Evauador;
+import Utilidades.Evaluador;
 import java.awt.Cursor;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
@@ -208,7 +208,7 @@ public class ProbarFuncion extends javax.swing.JFrame {
             expresion = expresion.replaceAll("h", txtAltura.getText());;
         }
 
-        String resultado = Evauador.pruebaFuncion(expresion);
+        String resultado = Evaluador.pruebaFuncion(expresion);
         this.setCursor(Cursor.DEFAULT_CURSOR);
 
         if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {

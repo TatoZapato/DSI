@@ -12,17 +12,14 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Desarrollo
+ * @author Führer
  */
-public class Evauador {
+public class Evaluador {
     
     public static String pruebaFuncion(String funcion){
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
         Object operation;
-        funcion = funcion.replaceAll("pow", "Math.pow");
-        funcion = funcion.replaceAll("sqrt", "Math.sqrt");
-        funcion = funcion.replaceAll("dap", "1");
         funcion = funcion.replaceAll("h", "1");
         funcion = funcion.replaceAll("B0", "1");
         funcion = funcion.replaceAll("B1", "1");
@@ -32,7 +29,10 @@ public class Evauador {
         funcion = funcion.replaceAll("B5", "1");
         funcion = funcion.replaceAll("B6", "1");
         funcion = funcion.replaceAll("EA", "1");
-        funcion = funcion.replaceAll("H", "1");
+        funcion = funcion.replaceAll("H", "1");        
+        funcion = funcion.replaceAll("pow", "Math.pow");
+        funcion = funcion.replaceAll("sqrt", "Math.sqrt");
+        funcion = funcion.replaceAll("dap", "1");
         
         try {
             System.out.println("funcion: "+funcion);
