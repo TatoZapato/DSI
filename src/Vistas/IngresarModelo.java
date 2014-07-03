@@ -9,6 +9,10 @@ import Utilidades.Evaluador;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.awt.Cursor;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
@@ -327,6 +331,11 @@ public class IngresarModelo extends javax.swing.JFrame {
         });
 
         jButton21.setText("Ayuda");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         jButton20.setText("Probar");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -538,7 +547,6 @@ public class IngresarModelo extends javax.swing.JFrame {
         //ValidateConcat("/");
     }//GEN-LAST:event_jButton15ActionPerformed
 
-    
     private boolean isNumber(String x) {
         try {
             Integer.parseInt(x);
@@ -566,7 +574,7 @@ public class IngresarModelo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-       txtFuncion.setText(txtFuncion.getText().concat("("));
+        txtFuncion.setText(txtFuncion.getText().concat("("));
         //ValidateConcat("(");
     }//GEN-LAST:event_jButton22ActionPerformed
 
@@ -607,17 +615,17 @@ public class IngresarModelo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        if(txtFuncion.getText().trim().equalsIgnoreCase("")){
-           JOptionPane.showMessageDialog(jPanel1, "Debe ingresar una funcion para poder evaluarla.", "Advertencia", 1);
-           return;
-       }
-        String resultado =Evaluador.pruebaFuncion(txtFuncion.getText());
+        if (txtFuncion.getText().trim().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(jPanel1, "Debe ingresar una funcion para poder evaluarla.", "Advertencia", 1);
+            return;
+        }
+        String resultado = Evaluador.pruebaFuncion(txtFuncion.getText());
         this.setCursor(Cursor.DEFAULT_CURSOR);
 
         if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {
             JOptionPane.showMessageDialog(jPanel1, "Error al momento de evaluar la Función, se debe cambiar la Función de Volumen.", "Error", 1);
             btnAceptarEnabled(false);
-        }else{
+        } else {
             btnAceptarEnabled(true);
         }
     }//GEN-LAST:event_jButton20ActionPerformed
@@ -665,6 +673,15 @@ public class IngresarModelo extends javax.swing.JFrame {
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         txtFuncion.setText(txtFuncion.getText().concat(","));
     }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        try {
+            File path = new File(getClass().getResource("/Utilidades/Manuales/Funciones.pdf").toURI());
+            Desktop.getDesktop().open(path);
+        } catch (URISyntaxException | IOException ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_jButton21ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,10 @@ import Utilidades.Evaluador;
 import Utilidades.Persistencia.DAO.FuncionDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import java.awt.Cursor;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
@@ -329,6 +333,11 @@ public class IngresarFuncion extends javax.swing.JFrame {
         });
 
         jButton21.setText("Ayuda");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         jButton20.setText("Probar");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -632,6 +641,15 @@ public class IngresarFuncion extends javax.swing.JFrame {
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         txtFuncion.setText(txtFuncion.getText().concat(","));
     }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        try {
+            File path = new File(getClass().getResource("/Utilidades/Manuales/Funciones.pdf").toURI());
+            Desktop.getDesktop().open(path);
+        } catch (URISyntaxException | IOException ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_jButton21ActionPerformed
 
     private LinkedList<String> buscarCoeficientes() {
         String[] coeficientes = {"dap", "h"};

@@ -75,60 +75,38 @@ public class ProcesamientoInventario {
             parametro.setEspecieSecundaria("Sin Información");
             parametro.setNumEspecies(0);
         } else {
-
-            //Especie Principal
-            //System.out.println("ESPECIE PRINCIAPAL: "+parametro.getEspeciePrincipal());
-            for (int i = 0; i < array.length; i++) {
-                for (int j = 0; j < array[0].length; j++) {
-                    System.out.println("arr" + array[i][j]);
-                }
-            }
-//            if(array.length == 1){
-//                
+//            for (int[] array1 : array) {
+//                for (int j = 0; j < array[0].length; j++) {
+//                    System.out.println("arr" + array1[j]);
+//                }
 //            }
             array = BubbleSort(array);
-            //System.out.println("aray" + array.length+"\n cod : "+(Integer) array[array.length - 1][1]);
-
             System.out.println("array[array.length - 1][1]" + array[array.length - 1][0]);
             System.out.println("array[array.length - 2][1]" + array[array.length - 2][0]);
             parametro.setEspeciePrincipal(BancoDatosDAO.obtenerEspecie(array[array.length - 1][0]));
-            //Especie Secundaria
-            if (array.length > 1) {
-                parametro.setEspecieSecundaria(BancoDatosDAO.obtenerEspecie(array[array.length - 2][0]));
-            } else {
-                parametro.setEspecieSecundaria(parametro.getEspeciePrincipal());
-            }
+            parametro.setEspecieSecundaria((array.length > 1) ? BancoDatosDAO.obtenerEspecie(array[array.length - 2][0]) : parametro.getEspeciePrincipal());
             //Numero de Especie
             parametro.setNumEspecies(array.length);
         }
-        /* private int ordeTrabajo */
+        /*ordeTrabajo */
         parametro.setOrdenTrabajo(inv.getOrdenTrabajo());
-
-        /* private String fechaMedicion */
+        /*fechaMedicion */
         parametro.setFechaMedicion(inv.getFecha() + "");
-
-        /* private String tipoInventario */
+        /* tipoInventario */
         parametro.setTipoInventario(BancoDatosDAO.obtenerTipoInventario(inv.getTipoInventario()));
-
-        /* private int numParcelas */
+        /*numParcelas */
         parametro.setNumParcelas(BancoDatosDAO.obtenerNumParcelas(inv));
-
-        /* private String superficieParcelas */
+        /*superficieParcelas */
         float superficie = BancoDatosDAO.obtenerSuperficieParcelas(inv);
-
         parametro.setSuperficieParcelas(superficie + "");
-
-        /* private String empresaServicios */
+        /*empresaServicios */
         parametro.setEmpresaServicios(BancoDatosDAO.obtenerEmpresaServicio(inv));
-        /* private Date fechaProyeccion */
+        /*fechaProyeccion */
         parametro.setFechaProyeccion(new Date(new java.util.Date().getTime()));
         int numArboles = arboles.size();
         float factorExpansion = 10000 / superficie;
         parametro.setFactorExpansion(factorExpansion + "");
-        //densidad
-        //float densidad = numArboles / superficie;
         parametro.setDensidad((numArboles * factorExpansion) + "");
-
         //densidadP;
         int numArbolesPodados = 0, numArbolesNoPodados = 0;
         for (int i = 0; i < arboles.size(); i++) {
@@ -249,7 +227,7 @@ public class ProcesamientoInventario {
         System.out.println("\n\n\n\nPRUEBA FUNCION SITIO");
         try {
             calcularSitio(sitio, 15, 20);
-            parametro.setValorSitio(calcularSitio(sitio, edadActual, Float.parseFloat(parametro.getAlturaTotalMedia()))+"");
+            parametro.setValorSitio(calcularSitio(sitio, edadActual, Float.parseFloat(parametro.getAlturaTotalMedia())) + "");
         } catch (Exception ex) {
             Logger.getLogger(ProcesamientoInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -506,9 +484,9 @@ public class ProcesamientoInventario {
         exp = exp.replace("EA", ea + "");
         Object operation = "Math.Error";
         try {
-            System.out.println("expresion = " +exp);
+            System.out.println("expresion = " + exp);
             operation = engine.eval(exp);
-            System.out.println(exp +" = "+operation);
+            System.out.println(exp + " = " + operation);
         } catch (ScriptException ex) {
             throw new Exception("Math.Error...");
         }
