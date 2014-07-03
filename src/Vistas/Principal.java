@@ -11,6 +11,10 @@ import Utilidades.Persistencia.DAO.FuncionSitioDAO;
 import Utilidades.Persistencia.DAO.InventarioDAO;
 import Utilidades.Persistencia.DAO.ModeloDAO;
 import Utilidades.Persistencia.DAOManager.DAOException;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -24,7 +28,7 @@ public class Principal extends javax.swing.JFrame {
     private final MantenedorFunciones mantenedorFunciones = new MantenedorFunciones();
     private final IngresarModelo ingresarModelo = new IngresarModelo();
     private final MantenedorModelos mantenedorModelos = new MantenedorModelos();
-    private final CargarDatos cargarDatos = new CargarDatos();
+//    private final CargarDatos cargarDatos = new CargarDatos();
 
     /**
      * Creates new form Principal
@@ -263,7 +267,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        JOptionPane.showMessageDialog(null, "Falta Implementar", "Advertencia", 2);
+        //JOptionPane.showMessageDialog(null, "Falta Implementar", "Advertencia", 2);
+        try {
+            File path = new File(getClass().getResource("/Utilidades/Manuales/Manual_Principal.pdf").toURI());
+            Desktop.getDesktop().open(path);
+        } catch (URISyntaxException | IOException ex) {
+            System.out.println(ex.toString());
+        }
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -282,6 +292,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             LinkedList<Inventario> lista = InventarioDAO.obtenerTodosLosInventariosProcesables();
             System.out.println(lista.size());
+            CargarDatos cargarDatos = new CargarDatos();
             cargarDatos.llenarTablaInventarios(lista);
             cargarDatos.setLocationRelativeTo(null);
             cargarDatos.setVisible(true);

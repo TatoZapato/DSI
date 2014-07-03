@@ -544,7 +544,10 @@ public class IngresarFuncion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-
+        if(txtFuncion.getText().trim().equalsIgnoreCase("")){
+           JOptionPane.showMessageDialog(jPanel1, "Debe ingresar una funcion para poder evaluarla.", "Advertencia", 1);
+           return;
+       }
         String resultado = Evaluador.pruebaFuncion(txtFuncion.getText());
         this.setCursor(Cursor.DEFAULT_CURSOR);
 

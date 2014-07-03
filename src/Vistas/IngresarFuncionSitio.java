@@ -82,7 +82,7 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
         jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -581,7 +581,11 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-       String resultado = Evaluador.pruebaFuncion(txtFuncion.getText());
+       if(txtFuncion.getText().trim().equalsIgnoreCase("")){
+           JOptionPane.showMessageDialog(jPanel1, "Debe ingresar una funcion para poder evaluarla.", "Advertencia", 1);
+           return;
+       }
+        String resultado = Evaluador.pruebaFuncion(txtFuncion.getText());
         this.setCursor(Cursor.DEFAULT_CURSOR);
 
         if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {
