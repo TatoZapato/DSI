@@ -11,7 +11,6 @@ import Utilidades.Inventario.ParametroParcela;
 import Utilidades.Persistencia.DAOManager.DAOException;
 import Utilidades.Persistencia.DAOManager.DAOManager;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

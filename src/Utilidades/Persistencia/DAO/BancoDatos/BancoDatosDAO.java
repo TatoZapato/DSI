@@ -93,9 +93,6 @@ public class BancoDatosDAO {
             ps.setInt(1, inv.getOrdenTrabajo());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println("asdasdasdaskjdhask");
-                System.out.println(rs.toString());
-                //orden_trabajo, numparcela, numero, especie, conpoda, dap, hpoda, htotal
                 arboles.add(new ArbolRaleo(rs.getInt("orden_trabajo"), rs.getInt("numparcela"), rs.getInt("numero"), rs.getInt("especie"), rs.getInt("conpoda"), rs.getFloat("dap"), rs.getFloat("hpoda"), rs.getFloat("htotal")));
             }
             rs.close();

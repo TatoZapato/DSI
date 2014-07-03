@@ -33,7 +33,6 @@ import org.apache.commons.math3.optim.nonlinear.vector.jacobian.LevenbergMarquar
 public class ProcesamientoInventario {
 
     private final static int CON_PODA = 1;
-    private static final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
 
     public static ParametroGeneral obtenerParametroGeneral(Inventario inv, LinkedList<ArbolRaleo> arboles, String model, String function, String sitio) throws DAOException {
         ParametroGeneral parametro = new ParametroGeneral();
@@ -223,10 +222,10 @@ public class ProcesamientoInventario {
             b[i] = (i < cof.length) ? cof[i] : 0;
         }
         parametro.setBO(b);
-        parametro.setAjuste("Minimo Cuadrado");
+        parametro.setAjuste("Minimo Cuadrado Ordinario");
         System.out.println("\n\n\n\nPRUEBA FUNCION SITIO");
         try {
-            calcularSitio(sitio, 15, 20);
+            //calcularSitio(sitio, 15, 20);
             parametro.setValorSitio(calcularSitio(sitio, edadActual, Float.parseFloat(parametro.getAlturaTotalMedia())) + "");
         } catch (Exception ex) {
             Logger.getLogger(ProcesamientoInventario.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,20 +264,20 @@ public class ProcesamientoInventario {
         for (int i = 0; i < numClases; i++) {
             LinkedList<ArbolRaleo> misArboles = new LinkedList();
             for (int j = 0; j < arboles.size(); j++) {
-                if (arboles.get(j).getDap() >= minDap) {// && (minDap + 2) > arboles.get(j).getDap()) {
+                    if (arboles.get(j).getDap() >= minDap && (minDap + 2) >= arboles.get(j).getDap()) { //(minDap + 2) rango Clase DAP
                     misArboles.add(arboles.get(j));
                 }
             }
             System.out.println("misArboles.size(): " + misArboles.size());
 
             DetalleTablaRodal detalle = new DetalleTablaRodal();
-            /* private int ordenTrabajo */
+            /*ordenTrabajo */
             detalle.setOrdenTrabajo(parametro.getOrdenTrabajo());
 
-            /* private int claseDAP */
+            /*claseDAP */
             detalle.setClaseDAP((int) minDap);
 
-            /* private int densidadTotal */
+            /*densidadTotal */
             float superficie = 1;
             if (misArboles.isEmpty()) {
                 detalle.setDensidadTotal("0");
@@ -292,8 +291,8 @@ public class ProcesamientoInventario {
                 int numArboles = misArboles.size();
                 superficie = BancoDatosDAO.obtenerSuperficieParcelas(inv);
                 System.out.println("NUMERO ARBOLES: " + numArboles);
-                System.out.println("SUPERFICIE: " + superficie);
-                detalle.setDensidadTotal("" + (numArboles / superficie));
+                System.out.println("Factor Expansion: " + 10000 / superficie);
+                detalle.setDensidadTotal("" + (numArboles * (10000 / superficie)));
                 int numArbolesP = 0, numArbolesNP = 0;
                 float sumaDap = 0;
 
@@ -309,8 +308,8 @@ public class ProcesamientoInventario {
                         conAltura.add(misArboles.get(j));
                     }
                 }
-                detalle.setDensidadPodado("" + numArbolesP / superficie);
-                detalle.setDensidadNoPodado("" + numArbolesNP / superficie);
+                detalle.setDensidadPodado("" + numArbolesP * (10000 / superficie));
+                detalle.setDensidadNoPodado("" + numArbolesNP * (10000 / superficie));
 
                 float dapMedio = (sumaDap / misArboles.size());
                 double areaBasal = Math.PI * Math.pow(dapMedio / 2, 2);
@@ -347,11 +346,13 @@ public class ProcesamientoInventario {
                 LinkedList<Float> volumenes = new LinkedList();
                 for (int j = 0; j < misArboles.size(); j++) {
                     try {
-                        float vol = calcularVolumenFuncion(function, misArboles.get(i).getDap(), misArboles.get(i).gethTotal());
+                        System.out.println("funcion :"+function +" - "+ misArboles.get(j).getDap()+" - "+misArboles.get(j).gethTotal());
+                        float vol = calcularVolumenFuncion(function, misArboles.get(j).getDap(), misArboles.get(j).gethTotal());
                         System.out.println("RESULTADO VOL: " + vol);
                         volumenes.add(vol);
                     } catch (Exception e) {
 //                    System.err.println("LA FUNCIÓN ESTÁ MALA");
+                        System.out.println("ERROR CTM!");
                         volumenes.add(0f);
                     }
                 }
@@ -362,8 +363,9 @@ public class ProcesamientoInventario {
                         sumaVolP += volumenes.get(j);
                     }
                 }
+                System.out.println("sumaVolP"+sumaVolP + "- misArboles.size()"+misArboles.size());
                 System.out.println("VOLUMEN PODADA: " + (sumaVolP / numArbolesP));
-                detalle.setVolumenPodado((sumaVolP / numArbolesP) + "");
+                detalle.setVolumenPodado((sumaVolP / numArbolesP) * (10000 / superficie) + "");
 
                 float sumaVolNP = 0;
                 for (int j = 0; j < misArboles.size(); j++) {
@@ -372,16 +374,15 @@ public class ProcesamientoInventario {
                         numArbolesNP++;
                     }
                 }
-                detalle.setVolumeNoPodado((sumaVolNP / numArbolesNP) + "");
+                detalle.setVolumeNoPodado((sumaVolNP / numArbolesNP) * (10000 / superficie) + "");
 
                 float sumaVol = 0;
                 for (int j = 0; j < volumenes.size(); j++) {
                     sumaVol += volumenes.get(j);
                 }
-                detalle.setVolumenTotal((sumaVol / misArboles.size()) + "");
+                detalle.setVolumenTotal((sumaVol / misArboles.size()) * (10000 / superficie) + "");
                 System.out.println("-----" + detalle.toString());
                 minDap += 2;
-
                 detalles.add(detalle);
             }
             tabla.setDetalles(detalles);
@@ -395,15 +396,18 @@ public class ProcesamientoInventario {
         LinkedList<ArbolRaleo> arboles = p.getMisArboles();
         LinkedList<Integer> parcelas = new LinkedList();
         for (ArbolRaleo arbol : arboles) {
+            System.out.println("arbol.getNumParcela() " + arbol.getNumParcela());
             if (!parcelas.contains(arbol.getNumParcela())) {
                 parcelas.add(arbol.getNumParcela());
+                System.out.println("arbol.getNumParcela() " + arbol.getNumParcela());
             }
         }
+        System.out.println("\n\n\n\n\n\nPARCELAS: " + parcelas.size() + " - " + arboles.size());
         LinkedList<DetalleParcela> detalles = new LinkedList();
         for (int i = 0; i < parcelas.size(); i++) {
 
             LinkedList<ArbolRaleo> misArbolRaleos = new LinkedList();
-            for (int j = 0; j < misArbolRaleos.size(); j++) {
+            for (int j = 0; j < arboles.size(); j++) {
                 if (parcelas.get(i) == arboles.get(j).getNumParcela()) {
                     misArbolRaleos.add(arboles.get(j));
                 }
@@ -438,16 +442,19 @@ public class ProcesamientoInventario {
                 detalle.setAlturaDominante(hMax + "");
             }
             double volumen = 0;
-
+            System.out.println("\n\n\n\n volumen PPP " + misArbolRaleos.size());
             for (int j = 0; j < misArbolRaleos.size(); j++) {
                 try {
+                    System.out.println(function + " - " + misArbolRaleos.get(j).getDap() + " - " + misArbolRaleos.get(j).gethTotal());
                     float vol = calcularVolumenFuncion(function, misArbolRaleos.get(j).getDap(), misArbolRaleos.get(j).gethTotal());
                     volumen += vol;
+
                 } catch (Exception e) {
-                    System.err.println("LA FUNCIÓN ESTÁ MALA");
+                    System.out.println("LA FUNCIÓN ESTÁ MALA " + e.toString());
                     volumen += 0;
                 }
             }
+            System.out.println("\n\n\n\nVOLUMEN PARAMETRO POR PARCELA :" + volumen);
             detalle.setVolumen(volumen + "");
 
             detalles.add(detalle);
@@ -462,9 +469,9 @@ public class ProcesamientoInventario {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
         String exp = expresion.replace("h", h + "");
+        exp = exp.replace("dap", dap + "");
         exp = exp.replace("pow", "Math.pow");
         exp = exp.replace("sqrt", "Math.sqrt");
-        exp = exp.replace("dap", dap + "");
         Object operation = "Math.Error";
         try {
             operation = engine.eval(exp);
