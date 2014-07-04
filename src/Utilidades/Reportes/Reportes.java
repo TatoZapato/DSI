@@ -18,12 +18,14 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Reportes {
 
+    private final String logo = "/Utilidades/Reportes/Logo.jpg";
     public void reporteDetallesParametrosGeneralUnico(int valor) {
         try {
             Connection conn = DAOManager.getConnection();
             String url = "General.jasper";
             Map parametros = new HashMap();
             parametros.put("OrdenTrabajo", valor);
+            parametros.put("Logo",this.getClass().getResourceAsStream(logo));
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource(url));
             JasperPrint print = JasperFillManager.fillReport(report, parametros, conn);
             JasperViewer viewer = new JasperViewer(print,false);
@@ -39,7 +41,8 @@ public class Reportes {
             Connection conn = DAOManager.getConnection();
             String url = "Parcela.jasper";
             Map parametros = new HashMap();
-            parametros.put("OrdenTrabajo", valor);
+            parametros.put("OrdenTrabajo", valor);            
+            parametros.put("Logo",this.getClass().getResourceAsStream(logo));
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource(url));
             JasperPrint print = JasperFillManager.fillReport(report, parametros, conn);
             JasperViewer viewer = new JasperViewer(print,false);
@@ -55,7 +58,8 @@ public class Reportes {
             Connection conn = DAOManager.getConnection();
             String url = "Rodal.jasper";
             Map parametros = new HashMap();
-            parametros.put("OrdenTrabajo", valor);
+            parametros.put("OrdenTrabajo", valor);            
+            parametros.put("Logo",this.getClass().getResourceAsStream(logo));
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource(url));
             JasperPrint print = JasperFillManager.fillReport(report, parametros, conn);
             JasperViewer viewer = new JasperViewer(print,false);

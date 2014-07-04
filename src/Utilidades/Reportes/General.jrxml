@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="General" language="groovy" pageWidth="792" pageHeight="720" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01343e2b-d2fc-47d9-a489-75686f362cd5">
-	<property name="ireport.zoom" value="0.9090909090909093"/>
+	<property name="ireport.zoom" value="0.6830134553650707"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="74"/>
+	<property name="ireport.y" value="424"/>
 	<style name="Title" hAlign="Center" vAlign="Top" fontName="Times New Roman" fontSize="26" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Subtitle" hAlign="Center" fontName="Times New Roman" fontSize="22" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Column header" forecolor="#000000" isBlankWhenNull="true" fontName="Times New Roman" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
 	<parameter name="OrdenTrabajo" class="java.lang.String"/>
+	<parameter name="Logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[SELECT * FROM T_INV_PARAMETROGENERAL WHERE T_INV_PARAMETROGENERAL.CD_ORDEN_TRABAJO = $P{OrdenTrabajo}]]>
 	</queryString>
@@ -53,7 +54,12 @@
 	<field name="FUNCION_SITIO" class="java.lang.String"/>
 	<field name="VALOR_SITIO" class="java.lang.String"/>
 	<background>
-		<band splitType="Stretch"/>
+		<band height="680" splitType="Stretch">
+			<image>
+				<reportElement x="267" y="630" width="384" height="50" uuid="0ec86f11-b55e-4971-aa53-990dfa66e3a8"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+		</band>
 	</background>
 	<title>
 		<band height="45" splitType="Stretch">
@@ -174,7 +180,7 @@
 				<textFieldExpression><![CDATA[$F{SUPERFICIE_PARCELAS}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Column header" x="676" y="13" width="91" height="20" uuid="7e227b52-bc82-4e4f-8afb-6b88d1656195"/>
+				<reportElement style="Column header" x="676" y="13" width="75" height="20" uuid="7e227b52-bc82-4e4f-8afb-6b88d1656195"/>
 				<textFieldExpression><![CDATA[$F{NM_PARCELAS}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -186,7 +192,7 @@
 				<textFieldExpression><![CDATA[$F{ES_SECUNDARIA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Column header" x="676" y="33" width="81" height="20" uuid="4a7a44bd-d913-4182-a8ea-2898ef03598f"/>
+				<reportElement style="Column header" x="676" y="33" width="75" height="20" uuid="4a7a44bd-d913-4182-a8ea-2898ef03598f"/>
 				<textFieldExpression><![CDATA[$F{NM_ESPECIES}]]></textFieldExpression>
 			</textField>
 			<line>

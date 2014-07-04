@@ -2,11 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rodal" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d9343c26-1bba-4543-8529-3ad2f7ddbd5f">
 	<property name="ireport.zoom" value="0.8264462809917354"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="351"/>
 	<style name="Column header" forecolor="#000000" isBlankWhenNull="true" fontName="Times New Roman" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Subtitle" hAlign="Center" fontName="Times New Roman" fontSize="22" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Title" hAlign="Center" vAlign="Top" fontName="Times New Roman" fontSize="26" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<parameter name="OrdenTrabajo" class="java.lang.String"/>
+	<parameter name="Logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[SELECT *
 FROM
@@ -41,7 +42,12 @@ ORDER BY T_INV_DETALLE_TABLARODAL.CD_CLASE_DAP]]>
 	<field name="B6" class="java.lang.String"/>
 	<field name="AJUSTE" class="java.lang.String"/>
 	<background>
-		<band splitType="Stretch"/>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement x="291" y="505" width="189" height="50" uuid="4ba22cb9-7641-47a9-ba75-c1c72fdfae41"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+		</band>
 	</background>
 	<title>
 		<band height="46" splitType="Stretch">
