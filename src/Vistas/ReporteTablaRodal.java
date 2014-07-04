@@ -23,6 +23,7 @@ public class ReporteTablaRodal extends javax.swing.JFrame {
      */
     private TablaRodal rodalActual;
     private static LinkedList<TablaRodal> misRodales;
+
     public ReporteTablaRodal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -31,9 +32,9 @@ public class ReporteTablaRodal extends javax.swing.JFrame {
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Error al momento de Cargar los Datos", "Error", 2);
         }
-        
+
     }
-    
+
     public static void llenarTablaRodales(LinkedList<TablaRodal> lista) {
         misRodales = lista;
         String[][] arr = new String[lista.size()][9];
@@ -43,7 +44,7 @@ public class ReporteTablaRodal extends javax.swing.JFrame {
             arr[i][2] = lista.get(i).getTipoInventario() + "";
             arr[i][3] = lista.get(i).getParametro().getEmPropietaria();
             arr[i][4] = lista.get(i).getParametro().getEmpresaServicios();
-            arr[i][5] = lista.get(i).getFechaMedicion()+"";
+            arr[i][5] = lista.get(i).getFechaMedicion() + "";
             arr[i][6] = lista.get(i).getFechaProyeccion() + "";
             arr[i][7] = lista.get(i).getFundo() + "";
             arr[i][8] = lista.get(i).getRodal() + "";
@@ -51,9 +52,7 @@ public class ReporteTablaRodal extends javax.swing.JFrame {
         TablaRodales.setModel(new javax.swing.table.DefaultTableModel(
                 arr,
                 new String[]{
-                    "Num. Orden", "Especie","Tipo Inventario","Emp. Propietaria", "Emp. Servicios"
-                        ,"Fecha Medición", "Fecha Proyección", "Fundo", "Rodal",
-                }
+                    "Num. Orden", "Especie", "Tipo Inventario", "Emp. Propietaria", "Emp. Servicios", "Fecha Medición", "Fecha Proyección", "Fundo", "Rodal",}
         ) {
             boolean[] canEdit = new boolean[]{
                 false, false, false, false, false, false, false, false, false
@@ -83,6 +82,11 @@ public class ReporteTablaRodal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Generar Reportes Tabla Rodal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 2, 18))); // NOI18N
 
@@ -162,7 +166,7 @@ public class ReporteTablaRodal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         if (TablaRodales.getSelectedRow() == -1) {
+        if (TablaRodales.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un Reporte a Generar", "Advertencia", 1);
             return;
         }
@@ -178,6 +182,10 @@ public class ReporteTablaRodal extends javax.swing.JFrame {
     private void TablaRodalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRodalesMouseClicked
 
     }//GEN-LAST:event_TablaRodalesMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        new Principal().show();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

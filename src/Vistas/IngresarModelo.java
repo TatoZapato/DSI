@@ -32,10 +32,12 @@ public class IngresarModelo extends javax.swing.JFrame {
     public IngresarModelo(MantenedorModelos father) {
         initComponents();
         padreMantenedor = father;
+        setLocationRelativeTo(null);
     }
 
     public IngresarModelo() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -82,7 +84,13 @@ public class IngresarModelo extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ingresar Modelo de Altura");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("f(x) =");
@@ -458,9 +466,10 @@ public class IngresarModelo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,16 +556,6 @@ public class IngresarModelo extends javax.swing.JFrame {
         //ValidateConcat("/");
     }//GEN-LAST:event_jButton15ActionPerformed
 
-    private boolean isNumber(String x) {
-        try {
-            Integer.parseInt(x);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         if (!txtFuncion.getText().equals("")) {
             if (txtFuncion.getText().length() >= 3) {
@@ -641,11 +640,6 @@ public class IngresarModelo extends javax.swing.JFrame {
         return co;
     }
 
-    void limpiarFuncion() {
-        txtFuncion.setText("");
-        coutnCoef = 0;
-    }
-
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         txtFuncion.setText(txtFuncion.getText().concat("dap"));
         //ValidateConcat("dap");
@@ -682,6 +676,12 @@ public class IngresarModelo extends javax.swing.JFrame {
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if (padreMantenedor == null) {
+            new Principal().show();
+        }
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

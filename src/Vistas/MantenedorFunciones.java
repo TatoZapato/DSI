@@ -93,6 +93,12 @@ public class MantenedorFunciones extends javax.swing.JFrame {
         btnEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gestionar Funciones de Volumen");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         TablaFunciones.setAutoCreateRowSorter(true);
         TablaFunciones.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -280,6 +286,10 @@ public class MantenedorFunciones extends javax.swing.JFrame {
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
         dispose();
     }//GEN-LAST:event_btnEliminar1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        new Principal().show();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

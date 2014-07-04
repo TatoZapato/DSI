@@ -85,6 +85,11 @@ public class ReporteParametroParcela extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Generar Reporte Parámetro por Parcela", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 2, 18))); // NOI18N
 
@@ -181,6 +186,10 @@ public class ReporteParametroParcela extends javax.swing.JFrame {
         Reportes report = new Reportes();
         report.reporteDetallesParametrosParcelaUnico(parametroActual.getOrdenTrabajo());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        new Principal().show();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

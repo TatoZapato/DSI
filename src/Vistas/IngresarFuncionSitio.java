@@ -89,7 +89,13 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ingresar Funcion de Sitio");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("f(H,EA) =");
@@ -543,14 +549,6 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
-    private boolean isNumber(String x) {
-        try {
-            Integer.parseInt(x);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         txtFuncion.setText(txtFuncion.getText().concat("("));
 
@@ -638,6 +636,12 @@ public class IngresarFuncionSitio extends javax.swing.JFrame {
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if (padreMantenedor == null) {
+            new Principal().show();
+        }
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

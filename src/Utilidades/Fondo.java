@@ -14,7 +14,6 @@ import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -23,25 +22,19 @@ import javax.swing.JFrame;
  */
 public class Fondo extends javax.swing.JPanel {
 
+    public Fondo(JFrame frame) {
+        setOpaque(false);
+    }
 
-    private ImageIcon imageIcon = new ImageIcon("/Utilidades/fondo.png");  
-  
-    public Fondo(JFrame frame) {  
-        //setPreferredSize(new Dimension(601, 279));
-        setOpaque(false);  
-    }  
-  
-    //el truco para establecer la imagen de fondo es sobreescribir el metodo paint()  
-    @Override  
-    public void paint(Graphics g) {  
+    @Override
+    public void paint(Graphics g) {
         final BufferedImage image;
         try {
             image = ImageIO.read(new File(getClass().getResource("/Utilidades/fondo.png").toURI()));
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);  
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(Fondo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        super.paint(g);  
-    }  
+        super.paint(g);
+    }
 }

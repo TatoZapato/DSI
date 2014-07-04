@@ -23,12 +23,16 @@ public class IngresarFuncion extends javax.swing.JFrame {
      */
     public IngresarFuncion() {
         initComponents();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
     private MantenedorFunciones padreMantenedor = null;
 
     IngresarFuncion(MantenedorFunciones father) {
         initComponents();
         padreMantenedor = father;
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void btnAceptarEnabled(boolean state) {
@@ -83,8 +87,13 @@ public class IngresarFuncion extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Agregar una Nueva Función");
+        setTitle("Ingresar Función de Volumen");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("f(dap) =");
@@ -553,17 +562,17 @@ public class IngresarFuncion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        if(txtFuncion.getText().trim().equalsIgnoreCase("")){
-           JOptionPane.showMessageDialog(jPanel1, "Debe ingresar una funcion para poder evaluarla.", "Advertencia", 1);
-           return;
-       }
+        if (txtFuncion.getText().trim().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(jPanel1, "Debe ingresar una funcion para poder evaluarla.", "Advertencia", 1);
+            return;
+        }
         String resultado = Evaluador.pruebaFuncion(txtFuncion.getText());
         this.setCursor(Cursor.DEFAULT_CURSOR);
 
         if (resultado.equalsIgnoreCase("Math.Error") || resultado.equalsIgnoreCase("Infinity")) {
             JOptionPane.showMessageDialog(jPanel1, "Error al momento de evaluar la Función, se debe cambiar la Función de Volumen.", "Error", 1);
             btnAceptarEnabled(false);
-        }else{
+        } else {
             btnAceptarEnabled(true);
         }
     }//GEN-LAST:event_jButton20ActionPerformed
@@ -622,8 +631,6 @@ public class IngresarFuncion extends javax.swing.JFrame {
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         txtFuncion.setText(txtFuncion.getText().concat("B"));
-        //ValidateConcat("B" + coutnCoef);
-        //coutnCoef++;
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
@@ -650,6 +657,12 @@ public class IngresarFuncion extends javax.swing.JFrame {
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if (padreMantenedor == null) {
+            new Principal().show();
+        }
+    }//GEN-LAST:event_formWindowClosed
 
     private LinkedList<String> buscarCoeficientes() {
         String[] coeficientes = {"dap", "h"};
@@ -728,7 +741,4 @@ public class IngresarFuncion extends javax.swing.JFrame {
     private javax.swing.JTextField txtFuncion;
     // End of variables declaration//GEN-END:variables
 
-    void limpiarFuncion() {
-        txtFuncion.setText("");
-    }
 }

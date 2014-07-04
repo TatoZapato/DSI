@@ -99,6 +99,12 @@ public class CargarDatos extends javax.swing.JFrame {
         btnDealle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cargar Datos de Inventario");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cargar Datos de Inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Times New Roman", 3, 24))); // NOI18N
 
@@ -264,14 +270,14 @@ public class CargarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaDatosInventarioMouseClicked
 
     private void btnDealleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDealleActionPerformed
-         inventarioActual = misInventarios.get(TablaDatosInventario.getSelectedRow());
+        inventarioActual = misInventarios.get(TablaDatosInventario.getSelectedRow());
         detalle = new DetalleCarga(inventarioActual);
         detalle.setLocationRelativeTo(null);
         detalle.setVisible(true);
     }//GEN-LAST:event_btnDealleActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
-        
+
         System.out.println(misInventarios.get(TablaDatosInventario.getSelectedRow()).getOrdenTrabajo());
         inventarioActual = misInventarios.get(TablaDatosInventario.getSelectedRow());
         if (inventarioActual == null || ComboBoxVolumen.getSelectedItem().equals("") || ComboBoxAltura.getSelectedItem().equals("") || ComboBoxSitio.getSelectedItem().equals("")) {
@@ -285,13 +291,13 @@ public class CargarDatos extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "No hay datos en la Base de Datos sobre Arboles de Raleo", "Advertencia", 1);
                 }
                 //System.out.println("PASO ARBOLES : "+arboles.size());
-                ParametroGeneral parametroG = ProcesamientoInventario.obtenerParametroGeneral(inventarioActual, arboles, modeloAltura, funcionVolumen,sitio);
+                ParametroGeneral parametroG = ProcesamientoInventario.obtenerParametroGeneral(inventarioActual, arboles, modeloAltura, funcionVolumen, sitio);
 
                 TablaRodal tablaR = ProcesamientoInventario.obtenerTablaRodal(parametroG, inventarioActual, modeloAltura, funcionVolumen);
 
                 ParametroParcela parametroP = ProcesamientoInventario.obtenerParametroParcela(parametroG, inventarioActual, funcionVolumen);
-                
-                System.out.println("Parcela: "+parametroP);
+
+                System.out.println("Parcela: " + parametroP);
                 parametroG.toString();
                 try {
                     //Reportes
@@ -309,7 +315,7 @@ public class CargarDatos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Se ha cargado con éxito", "Información", 1);
 
             } catch (DAOException ex) {
-                if(ex.getError() == 0) {
+                if (ex.getError() == 0) {
                     JOptionPane.showMessageDialog(this, "No existen Arboles Raleo asociados", "Información", 1);
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al recuperar los Arboles Raleo", "Información", 1);
@@ -319,6 +325,10 @@ public class CargarDatos extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnCargarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        new Principal().show();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

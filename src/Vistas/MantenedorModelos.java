@@ -28,6 +28,7 @@ public class MantenedorModelos extends javax.swing.JFrame {
         initComponents();
         misModelos = modelos;
         llenarTablaModelos(misModelos);
+        setLocationRelativeTo(null);
     }
 
     public void SetModelos(LinkedList<Modelo> modelos) {
@@ -38,6 +39,7 @@ public class MantenedorModelos extends javax.swing.JFrame {
     public MantenedorModelos() {
         initComponents();
         misModelos = new LinkedList<>();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -60,6 +62,12 @@ public class MantenedorModelos extends javax.swing.JFrame {
         btnEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gestionar Modelos de Altura");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         TablaModelos.setAutoCreateRowSorter(true);
         TablaModelos.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -151,10 +159,11 @@ public class MantenedorModelos extends javax.swing.JFrame {
                         .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,6 +246,10 @@ public class MantenedorModelos extends javax.swing.JFrame {
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
         dispose();
     }//GEN-LAST:event_btnEliminar1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        new Principal().show();
+    }//GEN-LAST:event_formWindowClosed
 
     private void llenarTablaModelos(LinkedList<Modelo> lista) {
         misModelos = lista;

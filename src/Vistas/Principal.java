@@ -25,12 +25,6 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
-    private final IngresarFuncion ingresarFuncion = new IngresarFuncion();
-    private final MantenedorFunciones mantenedorFunciones = new MantenedorFunciones();
-    private final IngresarModelo ingresarModelo = new IngresarModelo();
-    private final MantenedorModelos mantenedorModelos = new MantenedorModelos();
-//    private final CargarDatos cargarDatos = new CargarDatos();
-
     /**
      * Creates new form Principal
      */
@@ -255,16 +249,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ingresarFuncion.limpiarFuncion();
-        ingresarFuncion.setLocationRelativeTo(null);
-        ingresarFuncion.setVisible(true);
+        new IngresarFuncion().show();
+        dispose();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         try {
+            MantenedorFunciones mantenedorFunciones = new MantenedorFunciones();
             mantenedorFunciones.SetFunciones(FuncionDAO.obtenerTodosLasFunciones());
             mantenedorFunciones.setLocationRelativeTo(null);
             mantenedorFunciones.setVisible(true);
+            dispose();
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(null, "No se puede ejecutar esta función\n"
                     + "por que no hay conexion con la Base de Datos.", "Error", 1);
@@ -272,16 +267,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        ingresarModelo.limpiarFuncion();
-        ingresarModelo.setLocationRelativeTo(null);
-        ingresarModelo.setVisible(true);
+        new IngresarModelo().show();
+        dispose();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         try {
+            MantenedorModelos mantenedorModelos = new MantenedorModelos();
             mantenedorModelos.SetModelos(ModeloDAO.obtenerTodosLosModelos());
             mantenedorModelos.setLocationRelativeTo(null);
             mantenedorModelos.setVisible(true);
+            dispose();
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(null, "No se puede ejecutar esta función\n"
                     + "por que no hay conexion con la Base de Datos.", "Error", 1);
@@ -304,14 +300,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         new ReporteParametroParcela().show();
+        dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         new ReportesParametroGeneral().show();
+        dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         new ReporteTablaRodal().show();
+        dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -322,6 +321,7 @@ public class Principal extends javax.swing.JFrame {
             cargarDatos.llenarTablaInventarios(lista);
             cargarDatos.setLocationRelativeTo(null);
             cargarDatos.setVisible(true);
+            dispose();
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(rootPane, "No se Puede Establecer Conexion con la Base de ", "Excepción", 1);
         }
@@ -333,6 +333,7 @@ public class Principal extends javax.swing.JFrame {
             pantalla.SetFunciones(FuncionSitioDAO.obtenerTodosLasFunciones());
             pantalla.setLocationRelativeTo(null);
             pantalla.setVisible(true);
+            dispose();
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(null, "No se puede ejecutar esta función\n"
                     + "por que no hay conexion con la Base de Datos.", "Error", 1);
@@ -341,6 +342,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         new IngresarFuncionSitio().show();
+        dispose();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     /**
